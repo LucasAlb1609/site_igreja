@@ -55,12 +55,17 @@ h1 {
 
 /* Cabeçalho */
 header {
-    background: #10acec; /* Cor de fundo azul */
+    background: #007bff; /* Cor de fundo azul */
     color: #FFFFFF !important; /* Cor do texto branco */
     padding: 5px 15px; /* Espaçamento interno */
     display: flex;
     align-items: center;
     justify-content: space-between; /* Espaça o logotipo e o menu */
+}
+
+.sticky-top {
+  z-index: 1030; /* Garante que o menu fique na frente de tudo */
+  box-shadow: 0px 5px 8px rgba(0,0,0,0.2); /* Sombra leve no menu */
 }
 
 .logo {
@@ -118,6 +123,8 @@ nav a {
 /* Estilo para o item "Sobre" e seu dropdown */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+    /* Melhorar área de ativação do dropdown */
+    margin-top: 0; /* tira o "espaço" entre o botão e o menu */
 }
 
 /* Personalização do estilo do dropdown */
@@ -128,6 +135,15 @@ nav a {
     border-radius: 8px; /* Define o arredondamento dos cantos */
     font-weight: 500 !important;
     box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.2);
+    /* Melhorar ainda mais o tempo de resposta */
+    margin-top: 0px;
+    transition: all 0.3s ease;
+}
+
+/* Melhorar aparência */
+.dropdown-menu a {
+  padding: 10px 20px;
+
 }
 
 .dropdown-item {
@@ -190,6 +206,20 @@ body {
   width: 800px; /* As imagens ocupam toda a largura do carrossel */
   height: 400px; /* Ajusta para a altura do contêiner */
  
+}
+
+/*Ícones do carrossel de imagens*/
+.carousel-indicators li {
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: #555; /* Cor da bolinha */
+  opacity: 0.7;
+}
+
+.carousel-indicators .active {
+  background-color: #000; /* Cor da bolinha ativa */
+  opacity: 1;
 }
 
 .carousel-caption {

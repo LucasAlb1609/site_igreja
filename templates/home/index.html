@@ -15,12 +15,12 @@
 <body>
 
     <!-- Cabeçalho -->
-    <header>
+    <header class="sticky-top">
         <div class="logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'fotos/logo-oficial.png' %}" style="width: 70px; margin-right: 10px;">
+                <img src="{% static 'fotos/logo.png' %}" style="width: 70px; margin-right: 10px;">
             </a>
-            <h5 style="font-size: 0.7em; font-family: 'Arial Rounded MT Bold', Arial, sans-serif;">
+            <h5 style="font-size: 0.9em; font-weight: bold; font-family: 'Arial Rounded MT Bold', Arial, sans-serif,;">
               SEGUNDA IGREJA<br>BATISTA EM CASA AMARELA
             </h5>
         </div>
@@ -84,7 +84,8 @@
     </header>   
 
     <!-- Conteúdo da Página Aqui -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" 
+         data-ride="carousel" data-interval="4000" data-pause="hover">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -92,35 +93,18 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{% static 'fotos/Fachada.jpg' %}" class="d-block w-100" alt="Imagem 1">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Título da Imagem 1</h5>
-              <p>Descrição da imagem 1.</p>
-            </div>
+            <img src="{% static 'fotos/tema-2025.jpg' %}" class="d-block w-100" alt="Imagem 1">
+            
           </div>
           <div class="carousel-item">
-            <img src="{% static 'fotos/desenho.jpg' %}" class="d-block w-100" alt="Imagem 2">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Título da Imagem 2</h5>
-              <p>Descrição da imagem 2.</p>
-            </div>
+            <img src="{% static 'fotos/equipe-2.jpg' %}" class="d-block w-100" alt="Imagem 2">
+            
           </div>
           <div class="carousel-item">
-            <img src="{% static 'fotos/WhatsApp Image 2023-12-13 at 19.52.29.jpeg' %}" class="d-block w-100" alt="Imagem 3">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Título da Imagem 3</h5>
-              <p>Descrição da imagem 3.</p>
-            </div>
+            <img src="{% static 'fotos/equipe-1.jpg' %}" class="d-block w-100" alt="Imagem 3">
+            
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Próximo</span>
-        </a>
     </div>
 
     <div class="container1">
