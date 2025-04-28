@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Segunda Igreja Batista em Casa Amarela{% endblock %}</title>
+    
+    <!-- CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="{% static 'styles/2ibca.css' %}">    
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="sticky-top">
+        <div class="logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'fotos/logo.png' %}" style="width: 70px; margin-right: 10px;">
+            </a>
+            <h5 style="font-size: 0.9em; font-weight: bold; font-family: 'Arial Rounded MT Bold', Arial, sans-serif,;">
+              SEGUNDA IGREJA<br>BATISTA EM CASA AMARELA
+            </h5>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="nossaIgrejaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nossa Igreja
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-shadow" aria-labelledby="nossaIgrejaDropdown">
+                        <a class="dropdown-item" href="#">História</a>
+                        <a class="dropdown-item" href="#">Liderança</a>
+                        <a class="dropdown-item" href="#">Departamentos</a>
+                        <a class="dropdown-item" href="#">Congregações</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="agendaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Agenda
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="agendaDropdown">
+                        <a class="dropdown-item" href="#">Horários de Culto</a>
+                        <a class="dropdown-item" href="#">Reuniões de Ministério</a>
+                        <a class="dropdown-item" href="#">EBD</a>
+                        <a class="dropdown-item" href="#">Aulas de Música</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="podcastDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Podcast
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="podcastDropdown">
+                        <a class="dropdown-item" href="https://youtube.com/playlist?list=PLkrOlM1LjMj9zNXqcBwkjMMZLU9fdSmOO" target="_blank">
+                            <img src="{% static 'fotos/ícones/youtube.png' %}" alt="YouTube" class="icon">
+                            YouTube
+                        </a>
+                        <a class="dropdown-item" href="https://open.spotify.com/show/5tvBiNseK0Q4GmfweuYtLP" target="_blank">
+                            <img src="{% static 'fotos/ícones/spotify.png' %}" alt="Spotify" class="icon">
+                            Spotify
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="contatoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Contato
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="contatoDropdown">
+                        <a class="dropdown-item" href="https://www.instagram.com/_2ibca/" target="_blank">
+                            <img src="{% static 'fotos/ícones/instagram.png' %}" alt="Instagram" class="icon">
+                            Instagram
+                        </a>
+                        <a class="dropdown-item" href="https://wa.me/message/YHZLZY6LT73HO1" target="_blank">
+                            <img src="{% static 'fotos/ícones/whatsapp.png' %}" alt="WhatsApp" class="icon">
+                            WhatsApp
+                        </a>
+                    </div>
+                </li>                                              
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        ...
+        <!--  (Aqui também deve ajustar os ícones para usar static se tiver imagens no rodapé) -->
+        ...
+        <footer class="footer">
+          <div class="footer-container">
+            <div class="footer-left">
+              <h3>Isaías 55. 3-6</h3>
+              <p>3 Inclinai os vossos ouvidos, e vinde a mim; ouvi, e a vossa alma viverá; porque convosco farei uma aliança perpétua, dando-vos as firmes beneficências de Davi.</p>
+              <p>4 Eis que eu o dei por testemunha aos povos, como líder e governador dos povos.</p>
+              <p>5 Eis que chamarás a uma nação que não conheces, e uma nação que nunca te conheceu correrá para ti, por amor do Senhor teu Deus, e do Santo de Israel; porque ele te glorificou.</p>
+              <p>6 Buscai ao Senhor enquanto se pode achar, invocai-o enquanto está perto.</p>
+            
+              
+              <div class="social-links">
+                <a href="#"><img src="{% static '/fotos/ícones/instagram-preta.png' %}" alt="Instagram"></a>
+                <a href="#"><img src="{% static '/fotos/ícones/youtube-preta.png' %}" alt="YouTube"></a>
+                <a href="#"><img src="{% static '/fotos/ícones/whatsapp-preta.png' %}" alt="WhatsApp"></a>
+              </div>
+            </div>
+            <div class="footer-about">
+              <h4>About</h4>
+              <ul>
+                <li><a href="#">History</a></li>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">Brand Guidelines</a></li>
+                <li><a href="#">Terms & Condition</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div class="footer-services">
+              <h4>Services</h4>
+              <ul>
+                <li><a href="#">How to Order</a></li>
+                <li><a href="#">Our Product</a></li>
+                <li><a href="#">Order Status</a></li>
+                <li><a href="#">Promo</a></li>
+                <li><a href="#">Payment Method</a></li>
+              </ul>
+            </div>
+            <div class="footer-other">
+              <h4>Other</h4>
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Privacy</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          </br>
+          
+          <div class="spotify-component">
+              <iframe src="https://open.spotify.com/embed/playlist/4s4pYRb5VFlQ2LqYtX5xhY? utm_source=generator&theme=0" 
+                  width="80%"
+                  frameborder="0" 
+                  allowtransparency="true" 
+                  allow="encrypted-media">
+              </iframe>
+          </div>
+  
+        </footer>
+
+    <!-- JavaScript Bootstrap e personalizado -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/2ibca.js' %}"></script>
+
+</body>
+</html>
