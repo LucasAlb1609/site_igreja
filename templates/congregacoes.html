@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Congregações | Segunda Igreja Batista{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>Congregações da Igreja</h1>
-    <p>Conteúdo das Congregações da igreja aqui...</p>
-</div>
+
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container text-center">
+        <h1 class="mb-4"><strong>Nossas Congregações</strong></h1>
+        <img src="{% static 'fotos/desenho.jpg' %}" alt="Fachada da Igreja" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;">
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <ul>
+
+            <li>Volta do Moxotó-PE – Sertão do São Francisco</li>
+            <li>Bom Jardim do Araripe-PE – Sertão do Araripe</li>
+            <li>No Alto do Burity – RMR</li>
+            <li>Em Pau Amarelo – RMR</li>
+            <li>Em Limoeiro – Zona da Mata</li>
+            <li>Em Afogados – RMR</li>
+            <li>Em Aguazinha – RMR</li>
+            <li>Em Paudalho – Zona da Mata</li>
+            <li>Em Itamaracá - RMR</li>
+
+        </ul>
+    </div>
+</section>
+
 {% endblock %}
