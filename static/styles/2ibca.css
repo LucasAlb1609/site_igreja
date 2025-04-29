@@ -315,3 +315,106 @@ ul li {
   margin-bottom: 10px;
 }
   
+/* Estilos para cards de pessoas */
+.pessoa-card-section {
+  background-color: #007bff;
+  padding: 40px 0;
+}
+
+.titulo-pessoa {
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.descricao-pessoa {
+  color: white;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.pessoas-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pessoa-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 280px; /* Largura fixa para os cards */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.pessoa-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.pessoa-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #007bff;
+}
+
+.pessoa-card h3 {
+  color: #007bff;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.pessoa-card p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .pessoas-wrapper {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .pessoa-card {
+      width: 100%;
+      max-width: 350px;
+  }
+}
+
+/* Animação de entrada suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0; /* Começa invisível até a animação aplicar */
+}
+
+.animate-delay {
+  animation-delay: 0.3s;
+}

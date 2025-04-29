@@ -1,10 +1,32 @@
 {% extends 'base.html' %}
-
-{% block title %}Liderança | Segunda Igreja Batista{% endblock %}
+{% load static %}
 
 {% block content %}
-<div class="container">
-    <h1>Liderança da Igreja</h1>
-    <p>Conteúdo da Liderança da igreja aqui...</p>
-</div>
+
+<section class="pessoa-card-section">
+  <div class="container">
+    <h2 class="titulo-pessoa">Corpo Pastoral</h2>
+    
+    <p class="descricao-pessoa">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+    </p>
+
+    <div class="pessoas-wrapper">
+      <!-- Card 1 -->
+      <div class="pessoa-card animate-fade-in animate-delay">
+        <img src="{% static '/fotos/joao.jpg' %}" alt="Pastor João">
+        <h3>Pastor João Gomes</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="pessoa-card animate-fade-in animate-delay">
+        <img src="{% static '/fotos/romildo.jpg' %}" alt="Pastor Romildo">
+        <h3>Pastor Romildo Melo</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
