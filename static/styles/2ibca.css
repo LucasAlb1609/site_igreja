@@ -377,6 +377,7 @@ ul li {
   color: #007bff;
   margin-bottom: 10px;
   font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .pessoa-card p {
@@ -384,6 +385,15 @@ ul li {
   font-size: 1rem;
   line-height: 1.5;
 }
+
+.pessoa-card .cargo {
+  font-size: 1rem;
+  color: #d9971c;
+  margin-top: -8px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
 
 /* Responsividade */
 @media (max-width: 768px) {
