@@ -7,7 +7,7 @@ INSTRUÇÕES DE INSTALAÇÃO
 
 -Certifique-se de ter instalado em sua máquina:
     python 3.10.11 ou superior
-    Django 4.X.X
+    Django 4.2 ou superior
     IDE de sua preferêmcia
 
 
