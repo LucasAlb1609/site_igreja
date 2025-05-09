@@ -3,32 +3,122 @@
 
 {% block title %}Congregações | Segunda Igreja Batista{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/congregacoes.css' %}">
+{% endblock %}
+
 {% block content %}
-
-<section class="py-5" style="background-color: #f8f9fa;">
+<section class="hero-section bg-primary text-white py-5">
     <div class="container text-center">
-        <h1 class="mb-4"><strong>Nossas Congregações</strong></h1>
-        <img src="{% static 'fotos/desenho.jpg' %}" alt="Fachada da Igreja" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;">
+        <h1 class="hero-title">Nossas Congregações</h1>
+        <img src="{% static 'images/desenho.jpg' %}" 
+             alt="Fachada da Igreja" 
+             class="img-fluid rounded shadow my-4"
+             style="max-height: 400px; object-fit: cover;">
     </div>
 </section>
 
-
-<section>
+<section class="py-5">
     <div class="container">
-        <ul>
-
-            <li>Volta do Moxotó-PE – Sertão do São Francisco</li>
-            <li>Bom Jardim do Araripe-PE – Sertão do Araripe</li>
-            <li>No Alto do Burity – RMR</li>
-            <li>Em Pau Amarelo – RMR</li>
-            <li>Em Limoeiro – Zona da Mata</li>
-            <li>Em Afogados – RMR</li>
-            <li>Em Aguazinha – RMR</li>
-            <li>Em Paudalho – Zona da Mata</li>
-            <li>Em Itamaracá - RMR</li>
-
-        </ul>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-center mb-4">Locais de Culto</h2>
+                <div class="accordion" id="congregacoesAccordion">
+                    <!-- Região 1 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Sertão do São Francisco
+                            </button>
+                        </h3>
+                        <div id="collapseOne" class="accordion-collapse collapse show" 
+                             aria-labelledby="headingOne" data-bs-parent="#congregacoesAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Volta do Moxotó-PE</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Região 2 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Sertão do Araripe
+                            </button>
+                        </h3>
+                        <div id="collapseTwo" class="accordion-collapse collapse" 
+                             aria-labelledby="headingTwo" data-bs-parent="#congregacoesAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Bom Jardim do Araripe-PE</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Região 3 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Região Metropolitana do Recife (RMR)
+                            </button>
+                        </h3>
+                        <div id="collapseThree" class="accordion-collapse collapse" 
+                             aria-labelledby="headingThree" data-bs-parent="#congregacoesAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">No Alto do Burity</li>
+                                    <li class="list-group-item">Em Pau Amarelo</li>
+                                    <li class="list-group-item">Em Afogados</li>
+                                    <li class="list-group-item">Em Aguazinha</li>
+                                    <li class="list-group-item">Em Itamaracá</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Região 4 -->
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Zona da Mata
+                            </button>
+                        </h3>
+                        <div id="collapseFour" class="accordion-collapse collapse" 
+                             aria-labelledby="headingFour" data-bs-parent="#congregacoesAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Em Limoeiro</li>
+                                    <li class="list-group-item">Em Paudalho</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="text-center mb-4">Mapa das Congregações</h2>
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126418.55697558158!2d-34.9457604!3d-8.0346314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1969a8797d4b%3A0x6d9c3f5a6a6e5a6e!2sRecife%2C%20PE!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

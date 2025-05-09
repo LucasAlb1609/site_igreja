@@ -1,103 +1,116 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block title %}História | Segunda Igreja Batista em Casa Amarela{% endblock %}
 
-<section class="py-5" style="background-color: #f8f9fa;">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/historia.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section bg-primary text-white py-5">
     <div class="container text-center">
-        <h1 class="mb-4">Sobre a Segunda Igreja Batista em Casa Amarela</h1>
-        <img src="{% static 'fotos/Fachada.jpg' %}" alt="Fachada da Igreja" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;">
+        <h1 class="hero-title">Sobre a Segunda Igreja Batista em Casa Amarela</h1>
+        <img src="{% static 'images/Fachada.jpg' %}" 
+             alt="Fachada da Igreja" 
+             class="img-fluid rounded shadow my-4"
+             style="max-height: 400px; object-fit: cover;">
     </div>
 </section>
 
 <section class="py-5">
     <div class="container">
-
-        <!-- Fundação -->
-        <div class="mb-5">
-            <h2 class="mb-3">Fundação</h2>
-            <p>Fundada em 10 de setembro de 1943 - Organizada pela Igreja Batista de Escada com 43 membros fundadores.</p>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Fundação -->
+                <article class="history-section mb-5 animate-on-scroll">
+                    <h2 class="section-title">Fundação</h2>
+                    <p>
+                        Fundada em 10 de setembro de 1943 - Organizada pela Igreja Batista de Escada com 43 membros fundadores.
+                    </p>
+                </article>
+                
+                <!-- Perfil da Igreja -->
+                <article class="history-section mb-5 animate-on-scroll">
+                    <h2 class="section-title">Perfil da Igreja</h2>
+                    <p>
+                        A Segunda Igreja Batista em Casa Amarela dedica-se à proclamação do Evangelho e ao avanço do Reino de Deus, buscando se enquadrar no modelo de estratégia dada por Jesus Cristo em Atos 1:8.
+                    </p>
+                </article>
+                
+                <!-- Missão -->
+                <article class="history-section mb-5 animate-on-scroll">
+                    <h2 class="section-title">Missão</h2>
+                    <p>
+                        Missão baseada em cinco pilares: Adoração, Edificação, Comunhão, Proclamação e Serviço Social Cristão. Todos os ministérios e atividades da igreja são voltados para atender esses princípios fundamentais.
+                    </p>
+                </article>
+                
+                <!-- Pastores -->
+                <article class="history-section mb-5 animate-on-scroll">
+                    <h2 class="section-title">Pastorado</h2>
+                    <p><strong>Pastor Fundador:</strong> Severino Belo</p>
+                    <p><strong>Pastores que exerceram oficialmente seus ministérios:</strong></p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Pastor Severino Belo – 1943 – aproximadamente três meses.</li>
+                        <li class="list-group-item">Pastor Manoel Machado – 1944 a 1953 – 10 anos.</li>
+                        <li class="list-group-item">Pastor Albérico de Souza – 1954 a 1957 – 4 anos.</li>
+                        <li class="list-group-item">Pastor Severino Cardoso – 1958 a 1962 – 5 anos.</li>
+                        <li class="list-group-item">Pastor Rosivaldo de Araújo – 1963 a 1971 – 9 anos.</li>
+                        <li class="list-group-item">Pastor Leandro Dias – 1971 – 11 meses.</li>
+                        <li class="list-group-item">Pastor Pedro Andrade – 1971-1972 (Interino) e depois efetivo desde 1975.</li>
+                        <li class="list-group-item">Pastor Carlos Pezzotti – 1972 a 1974 – 2 anos.</li>
+                        <li class="list-group-item">Pastor João Gomes – Desde 1999 (como pastor auxiliar, depois presidente em 2008).</li>
+                        <li class="list-group-item">Pr. Elcias Rodrigues Martins – Vice-presidente a partir de 2008 até 2017.</li>
+                        <li class="list-group-item">Pr. Romildo Silva de Melo – Vice-presidente em 2018.</li>
+                    </ul>
+                </article>
+                
+                <!-- Tragédia 2008 -->
+                <article class="history-section mb-5 animate-on-scroll">
+                    <h2 class="section-title">Tragédia de 13 de setembro de 2008</h2>
+                    <p>
+                        Durante uma viagem missionária a Bom Jardim do Araripe, um acidente de ônibus causou a perda de sete vidas preciosas, incluindo o Pastor Pedro Pereira de Andrade e o Pastor Solon de Araújo Oliveira. Foi um momento de grande dor para a igreja e toda a comunidade.
+                    </p>
+                </article>
+                
+                <!-- Igrejas e Congregações -->
+                <article class="history-section mb-5 animate-on-scroll">
+                    <h2 class="section-title">Igrejas Geradas</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Igreja Batista na Várzea – RMR</li>
+                        <li class="list-group-item">Igreja Batista em Surubim – Zona da Mata</li>
+                        <li class="list-group-item">Igreja Batista Central de Iputinga – RMR</li>
+                        <li class="list-group-item">Igreja Batista em Pau D' Alho – Zona da Mata</li>
+                        <li class="list-group-item">Igreja Batista no Arruda – RMR</li>
+                        <li class="list-group-item">Igreja Batista em Paratibe – RMR</li>
+                        <li class="list-group-item">Igreja Batista em Barra de Jangada – Jaboatão</li>
+                        <li class="list-group-item">Igreja Batista em Dois Irmãos – RMR</li>
+                        <li class="list-group-item">Igreja Batista no Conjunto Dom Hélder Câmara – Jaboatão</li>
+                        <li class="list-group-item">Igreja Batista Central em Barra de Jangada – Jaboatão</li>
+                        <li class="list-group-item">Igreja Batista no Alto da Telha – Guabiraba – RMR</li>
+                        <li class="list-group-item">2ª Igreja Batista Missionária do Curado IV – Jaboatão</li>
+                        <li class="list-group-item">Igreja Batista Missionária em Pedra de Fogo – Paraíba</li>
+                        <li class="list-group-item">Igreja Batista Missionária em Garanhuns</li>
+                        <li class="list-group-item">Igreja Batista Central em Casa Amarela (Vasco da Gama) - Por 1ª divisão - Década de 50</li>
+                        <li class="list-group-item">Igreja Evangélica em Casa Amarela - Por 2ª divisão - Por ocasião da Renovação Espiritual na década de 60</li>
+                    </ul>
+                </article>
+                
+                <!-- Campos Missionários -->
+                <article class="history-section animate-on-scroll">
+                    <h2 class="section-title">Campos Missionários e Missionários</h2>
+                    <p><strong>Trabalhos realizados em países como:</strong></p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Tailândia – Povos Karen</li>
+                        <li class="list-group-item">Níger – África</li>
+                        <li class="list-group-item">Egito – Oriente Médio</li>
+                        <li class="list-group-item">México – América Latina</li>
+                        <li class="list-group-item">Guiné-Bissau – África</li>
+                    </ul>
+                </article>
+            </div>
         </div>
-
-         <!-- Perfil da Igreja -->
-         <div class="mb-5">
-            <h2 class="mb-3">Perfil da Igreja</h2>
-            <p>A Segunda Igreja Batista em Casa Amarela dedica-se à proclamação do Evangelho e ao avanço do Reino de Deus, buscando se enquadrar no modelo de estratégia dada por Jesus Cristo em Atos 1:8.</p>
-        </div>
-
-        <!-- Missão -->
-        <div class="mb-5">
-            <h2 class="mb-3">Missão</h2>
-            <p>Missão baseada em cinco pilares: Adoração, Edificação, Comunhão, Proclamação e Serviço Social Cristão. Todos os ministérios e atividades da igreja são voltados para atender esses princípios fundamentais.</p>
-        </div>
-
-        <!-- Pastores -->
-        <div class="mb-5">
-            <h2 class="mb-3">Pastorado</h2>
-            <p><strong>Pastor Fundador:</strong> Severino Belo</p>
-            <p><strong>Pastores que exerceram oficialmente seus ministérios:</strong></p>
-            <ul>
-                <li>Pastor Severino Belo – 1943 – aproximadamente três meses.</li>
-                <li>Pastor Manoel Machado – 1944 a 1953 – 10 anos.</li>
-                <li>Pastor Albérico de Souza – 1954 a 1957 – 4 anos.</li>
-                <li>Pastor Severino Cardoso – 1958 a 1962 – 5 anos.</li>
-                <li>Pastor Rosivaldo de Araújo – 1963 a 1971 – 9 anos.</li>
-                <li>Pastor Leandro Dias – 1971 – 11 meses.</li>
-                <li>Pastor Pedro Andrade – 1971-1972 (Interino) e depois efetivo desde 1975.</li>
-                <li>Pastor Carlos Pezzotti – 1972 a 1974 – 2 anos.</li>
-                <li>Pastor João Gomes – Desde 1999 (auxiliar, depois presidente em 2008).</li>
-                <li>Pr. Elcias Rodrigues Martins – Vice-presidente a partir de 2008.</li>
-                <li>Pr. Romildo Silva de Melo – Vice-presidente em 2018.</li>
-            </ul>
-        </div>
-
-        <!-- Tragédia 2008 -->
-        <div class="mb-5">
-            <h2 class="mb-3">Tragédia de 13 de setembro de 2008</h2>
-            <p>Durante uma viagem missionária a Bom Jardim do Araripe, um acidente de ônibus causou a perda de sete vidas preciosas, incluindo o Pastor Pedro Pereira de Andrade e o Pastor Solon de Araújo Oliveira. Foi um momento de grande dor para a igreja e toda a comunidade.</p>
-        </div>
-
-        <!-- Igrejas e Congregações -->
-        <div class="mb-5">
-            <h2 class="mb-3"><strong>Igrejas Geradas</strong></h2>
-            <ul>
-                	<li>Igreja Batista na Várzea – RMR</li>
-                    <li>Igreja Batista em Surubim – Zona da Mata</li>
-                    <li>Igreja Batista Central de Iputinga – RMR</li>
-                    <li>Igreja Batista em Pau D' Alho – Zona da Mata</li>
-                    <li>Igreja Batista no Arruda – RMR</li>
-                    <li>Igreja Batista em Paratibe – RMR</li>
-                    <li>Igreja Batista em Barra de Jangada – Jaboatão </li>
-                    <li>Igreja Batista em Dois Irmãos – RMR</li>
-                    <li>Igreja Batista no Conjunto Dom Hélder Câmara – Jaboatão</li>
-                    <li>Igreja Batista Central em Barra de Jangada – Jaboatão</li>
-                    <li>Igreja Batista no Alto da Telha – Guabiraba – RMR</li>
-                    <li>2ª Igreja Batista Missionária do Curado IV – Jaboatão</li>
-                    <li>Igreja Batista Missionária em Pedra de Fogo – Paraíba</li>
-                    <li>Igreja Batista Missionária em Garanhuns</li>
-                    <li>Igreja Batista Central em Casa Amarela (Vasco da Gama) 
-                        - Por 1ª divisão - Década de 50</li>
-                    <li>Igreja Evangélica em Casa Amarela 
-                        - Por 2ª divisão - 
-                        Por ocasião da Renovação Espiritual na década de 60</li>
-                    
-            </ul>            
-        </div>
-
-        <!-- Campos Missionários -->
-        <div class="mb-5">
-            <h2 class="mb-3">Campos Missionários e Missionários</h2>
-            <p><strong>Trabalhos realizados em países como:</strong></p>
-            <ul>
-                <li>Tailândia – Povos Karen</li>
-                <li>Níger – África</li>
-                <li>Egito – Oriente Médio</li>
-                <li>México – América Latina</li>
-                <li>Guiné-Bissau – África</li>
-            </ul>
-        </div>
-
     </div>
 </section>
-
 {% endblock %}
