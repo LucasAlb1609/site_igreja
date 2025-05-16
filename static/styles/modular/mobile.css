@@ -1,0 +1,212 @@
+/* Mobile CSS - 2IBCA */
+/* Estilos otimizados para dispositivos móveis (< 576px) */
+
+@media (max-width: 576px) {
+  /* Ajustes gerais para mobile */
+  body {
+    font-size: 14px;
+  }
+
+  /* Cabeçalho para mobile */
+  header {
+    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Logo para mobile */
+  .logo {
+    margin-bottom: 5px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+
+  .logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .logo h5 {
+    font-size: 0.7em;
+  }
+
+  /* Menu hamburger para mobile */
+  /* Primeiro esconde o menu normal */
+  nav {
+    width: 100%;
+  }
+
+  /* Estilo para o botão do menu hamburger */
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    z-index: 9999;
+    padding: 8px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--text-light);
+    transition: var(--transition-fast);
+  }
+
+  /* Menu mobile fechado (estado padrão) */
+  .menu {
+    display: none; /* Esconde por padrão */
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    background-color: var(--primary-color);
+  }
+
+  /* Menu mobile aberto (será controlado por JavaScript) */
+  .menu.show {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: var(--shadow-md);
+  }
+
+  .menu li {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .menu li a {
+    display: block;
+    padding: 12px 15px;
+    width: 100%;
+  }
+
+  /* Estilo do dropdown no mobile */
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    margin-top: 0;
+    padding: 0;
+    display: none;
+  }
+
+  .dropdown-item {
+    padding: 10px;
+    color: var(--text-light);
+    font-weight: 400;
+    text-align: center;
+    /* Ajustes para manter ícone e texto na mesma linha */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Ícones no menu mobile */
+  .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  /* Forçar exibição do menu dropdown quando o item pai é clicado */
+  .nav-item.show .dropdown-menu {
+    display: block;
+  }
+
+  /* Modificar estilo dos dropdown toggles */
+  .dropdown-toggle::after {
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+
+  /* Destaque visual para item ativo do menu */
+  .nav-item.show > .nav-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+  }
+
+  /* Carrossel para mobile */
+  #carouselExampleIndicators {
+    max-width: 100%;
+    height: 200px;
+    margin: 0;
+  }
+
+  #carouselExampleIndicators .carousel-inner img {
+    height: 200px;
+  }
+
+  .carousel-caption {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Ajustes nos cards para mobile */
+  .pessoas-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pessoa-card {
+    width: 90%;
+    max-width: none;
+  }
+
+  /* Ajustes no footer para mobile */
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-sm);
+  }
+
+  .footer-left {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-about,
+  .footer-services,
+  .footer-other {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .social-links {
+    justify-content: center;
+    display: flex;
+    margin-top: var(--spacing-sm);
+  }
+
+  /* Ajuste no componente Spotify */
+  .spotify-component iframe {
+    width: 95%;
+    height: 300px;
+  }
+
+  /* Ajustes nos containers */
+  .container1,
+  .container2,
+  .container3,
+  .container4 {
+    padding: 0.5em;
+  }
+} 
