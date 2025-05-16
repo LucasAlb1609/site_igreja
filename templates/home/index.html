@@ -2,76 +2,49 @@
 {% load static %}
 
 {% block content %}
-<!-- Worship Times Section -->
-<section class="section-highlight">
-    <div class="container">
-        <h2 class="section-title">Horários de Culto</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card bg-transparent border-light h-100">
-                    <div class="card-body text-center">
-                        <h3 class="card-title">Domingo</h3>
-                        <ul class="list-unstyled">
-                            <li class="mb-2">09:00 - Escola Bíblica</li>
-                            <li class="mb-2">10:30 - Culto Matutino</li>
-                            <li>19:00 - Culto Vespertino</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- Conteúdo da Página Aqui -->
+    <div id="carouselExampleIndicators" class="carousel slide" 
+         data-ride="carousel" data-interval="4000" data-pause="hover">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'fotos/tema-2025.jpg' %}" class="d-block w-100" alt="Imagem 1">
             
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card bg-transparent border-light h-100">
-                    <div class="card-body text-center">
-                        <h3 class="card-title">Quarta-feira</h3>
-                        <ul class="list-unstyled">
-                            <li>19:30 - Culto de Oração</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img src="{% static 'fotos/equipe-2.jpg' %}" class="d-block w-100" alt="Imagem 2">
             
-            <div class="col-md-6 col-lg-4">
-                <div class="card bg-transparent border-light h-100">
-                    <div class="card-body text-center">
-                        <h3 class="card-title">Sábado</h3>
-                        <ul class="list-unstyled">
-                            <li>19:00 - Culto Jovem</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img src="{% static 'fotos/equipe-1.jpg' %}" class="d-block w-100" alt="Imagem 3">
+            
+          </div>
+
         </div>
     </div>
-</section>
 
-<!-- Latest Sermon Section -->
-<section class="info-section">
-    <div class="container">
-        <h2 class="section-title">Última Transmissão</h2>
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="ratio ratio-16x9">
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </div>
-                <div class="text-center mt-4">
-                    <a href="https://youtube.com/playlist?list=PLkrOlM1LjMj9zNXqcBwkjMMZLU9fdSmOO" 
-                       class="btn btn-primary" 
-                       target="_blank" 
-                       rel="noopener noreferrer">
-                        Ver Mais Mensagens
-                    </a>
-                </div>
-            </div>
+  
+    <div class="container1">
+      <div class="container3 py-5">
+        <div class="container text-center">
+          <h2 class="mb-4">Última Transmissão ao Vivo</h2>
+          <a href="https://www.youtube.com/watch?v=uXMkc5owHzY" target="_blank">
+            <img src="{% static 'fotos/capa-maravilhas.jpeg' %}" alt="Assista a live" class="img-fluid rounded shadow mb-3" style="max-height: 400px;">
+            <br>
+            <button class="btn btn-danger mt-2">Assistir no YouTube</button>
+          </a>
         </div>
+      </div>      
     </div>
-</section>
-{% endblock %}
 
-{% block extra_js %}
-<script src="{% static 'js/components/carousel.js' %}"></script>
-{% endblock %}
+    <div class="container2">
+      <h1>DEVOCIONAL DA SEMANA</h1>
+    </div>
+
+    {% endblock %}

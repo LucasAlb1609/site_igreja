@@ -1,113 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Liderança | Segunda Igreja Batista{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/pages/lideranca.css' %}">
-{% endblock %}
-
 {% block content %}
-<section class="leadership-hero py-5 bg-primary text-white">
-    <div class="container text-center">
-        <h1 class="hero-title">Nossa Liderança</h1>
-        <p class="lead">Conheça nosso corpo pastoral e diaconal</p>
+
+<section class="pessoa-card-section">
+  <div class="container">
+    <h2 class="titulo-pessoa">Corpo Pastoral</h2>
+    
+    <p class="descricao-pessoa">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+    </p>
+
+    <div class="pessoas-wrapper">
+      <!-- Card 1 -->
+      <div class="pessoa-card animate-fade-in animate-delay">
+        <img src="{% static '/fotos/joao.jpg' %}" alt="Pastor João">
+        <h3>Pastor João Gomes</h3>
+        <h4 class="cargo">Pastor Presidente</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="pessoa-card animate-fade-in animate-delay">
+        <img src="{% static '/fotos/romildo.jpg' %}" alt="Pastor Romildo">
+        <h3>Pastor Romildo Melo</h3>
+        <h4 class="cargo">Pastor Vice-Presidente</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor</p>
+      </div>
     </div>
+  </div>
 </section>
 
-<section class="py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title">Corpo Pastoral</h2>
-            <p class="section-description">
-                Nossa equipe pastoral dedicada ao serviço de Deus e da comunidade.
-            </p>
-        </div>
-        
-        <div class="row justify-content-center">
-            <!-- Pastor 1 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="leader-card animate-on-scroll">
-                    <img src="{% static 'images/joao.jpg' %}" 
-                         alt="Pastor João" 
-                         class="leader-img">
-                    <h3 class="leader-name">Pastor João Gomes</h3>
-                    <h4 class="leader-position">Pastor Presidente</h4>
-                    <p class="leader-bio">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.
-                    </p>
-                    <div class="social-links mt-3">
-                        <a href="#" class="text-decoration-none me-2" data-bs-toggle="tooltip" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="#" class="text-decoration-none" data-bs-toggle="tooltip" title="Telefone">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Pastor 2 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="leader-card animate-on-scroll">
-                    <img src="{% static 'images/romildo.jpg' %}" 
-                         alt="Pastor Romildo" 
-                         class="leader-img">
-                    <h3 class="leader-name">Pastor Romildo Melo</h3>
-                    <h4 class="leader-position">Pastor Vice-Presidente</h4>
-                    <p class="leader-bio">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.
-                    </p>
-                    <div class="social-links mt-3">
-                        <a href="#" class="text-decoration-none me-2" data-bs-toggle="tooltip" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="#" class="text-decoration-none" data-bs-toggle="tooltip" title="Telefone">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="pessoa-card-section">
+  <div class="container">
+    <h2 class="titulo-pessoa">Conselho Diaconal</h2>
+
+    <p class="descricao-pessoa">
+      Conheça os membros do Corpo Diaconal da nossa igreja.
+    </p>
+
+    <div class="pessoas-wrapper">
+      <div class="pessoa-card animate-fade-in">
+        <img src="{% static '/fotos/diacono.jpg' %}" alt="Dc. Wanderley Cavalcante">
+        <h3>Dc. Wanderley Cavalcanti</h3>
+        <h4 class="cargo">Presidente do Conselho Diaconal</h4>
+        <p>Consagrado ao diaconato na Assembléia de Deus PE em 2009, têm servido na nossa igreja desde 2019</p>
+      </div>
     </div>
+  </div>
 </section>
 
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title">Conselho Diaconal</h2>
-            <p class="section-description">
-                Conheça quem atua no Conselho Diaconal da nossa igreja.
-            </p>
-        </div>
-        
-        <div class="row justify-content-center">
-            <!-- Diácono 1 -->
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="leader-card animate-on-scroll">
-                    <img src="{% static 'images/diacono.jpg' %}" 
-                         alt="Dc. Wanderley Cavalcante" 
-                         class="leader-img">
-                    <h3 class="leader-name">Dc. Wanderley Cavalcante</h3>
-                    <h4 class="leader-position">Presidente do Conselho Diaconal</h4>
-                    <p class="leader-bio">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.
-                    </p>
-                    <div class="social-links mt-3">
-                        <a href="#" class="text-decoration-none me-2" data-bs-toggle="tooltip" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="#" class="text-decoration-none" data-bs-toggle="tooltip" title="Telefone">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-{% endblock %}
 
-{% block extra_js %}
-<script src="{% static 'js/pages/lideranca.js' %}"></script>
 {% endblock %}

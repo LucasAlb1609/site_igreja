@@ -7,8 +7,8 @@ INSTRUÇÕES DE INSTALAÇÃO
 
 -Certifique-se de ter instalado em sua máquina:
     python 3.10.11 ou superior
-    Django 4.X.X
-    IDE de sua preferêmcia
+    Django 4.2 ou superior
+    IDE de sua preferência
 
 
 -Configurando o=seu ambiente virtual:
