@@ -1,0 +1,481 @@
+/* Reset de Estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos Globais */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  background-color: #f4f4f4;
+}
+
+.container {
+width: 90%; /* Em vez de fixar uma largura em pixels */
+margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+h1 {
+font-size: 2rem; /* Escala com o tamanho base do texto */
+}
+
+/* Responsividade do carrossel */
+.carousel-inner img {
+max-width: 100%;
+height: auto; /* Ajusta automaticamente a altura mantendo a proporção */
+}
+
+/* Responsividade das legendas do carrossel */
+.carousel-caption {
+background-color: rgba(255, 255, 255, 0.7); /* Fundo branco semitransparente */
+padding: 10px 20px; /* Espaçamento interno */
+border-radius: 5px; /* Bordas arredondadas */
+color: #000; /* Cor do texto */
+text-shadow: none; /* Remove sombra do texto */
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+.carousel-caption {
+    font-size: 0.9rem; /* Reduz o tamanho da fonte */
+    padding: 8px 15px; /* Ajusta o espaçamento */
+}
+}
+
+/* Ajustes para smartphones */
+@media (max-width: 576px) {
+.carousel-caption {
+    font-size: 0.8rem; /* Tamanho da fonte menor ainda */
+    padding: 5px 10px; /* Espaçamento mais compacto */
+}
+}
+
+
+/* Cabeçalho */
+header {
+  background: #007bff; /* Cor de fundo azul */
+  color: #FFFFFF !important; /* Cor do texto branco */
+  padding: 5px 15px; /* Espaçamento interno */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espaça o logotipo e o menu */
+}
+
+.sticky-top {
+z-index: 1030; /* Garante que o menu fique na frente de tudo */
+box-shadow: 0px 5px 8px rgba(0,0,0,0.2); /* Sombra leve no menu */
+}
+
+.logo {
+  display: flex;
+  align-items: flex-end;
+  font-family: 'Arial Rounded MT Bold', Arial, sans-serif; /* Fonte mais arredondada */
+  margin: 0;
+  line-height: 1.2; /* Ajuste a altura da linha se necessário */
+}
+
+.logo img {
+  height: 100px; /* Altura da logo (ajuste conforme necessário) */
+  margin-right: 10px; /* Espaçamento entre a logo e o texto */
+  transition: transform 0.5s ease; /* Animação suave ao interagir */
+}
+
+.logo a:hover img {
+transform: scale(1.1); /* Aumenta ligeiramente a logo ao passar o mouse */
+}
+
+.menu{
+font-weight: 500 !important;
+padding: 10px 40px;
+}
+
+
+/* Alinhamento dos itens do menu à direita */
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Espaço entre os itens do menu */
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px 12px;
+}
+
+/* Estilos adicionais para o submenu */
+
+/* Estilo para o item "Sobre" e seu dropdown */
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  /* Melhorar área de ativação do dropdown */
+  margin-top: 0; /* tira o "espaço" entre o botão e o menu */
+}
+
+/* Personalização do estilo do dropdown */
+.dropdown-menu {
+  font-family: 'Arial Rounded MT Bold', Arial, sans-serif; /* Fonte mais arredondada */
+  background-color: #ffffff; /* Cor de fundo do dropdown */
+  border: 1px solid hsl(210, 50%, 90%); /* Define uma borda com cor usando HSL */
+  border-radius: 8px; /* Define o arredondamento dos cantos */
+  font-weight: 500 !important;
+  box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.2);
+  /* Melhorar ainda mais o tempo de resposta */
+  margin-top: 0px;
+  transition: all 0.3s ease;
+}
+
+/* Melhorar aparência */
+.dropdown-menu a {
+padding: 10px 20px;
+
+}
+
+.dropdown-item {
+  color: #10acec; /* Cor do texto no dropdown */
+  font-weight: 700;
+  font-style: inherit;
+}
+
+.dropdown-item:hover {
+  background-color: #10acec; /* Cor de fundo ao passar o mouse no dropdown */
+}
+
+nav a:hover {
+  background-color: #10acec;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* Estilos do Conteúdo da Página Aqui */
+
+.menu {
+  list-style: none;
+  display: flex;
+  
+}
+
+.menu-item {
+  margin-right: 20px;
+}
+
+/* Adicione um contêiner para o conteúdo abaixo da navegação */
+.content-container {
+  max-width: 500px; /* Largura máxima do conteúdo */
+  margin: 10px auto; /* Centraliza o contêiner */
+}
+
+/* Estilos adicionais para o conteúdo */
+
+/* Estilos gerais */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo do contêiner do carrossel */
+#carouselExampleIndicators {
+padding-top: 1.0em;
+max-width: 800px; /* Define a largura máxima */
+height: 400px; /* Define a altura fixa */
+margin: auto; /* Centraliza o carrossel horizontalmente */
+overflow: hidden; /* Garante que conteúdo extra seja cortado */
+}
+
+/* Estilo das imagens dentro do carrossel */
+#carouselExampleIndicators .carousel-inner img {
+width: 800px; /* As imagens ocupam toda a largura do carrossel */
+height: 400px; /* Ajusta para a altura do contêiner */
+
+}
+
+/*Ícones do carrossel de imagens*/
+.carousel-indicators li {
+width: 15px;
+height: 15px;
+border-radius: 100%;
+background-color: #555; /* Cor da bolinha */
+opacity: 0.7;
+}
+
+.carousel-indicators .active {
+background-color: #000; /* Cor da bolinha ativa */
+opacity: 1;
+}
+
+.carousel-caption {
+background-color: rgba(255, 255, 255, 0.7); /* Branco com 70% de transparência */
+padding: 10px 10px; /* Espaçamento interno para o texto */
+border-radius: 5px; /* Bordas arredondadas (opcional) */
+color: #000; /* Texto preto para melhor contraste */
+text-shadow: none; /* Remove sombras no texto, se houver */
+}
+
+.container1{
+background-color: #eee7d7;
+align-items: center;
+padding: 0.8em;
+}
+
+.container2{
+background-color: #10acec;
+align-items: center;
+padding: 0.8em;
+}
+
+.container3{
+background-color: #eee7d7;
+align-items: center;
+padding: 0.8em;
+}
+
+.container4{
+background-color: #10acec;
+align-items: center;
+padding: 0.8em;
+}
+
+footer {
+background-color: #eee7d7;
+padding: 40px 30px 30px 30px;
+}
+
+.footer-container {
+display: flex;
+justify-content: space-between;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.footer-left {
+flex: 1;
+padding-right: 20px;
+}
+
+.footer-left h3 {
+font-size: 24px;
+margin-bottom: 10px;
+}
+
+.footer-left p {
+font-size: 14px;
+color: #555;
+line-height: 1.6;
+margin-bottom: 20px;
+}
+
+.social-links a {
+margin-right: 15px;
+text-decoration: none;
+}
+
+.social-links img {
+width: 24px;
+height: 24px;
+}
+
+.footer-about, .footer-services, .footer-other {
+flex: 1;
+}
+
+.footer-about h4, .footer-services h4, .footer-other h4 {
+font-size: 18px;
+margin-bottom: 15px;
+}
+
+.spotify-component{
+text-align: center;
+}
+
+ul {
+list-style-type: none;
+padding-left: 0;
+}
+
+ul li {
+margin-bottom: 10px;
+}
+
+/* Estilos para cards de pessoas */
+.pessoa-card-section {
+background-color: #007bff;
+padding: 40px 0;
+}
+
+.titulo-pessoa {
+color: white;
+text-align: center;
+margin-bottom: 30px;
+font-size: 2.5rem;
+font-weight: 700;
+}
+
+.descricao-pessoa {
+color: white;
+text-align: center;
+max-width: 800px;
+margin: 0 auto 40px;
+font-size: 1.1rem;
+line-height: 1.6;
+}
+
+.pessoas-wrapper {
+display: flex;
+justify-content: center;
+gap: 30px;
+flex-wrap: wrap;
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.pessoa-card {
+background: white;
+border-radius: 10px;
+padding: 20px;
+width: 280px; /* Largura fixa para os cards */
+text-align: center;
+box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+margin-bottom: 20px;
+}
+
+.pessoa-card:hover {
+transform: translateY(-10px) scale(1.03);
+box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+}
+
+.pessoa-card img {
+width: 150px;
+height: 150px;
+border-radius: 50%;
+object-fit: cover;
+margin-bottom: 15px;
+border: 3px solid #007bff;
+}
+
+.pessoa-card h3 {
+color: #007bff;
+margin-bottom: 10px;
+font-size: 1.5rem;
+font-weight: bold;
+}
+
+.pessoa-card p {
+color: #555;
+font-size: 1rem;
+line-height: 1.5;
+}
+
+.pessoa-card .cargo {
+font-size: 1rem;
+color: #d9971c;
+margin-top: -8px;
+margin-bottom: 10px;
+font-weight: bold;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+.pessoas-wrapper {
+    flex-direction: column;
+    align-items: center;
+}
+
+.pessoa-card {
+    width: 100%;
+    max-width: 350px;
+}
+}
+
+/* Animação de entrada suave */
+@keyframes fadeInUp {
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+.animate-fade-in {
+animation: fadeInUp 0.8s ease forwards;
+opacity: 0; /* Começa invisível até a animação aplicar */
+}
+
+.animate-delay {
+animation-delay: 0.3s;
+}
+
+
+
+
+/* ========== Ajustes para Responsividade Ampla ========== */
+
+/* Impede estouros laterais */
+body, html {
+  overflow-x: hidden;
+}
+
+/* Menu principal responsivo */
+.menu, nav, header {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* Itens do menu */
+.menu li {
+  display: inline-block;
+  padding: 10px;
+}
+
+/* Imagens e vídeos responsivos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Media Query para smartphones */
+@media (max-width: 600px) {
+  .menu {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .menu li {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  header, nav {
+      overflow-x: hidden;
+  }
+}
