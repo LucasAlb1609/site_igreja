@@ -3,14 +3,15 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Segunda Igreja Batista em Casa Amarela{% endblock %}</title>
     
     <!-- CSS Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
-    <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="{% static 'styles/2ibca.css' %}">    
+    <!-- CSS Personalizado Modular -->
+    <link rel="stylesheet" href="{% static 'styles/modular/main.css' %}">    
 </head>
 <body>
 
@@ -18,11 +19,13 @@
     <header class="sticky-top">
         <div class="logo">
             <a href="{% url 'index' %}">
-                <img src="{% static 'fotos/logo.png' %}" style="width: 70px; margin-right: 10px;">
+                <img src="{% static 'fotos/logo.png' %}" style="height: 70px; width: auto; margin-right: 10px;">
             </a>
-            <h5 style="font-size: 0.9em; font-weight: bold; font-family: 'Arial Rounded MT Bold', Arial, sans-serif,;">
-              SEGUNDA IGREJA<br>BATISTA EM CASA AMARELA
-            </h5>
+            <a href="{% url 'index' %}" style="text-decoration: none; color: inherit;">
+                <h5 style="font-size: 0.9em; font-weight: bold; font-family: 'Arial Rounded MT Bold', Arial, sans-serif,;">
+                  SEGUNDA IGREJA<br>BATISTA EM CASA AMARELA
+                </h5>
+            </a>
         </div>
         <nav>
             <ul class="menu">
@@ -90,9 +93,9 @@
 
     <!-- Rodapé -->
     <footer class="footer">
-        ...
+
         <!--  (Aqui também deve ajustar os ícones para usar static se tiver imagens no rodapé) -->
-        ...
+      
         <footer class="footer">
           <div class="footer-container">
             <div class="footer-left">
@@ -163,6 +166,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{% static 'js/2ibca.js' %}"></script>
+    <script src="{% static 'js/mobile-menu.js' %}"></script>
 
 </body>
 </html>

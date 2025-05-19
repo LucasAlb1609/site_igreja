@@ -1,0 +1,52 @@
+/* Variables CSS - 2IBCA */
+:root {
+  /* Cores principais */
+  --primary-color: #007bff;      /* Azul principal */
+  --secondary-color: #10acec;    /* Azul secundário */
+  --accent-color: #d9971c;       /* Cor de destaque (dourado) */
+  --bg-light: #f4f4f4;           /* Fundo claro */
+  --bg-alt: #eee7d7;             /* Fundo alternativo */
+  --text-dark: #000000;          /* Texto escuro */
+  --text-light: #ffffff;         /* Texto claro */
+  --text-muted: #555555;         /* Texto secundário */
+  
+  /* Tamanhos de fonte responsivos */
+  --font-size-base: 16px;
+  --font-size-sm: 0.875rem;      /* 14px se base for 16px */
+  --font-size-md: 1rem;          /* 16px */
+  --font-size-lg: 1.25rem;       /* 20px */
+  --font-size-xl: 1.5rem;        /* 24px */
+  --font-size-xxl: 2rem;         /* 32px */
+  
+  /* Espaçamentos */
+  --spacing-xs: 0.25rem;         /* 4px */
+  --spacing-sm: 0.5rem;          /* 8px */
+  --spacing-md: 1rem;            /* 16px */
+  --spacing-lg: 1.5rem;          /* 24px */
+  --spacing-xl: 2rem;            /* 32px */
+  
+  /* Breakpoints para responsividade */
+  --mobile-width: 576px;
+  --tablet-width: 768px;
+  --desktop-width: 992px;
+  --large-desktop-width: 1200px;
+  
+  /* Arredondamentos */
+  --border-radius-sm: 5px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 10px;
+  --border-radius-circle: 50%;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  
+  /* Transições */
+  --transition-fast: 0.3s ease;
+  --transition-medium: 0.5s ease;
+  
+  /* Larguras de container */
+  --container-sm: 90%;
+  --container-max-width: 1200px;
+} 

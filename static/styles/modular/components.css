@@ -1,0 +1,228 @@
+/* Components CSS - 2IBCA */
+
+/* Carousel */
+.carousel-inner img {
+  max-width: 100%;
+  height: auto;
+}
+
+.carousel-caption {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: var(--border-radius-sm);
+  color: var(--text-dark);
+  text-shadow: none;
+}
+
+.carousel-indicators li {
+  width: 15px;
+  height: 15px;
+  border-radius: var(--border-radius-circle);
+  background-color: #555;
+  opacity: 0.7;
+}
+
+.carousel-indicators .active {
+  background-color: var(--text-dark);
+  opacity: 1;
+}
+
+/* Containers com cores de fundo */
+.container1 {
+  background-color: var(--bg-alt);
+  padding: 0.8em;
+  text-align: center;
+}
+
+.container2 {
+  background-color: var(--secondary-color);
+  padding: 0.8em;
+  text-align: center;
+}
+
+.container3 {
+  background-color: var(--bg-alt);
+  padding: 0.8em;
+  text-align: center;
+}
+
+.container4 {
+  background-color: var(--text-light);
+  padding: 0.8em;
+  text-align: center;
+}
+
+/* Centralização de imagens e conteúdo em todas as páginas */
+.page-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-image-container img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Transmissão ao vivo centralizada */
+.live-stream-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.live-stream-container iframe {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Cards de pessoas */
+.pessoa-card-section {
+  background-color: var(--primary-color);
+  padding: 40px 0;
+  text-align: center;
+}
+
+.titulo-pessoa {
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.descricao-pessoa {
+  color: var(--text-light);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.pessoas-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pessoa-card {
+  background: var(--text-light);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-fast);
+  margin-bottom: 20px;
+}
+
+.pessoa-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+
+.pessoa-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: var(--border-radius-circle);
+  object-fit: cover;
+  margin: 0 auto 15px;
+  border: 3px solid var(--primary-color);
+  display: block;
+}
+
+.pessoa-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.pessoa-card p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.pessoa-card .cargo {
+  font-size: 1rem;
+  color: var(--accent-color);
+  margin-top: -8px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  padding: var(--spacing-lg) 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.footer-left {
+  flex: 2;
+}
+
+.footer-left h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-left p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+}
+
+.social-links a {
+  margin-right: var(--spacing-md);
+  text-decoration: none;
+}
+
+.social-links img {
+  width: 24px;
+  height: 24px;
+  transition: var(--transition-fast);
+}
+
+.social-links img:hover {
+  transform: scale(1.2);
+}
+
+.spotify-component {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+.spotify-component iframe {
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  margin: 0 auto;
+  display: block;
+  max-width: 100%;
+} 

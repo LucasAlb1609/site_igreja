@@ -1,0 +1,78 @@
+/* Animations CSS - 2IBCA */
+
+/* Animação de entrada suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animação de destaque */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Animação de rotação */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animação de deslize horizontal */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Classes de utilidade para animações */
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0; /* Começa invisível até a animação aplicar */
+}
+
+.animate-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-2 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-3 {
+  animation-delay: 0.6s;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+.rotate {
+  animation: rotate 2s linear infinite;
+}
+
+.slide-in {
+  animation: slideInRight 0.5s ease forwards;
+} 

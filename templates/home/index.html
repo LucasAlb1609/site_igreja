@@ -29,20 +29,24 @@
         </div>
     </div>
 
-    <div class="container1">
-      <h1>RESUMO COM FOTO DA FACHADA</h1>
-    </div>
   
-    <div class="container2">
-      <h1>CORPO PASTORAL</h1>
+    <div class="container1">
+      <div class="container3 py-5">
+        <div class="container text-center">
+          <h2 class="mb-4">Última Transmissão ao Vivo</h2>
+          <div class="live-stream-container">
+            <a href="https://www.youtube.com/watch?v=uXMkc5owHzY" target="_blank">
+              <img src="{% static 'fotos/capa-maravilhas.jpeg' %}" alt="Assista a live" class="img-fluid rounded shadow mb-3" style="max-height: 400px;">
+              <br>
+              <button class="btn btn-danger mt-2">Assistir no YouTube</button>
+            </a>
+          </div>
+        </div>
+      </div>      
     </div>
 
-    <div class="container3">
-      <h1>ÚLTIMA TRANSMISSÃO</h1>
-    </div>
-    
-    <div class="container4">
-      <h1>DEPARTAMENTOS</h1>
+    <div class="container2">
+      <h1>DEVOCIONAL DA SEMANA</h1>
     </div>
 
     {% endblock %}

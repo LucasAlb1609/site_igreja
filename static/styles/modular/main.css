@@ -1,0 +1,31 @@
+/* Main CSS - 2IBCA */
+/* Este arquivo importa todos os módulos CSS */
+
+/* 1. Variáveis (deve ser importado primeiro) */
+@import url('variables.css');
+
+/* 2. Estilos padrão e reset */
+@import url('default.css');
+
+/* 3. Componentes específicos */
+@import url('components.css');
+
+/* 4. Animações */
+@import url('animations.css');
+
+/* 5. Layouts responsivos (do maior para o menor) */
+@import url('desktop.css');
+@import url('tablet.css');
+@import url('mobile.css');
+
+/* 
+Ordem de importação:
+1. Variáveis: para que estejam disponíveis em todos os arquivos
+2. Default: reset e estilos básicos globais
+3. Componentes: estilos de componentes específicos que são comuns a todos os layouts
+4. Animações: efeitos visuais que podem ser aplicados em qualquer layout
+5. Layouts responsivos: estilos específicos para cada tamanho de tela
+   - Desktop primeiro (para telas grandes)
+   - Tablet (breakpoints médios)
+   - Mobile (breakpoints pequenos)
+*/ 
