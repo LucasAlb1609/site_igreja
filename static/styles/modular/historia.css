@@ -1,0 +1,81 @@
+/* Estilos para a página de História da Igreja */
+
+/* Estilos para a imagem da fachada */
+.fachada-img {
+    max-height: 400px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Estilos para os ícones da missão */
+.missao-icon {
+    width: 80px;
+    height: 80px;
+    transition: transform 0.3s ease;
+}
+
+.missao-card:hover .missao-icon {
+    transform: scale(1.2);
+}
+
+.missao-card {
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Estilos para os cards de pastores */
+.pastor-card {
+    height: 100%;
+}
+
+.pastor-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.pastor-nome {
+    color: #f8a978;
+}
+
+/* Estilos para a seção de igrejas geradas */
+.igreja-card {
+    height: 100%;
+}
+
+/* Estilos para a seção de campos missionários */
+.campo-missionario-img-container {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.campo-missionario-img {
+    max-height: 100px;
+}
+
+.campo-missionario-titulo {
+    color: #f8a978;
+}
+
+/* Estilos para a seção de chamada para participação */
+.participacao-banner {
+    background: linear-gradient(90deg, #6ab7e2 0%, #f8a978 100%);
+}
+
+/* Estilos para a seção de tragédia */
+.memorial-img {
+    max-width: 300px;
+}
+
+/* Estilos para os destaques de texto */
+.destaque-laranja {
+    color: #f8a978;
+}
+
+/* Estilos para os cards especiais */
+.card-destaque-laranja {
+    background-color: #f8a978;
+}

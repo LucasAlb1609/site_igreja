@@ -1,105 +1,547 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/modular/historia.css' %}">
+{% endblock %}
 
-<section class="py-5" style="background-color: #f8f9fa;">
-    <div class="container text-center">
-        <h1 class="mb-4">Sobre a Segunda Igreja Batista em Casa Amarela</h1>
-        <div class="page-image-container">
-            <img src="{% static 'fotos/Fachada.jpg' %}" alt="Fachada da Igreja" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;">
-        </div>
+{% block content %}
+<!-- Banner principal da história -->
+<section class="py-5 text-center historia-banner" style="background: linear-gradient(90deg, #6ab7e2 0%, #f8a978 100%); min-height: 300px;">
+    <div class="container">
+        <h1 class="display-4 text-white mb-3">Nossa História</h1>
+        <p class="lead text-white">Uma jornada de fé e dedicação desde 1943</p>
     </div>
 </section>
 
+<!-- Introdução da Igreja -->
 <section class="py-5">
     <div class="container">
-
-        <!-- Fundação -->
-        <div class="mb-5">
-            <h2 class="mb-3">Fundação</h2>
-            <p>Fundada em 10 de setembro de 1943 - Organizada pela Igreja Batista de Escada com 43 membros fundadores.</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="text-center mb-4">Segunda Igreja Batista em Casa Amarela</h2>
+                <div class="text-center mb-4">
+                    <img src="{% static 'fotos/Fachada.jpg' %}" 
+                    alt="Fachada da Igreja" 
+                    class="img-fluid rounded shadow fachada-img">
+                </div>
+                <div class="bg-light p-4 rounded shadow-sm mb-5">
+                    <p class="text-center">Nossa igreja tem uma rica história de fé, dedicação e serviço à comunidade. Ao longo de décadas, temos sido abençoados com crescimento e transformação, sempre mantendo nosso compromisso com a proclamação do Evangelho.</p>
+                </div>
+            </div>
         </div>
-
-         <!-- Perfil da Igreja -->
-         <div class="mb-5">
-            <h2 class="mb-3">Perfil da Igreja</h2>
-            <p>A Segunda Igreja Batista em Casa Amarela dedica-se à proclamação do Evangelho e ao avanço do Reino de Deus, buscando se enquadrar no modelo de estratégia dada por Jesus Cristo em Atos 1:8.</p>
-        </div>
-
-        <!-- Missão -->
-        <div class="mb-5">
-            <h2 class="mb-3">Missão</h2>
-            <p>Missão baseada em cinco pilares: Adoração, Edificação, Comunhão, Proclamação e Serviço Social Cristão. Todos os ministérios e atividades da igreja são voltados para atender esses princípios fundamentais.</p>
-        </div>
-
-        <!-- Pastores -->
-        <div class="mb-5">
-            <h2 class="mb-3">Pastorado</h2>
-            <p><strong>Pastor Fundador:</strong> Severino Belo</p>
-            <p><strong>Pastores que exerceram oficialmente seus ministérios:</strong></p>
-            <ul>
-                <li>Pastor Severino Belo – 1943 – aproximadamente três meses.</li>
-                <li>Pastor Manoel Machado – 1944 a 1953 – 10 anos.</li>
-                <li>Pastor Albérico de Souza – 1954 a 1957 – 4 anos.</li>
-                <li>Pastor Severino Cardoso – 1958 a 1962 – 5 anos.</li>
-                <li>Pastor Rosivaldo de Araújo – 1963 a 1971 – 9 anos.</li>
-                <li>Pastor Leandro Dias – 1971 – 11 meses.</li>
-                <li>Pastor Pedro Andrade – 1971-1972 (Interino) e depois efetivo desde 1975.</li>
-                <li>Pastor Carlos Pezzotti – 1972 a 1974 – 2 anos.</li>
-                <li>Pastor João Gomes – Desde 1999 (auxiliar, depois presidente em 2008).</li>
-                <li>Pr. Elcias Rodrigues Martins – Vice-presidente a partir de 2008.</li>
-                <li>Pr. Romildo Silva de Melo – Vice-presidente em 2018.</li>
-            </ul>
-        </div>
-
-        <!-- Tragédia 2008 -->
-        <div class="mb-5">
-            <h2 class="mb-3">Tragédia de 13 de setembro de 2008</h2>
-            <p>Durante uma viagem missionária a Bom Jardim do Araripe, um acidente de ônibus causou a perda de sete vidas preciosas, incluindo o Pastor Pedro Pereira de Andrade e o Pastor Solon de Araújo Oliveira. Foi um momento de grande dor para a igreja e toda a comunidade.</p>
-        </div>
-
-        <!-- Igrejas e Congregações -->
-        <div class="mb-5">
-            <h2 class="mb-3"><strong>Igrejas Geradas</strong></h2>
-            <ul>
-                	<li>Igreja Batista na Várzea – RMR</li>
-                    <li>Igreja Batista em Surubim – Zona da Mata</li>
-                    <li>Igreja Batista Central de Iputinga – RMR</li>
-                    <li>Igreja Batista em Pau D' Alho – Zona da Mata</li>
-                    <li>Igreja Batista no Arruda – RMR</li>
-                    <li>Igreja Batista em Paratibe – RMR</li>
-                    <li>Igreja Batista em Barra de Jangada – Jaboatão </li>
-                    <li>Igreja Batista em Dois Irmãos – RMR</li>
-                    <li>Igreja Batista no Conjunto Dom Hélder Câmara – Jaboatão</li>
-                    <li>Igreja Batista Central em Barra de Jangada – Jaboatão</li>
-                    <li>Igreja Batista no Alto da Telha – Guabiraba – RMR</li>
-                    <li>2ª Igreja Batista Missionária do Curado IV – Jaboatão</li>
-                    <li>Igreja Batista Missionária em Pedra de Fogo – Paraíba</li>
-                    <li>Igreja Batista Missionária em Garanhuns</li>
-                    <li>Igreja Batista Central em Casa Amarela (Vasco da Gama) 
-                        - Por 1ª divisão - Década de 50</li>
-                    <li>Igreja Evangélica em Casa Amarela 
-                        - Por 2ª divisão - 
-                        Por ocasião da Renovação Espiritual na década de 60</li>
-                    
-            </ul>            
-        </div>
-
-        <!-- Campos Missionários -->
-        <div class="mb-5">
-            <h2 class="mb-3">Campos Missionários e Missionários</h2>
-            <p><strong>Trabalhos realizados em países como:</strong></p>
-            <ul>
-                <li>Tailândia – Povos Karen</li>
-                <li>Níger – África</li>
-                <li>Egito – Oriente Médio</li>
-                <li>México – América Latina</li>
-                <li>Guiné-Bissau – África</li>
-            </ul>
-        </div>
-
     </div>
 </section>
 
+<!-- Fundação -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Fundação</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow mb-4">
+                    <div class="card-body">
+                        <p class="mb-0">Fundada em <strong>10 de setembro de 1943</strong> - Organizada pela Igreja Batista de Escada com 43 membros fundadores.</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Membros fundadores da Segunda Igreja Batista em Casa Amarela</h5>
+                        </div>
+                        <div class="card-body">
+                            <img src="{% static 'fotos/igreja.jpg' %}" alt="Membros fundadores da igreja" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Perfil da Igreja -->
+<section class="py-4">
+    <div class="container">
+        <h2 class="text-center mb-4">Perfil da Igreja</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bg-light p-4 rounded shadow-sm">
+                    <p>A Segunda Igreja Batista em Casa Amarela dedica-se à proclamação do Evangelho e ao avanço do Reino de Deus, buscando se enquadrar no modelo de estratégia dada por Jesus Cristo em Atos 1:8: <em>"Mas recebereis poder ao descer sobre vós o Espírito Santo e ser-me-eis testemunhas, tanto em Jerusalém, como em toda a Judéia, Samaria e até os confins da terra."</em> É para este alvo que direcionamos todas as atividades que fazem parte da missão da igreja aqui na terra.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Missão -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Missão</h2>
+        <p class="text-center mb-5">Missão baseada em cinco pilares fundamentais:</p>
+        
+        <div class="row justify-content-center">
+            <div class="col mb-4">
+                <div class="card border-0 shadow-sm missao-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/ícones/adoracao.png' %}" alt="Adoração" class="missao-icon mb-3">
+                        <h5>Adoração</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card border-0 shadow-sm missao-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/ícones/biblia.png' %}" alt="Edificação" class="missao-icon mb-3">
+                        <h5>Edificação</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card border-0 shadow-sm missao-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/ícones/comunhao.png' %}" alt="Comunhão" class="missao-icon mb-3">
+                        <h5>Comunhão</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card border-0 shadow-sm missao-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/ícones/proclamar.png' %}" alt="Proclamação" class="missao-icon mb-3">
+                        <h5>Proclamação</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card border-0 shadow-sm missao-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/ícones/social.png' %}" alt="Serviço Social Cristão" class="missao-icon mb-3">
+                        <h5>Serviço Social Cristão</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-3">
+            <div class="col-lg-8">
+                <p class="text-center">Todos os ministérios e atividades da igreja são voltados para atender esses princípios fundamentais.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pastorado -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Pastorado</h2>
+        <p class="text-center mb-4">Conheça os pastores que lideraram nossa igreja ao longo dos anos:</p>
+        
+        <!-- Pastores Fundadores -->
+        <div class="row mb-5">
+            <div class="col-12 mb-4">
+                <h3 class="text-center">Pastores Fundadores</h3>
+            </div>
+            
+            <!-- Pastor Severino Belo -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Severino Belo" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Severino Belo</h5>
+                        <p class="card-text text-muted">Pastor Fundador</p>
+                        <p class="card-text">1943 - aproximadamente três meses</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Manoel Machado -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Manoel Machado" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Manoel Machado</h5>
+                        <p class="card-text">Administrador da Construção do 1º Templo</p>
+                        <p class="card-text">1944 a 1953 - 10 anos</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Albérico de Souza -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Albérico de Souza" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Albérico de Souza</h5>
+                        <p class="card-text">O Pastor que amava as crianças e as flores</p>
+                        <p class="card-text">1954 a 1957 - 4 anos</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Severino Cardoso -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Severino Cardoso" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Severino Cardoso</h5>
+                        <p class="card-text">Administrador da construção da casa pastoral</p>
+                        <p class="card-text">1958 a 1962 - 5 anos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pastores Posteriores -->
+        <div class="row">
+            <!-- Pastor Rosivaldo de Araújo -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Rosivaldo de Araújo" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Rosivaldo de Araújo</h5>
+                        <p class="card-text">Instrumento de Deus para trazer ao rebanho um poderoso avivamento espiritual</p>
+                        <p class="card-text">1963 a 1971 - 9 anos</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Leandro Dias -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Leandro Dias" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Leandro Dias</h5>
+                        <p class="card-text">1971 - 11 meses</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Pedro Andrade -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Pedro Andrade" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Pedro Andrade</h5>
+                        <p class="card-text">Administrou a ampliação de nossas fronteiras através da expansão do Evangelho</p>
+                        <p class="card-text">1971-1972 (Interino) e depois efetivo desde 1975</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Carlos Pezzotti -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Carlos Pezzotti" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Carlos Pezzotti</h5>
+                        <p class="card-text">1972 a 1974 - 2 anos</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor João Gomes -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/joao.jpg' %}" alt="Pastor João Gomes" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor João Gomes</h5>
+                        <p class="card-text">Trabalhou especificamente com Evangelismo e Discipulado</p>
+                        <p class="card-text">Desde 1999 (auxiliar, depois presidente em 2008)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Elcias Rodrigues Martins -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Elcias Rodrigues Martins" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Elcias Rodrigues Martins</h5>
+                        <p class="card-text">Vice-presidente a partir de 2008</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pastor Romildo Silva de Melo -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm pastor-card">
+                    <div class="card-body text-center">
+                        <img src="{% static 'fotos/romildo.jpg' %}" alt="Pastor Romildo Silva de Melo" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <h5 class="card-title pastor-nome">Pastor Romildo Silva de Melo</h5>
+                        <p class="card-text">Vice-presidente em 2018</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tragédia de 2008 -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Tragédia de 13 de setembro de 2008</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-4">
+                        <p>Durante uma viagem missionária a Bom Jardim do Araripe, um acidente de ônibus causou a perda de sete vidas preciosas, incluindo o Pastor Pedro Pereira de Andrade e o Pastor Solon de Araújo Oliveira. Foi um momento de grande dor para a igreja e toda a comunidade.</p>
+                        
+                        <h4 class="text-center mt-4 mb-3">Em memória</h4>
+                        <div class="text-center">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial às vítimas do acidente" class="img-fluid rounded shadow-sm memorial-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Igrejas Geradas -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Igrejas Geradas</h2>
+        
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card h-100 border-0 shadow-sm igreja-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Igreja Batista na Várzea</h5>
+                        <p class="card-text text-muted">RMR</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card h-100 border-0 shadow-sm igreja-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Igreja Batista em Surubim</h5>
+                        <p class="card-text text-muted">Zona da Mata</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card h-100 border-0 shadow-sm igreja-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Igreja Batista Central de Iputinga</h5>
+                        <p class="card-text text-muted">RMR</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card h-100 border-0 shadow-sm igreja-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Igreja Batista em Pau D' Alho</h5>
+                        <p class="card-text text-muted">Zona da Mata</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card h-100 border-0 shadow-sm igreja-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Igreja Batista no Arruda</h5>
+                        <p class="card-text text-muted">RMR</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card h-100 border-0 shadow-sm igreja-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Igreja Batista em Paratibe</h5>
+                        <p class="card-text text-muted">RMR</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#maisIgrejas" aria-expanded="false" aria-controls="maisIgrejas">
+                    Ver mais igrejas
+                </button>
+            </div>
+        </div>
+        
+        <div class="collapse mt-3" id="maisIgrejas">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Igreja Batista em Barra de Jangada</h5>
+                            <p class="card-text text-muted">Jaboatão</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Igreja Batista em Dois Irmãos</h5>
+                            <p class="card-text text-muted">RMR</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Igreja Batista no Conjunto Dom Hélder Câmara</h5>
+                            <p class="card-text text-muted">Jaboatão</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Igreja Batista Central em Barra de Jangada</h5>
+                            <p class="card-text text-muted">Jaboatão</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Igreja Batista no Alto da Telha</h5>
+                            <p class="card-text text-muted">Guabiraba - RMR</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">2ª Igreja Batista Missionária do Curado IV</h5>
+                            <p class="card-text text-muted">Jaboatão</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Igreja Batista Missionária em Pedra de Fogo</h5>
+                            <p class="card-text text-muted">Paraíba</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="card h-100 border-0 shadow-sm igreja-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Igreja Batista Missionária em Garanhuns</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12 mb-3">
+                    <div class="card border-0 shadow-sm card-destaque-laranja">
+                        <div class="card-body text-center text-white">
+                            <h5 class="mb-0">Igreja Batista Central em Casa Amarela (Vasco da Gama) - Por 1ª divisão - Década de 50</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm card-destaque-laranja">
+                        <div class="card-body text-center text-white">
+                            <h5 class="mb-0">Igreja Evangélica em Casa Amarela - Por 2ª divisão - Por ocasião da Renovação Espiritual na década de 60</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Campos Missionários -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Campos Missionários e Missionários</h2>
+        <p class="text-center mb-5">Trabalhos realizados em países como:</p>
+        
+        <div class="row justify-content-center">
+            <!-- Tailândia -->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="campo-missionario-img-container">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Bandeira da Tailândia" class="img-fluid campo-missionario-img">
+                        </div>
+                        <h5 class="card-title campo-missionario-titulo">Tailândia</h5>
+                        <p class="card-text">Povos Karen</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Níger -->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="campo-missionario-img-container">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Bandeira do Níger" class="img-fluid campo-missionario-img">
+                        </div>
+                        <h5 class="card-title campo-missionario-titulo">Níger</h5>
+                        <p class="card-text">África</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Egito -->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="campo-missionario-img-container">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Bandeira do Egito" class="img-fluid campo-missionario-img">
+                        </div>
+                        <h5 class="card-title campo-missionario-titulo">Egito</h5>
+                        <p class="card-text">Oriente Médio</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- México -->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="campo-missionario-img-container">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Bandeira do México" class="img-fluid campo-missionario-img">
+                        </div>
+                        <h5 class="card-title campo-missionario-titulo">México</h5>
+                        <p class="card-text">América Latina</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Guiné-Bissau -->
+            <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="campo-missionario-img-container">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Bandeira da Guiné-Bissau" class="img-fluid campo-missionario-img">
+                        </div>
+                        <h5 class="card-title campo-missionario-titulo">Guiné-Bissau</h5>
+                        <p class="card-text">África</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Chamada para Participação -->
+<section class="py-5 participacao-banner">
+    <div class="container text-center">
+        <h2 class="text-white mb-4">Faça Parte da Nossa História</h2>
+        <p class="text-white mb-4">Nossa jornada continua e você é convidado a fazer parte dela. Venha conhecer nossa comunidade e crescer conosco em fé e propósito.</p>
+        <a href="#" class="btn btn-light px-4 py-2 shadow">Visite-nos</a>
+    </div>
+</section>
 {% endblock %}
