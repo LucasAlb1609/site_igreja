@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-qli58exh12hcsm-lez=s(43i)bn(0uk=tm3a$ou95@xq$o0^er
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -126,8 +126,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import dj_database_url
-
-DATABASES['default'] = dj_database_url.config(
-    conn_max_age=600, ssl_require=True
-)
+# Configurações para arquivos de mídia (uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
