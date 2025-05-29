@@ -13,6 +13,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    background-color: var(--primary-color); /* Garantir cor de fundo */
   }
 
   /* Logo para mobile */
@@ -55,7 +56,7 @@
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    background-color: var(--text-light);
+    background-color: var(--text-light); /* Cor do ícone hamburger */
     transition: var(--transition-fast);
   }
 
@@ -65,7 +66,7 @@
     flex-direction: column;
     width: 100%;
     padding: 0;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Cor de fundo principal */
   }
 
   /* Menu mobile aberto (será controlado por JavaScript) */
@@ -77,26 +78,38 @@
     width: 100%;
     z-index: 999;
     box-shadow: var(--shadow-md);
+    background-color: var(--primary-color); /* Cor de fundo principal */
   }
 
   .menu li {
     width: 100%;
     text-align: center;
     margin-bottom: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Linha divisória mais sutil */
+  }
+
+  .menu li:first-child {
+    border-top: none; /* Remover borda do primeiro item */
   }
 
   .menu li a {
     display: block;
     padding: 12px 15px;
     width: 100%;
+    color: var(--text-light); /* Cor do texto */
+    font-weight: bold;
+    transition: var(--transition-fast);
+  }
+
+  .menu li a:hover {
+    background-color: var(--secondary-color); /* Cor de fundo ao passar o mouse */
   }
 
   /* Estilo do dropdown no mobile */
   .dropdown-menu {
     position: static;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.15); /* Fundo ligeiramente mais escuro para contraste */
     box-shadow: none;
     border: none;
     border-radius: 0;
@@ -107,18 +120,24 @@
 
   .dropdown-item {
     padding: 10px;
-    color: var(--text-light);
-    font-weight: 400;
+    color: var(--text-light); /* Cor do texto do dropdown */
+    font-weight: normal; /* Peso normal para itens de dropdown */
     text-align: center;
     /* Ajustes para manter ícone e texto na mesma linha */
     display: flex !important;
     justify-content: center;
     align-items: center;
     white-space: nowrap;
+    position: relative; /* Para a divisória */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Divisória sutil */
+  }
+
+  .dropdown-menu .dropdown-item:first-child {
+      border-top: none; /* Remover borda do primeiro item do dropdown */
   }
 
   .dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--secondary-color); /* Cor de fundo ao passar o mouse */
   }
 
   /* Ícones no menu mobile */
@@ -142,19 +161,26 @@
 
   /* Destaque visual para item ativo do menu */
   .nav-item.show > .nav-link {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--secondary-color); /* Cor de fundo para item ativo */
     font-weight: bold;
   }
 
-  /* Carrossel para mobile */
+  /* Carrossel para mobile - ALTURA DOBRADA NOVAMENTE */
   #carouselExampleIndicators {
-    max-width: 100%;
-    height: 200px;
+    width: 100%;
+    height: 60vh; /* Altura ajustada pelo usuário */
     margin: 0;
   }
 
+  #carouselExampleIndicators .carousel-inner,
+  #carouselExampleIndicators .carousel-item {
+    height: 100%;
+  }
+
   #carouselExampleIndicators .carousel-inner img {
-    height: 200px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
   .carousel-caption {
@@ -207,6 +233,6 @@
   .container2,
   .container3,
   .container4 {
-    padding: 0.5em;
+    padding: 1.5em 0.5em; /* Ajustar padding vertical */
   }
 } 

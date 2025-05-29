@@ -27,29 +27,39 @@
   opacity: 1;
 }
 
-/* Containers com cores de fundo */
+/* Containers com cores de fundo e separadores */
+.container1,
+.container2,
+.container3,
+.container4 {
+  padding: 2em 0.8em; /* Aumentar padding vertical */
+  text-align: center;
+  position: relative; /* Necessário para o pseudo-elemento */
+  /* Adicionar uma sombra sutil na parte inferior para separar */
+  box-shadow: 0 4px 6px -6px rgba(0, 0, 0, 0.3); /* Sombra apenas na parte inferior */
+  margin-bottom: 1px; /* Pequena margem para garantir a visibilidade da sombra */
+}
+
 .container1 {
   background-color: var(--bg-alt);
-  padding: 0.8em;
-  text-align: center;
 }
 
 .container2 {
   background-color: var(--secondary-color);
-  padding: 0.8em;
-  text-align: center;
+  color: var(--text-light); /* Garantir contraste */
+}
+
+.container2 h1,
+.container2 h2 {
+  color: var(--text-light);
 }
 
 .container3 {
   background-color: var(--bg-alt);
-  padding: 0.8em;
-  text-align: center;
 }
 
 .container4 {
   background-color: var(--text-light);
-  padding: 0.8em;
-  text-align: center;
 }
 
 /* Centralização de imagens e conteúdo em todas as páginas */
@@ -71,13 +81,15 @@
 /* Transmissão ao vivo centralizada */
 .live-stream-container {
   display: flex;
+  flex-direction: column; /* Empilhar imagem e botão */
   justify-content: center;
   align-items: center;
   width: 100%;
   margin: 0 auto;
 }
 
-.live-stream-container iframe {
+.live-stream-container iframe,
+.live-stream-container img {
   max-width: 100%;
   margin: 0 auto;
 }
@@ -168,6 +180,7 @@ footer {
   background-color: var(--bg-light);
   color: var(--text-dark);
   padding: var(--spacing-lg) 0;
+  margin-top: 1px; /* Separar do último container */
 }
 
 .footer-container {
@@ -225,4 +238,49 @@ footer {
   margin: 0 auto;
   display: block;
   max-width: 100%;
-} 
+}
+
+/* Botão Flutuante WhatsApp - NOVO */
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  left: 40px;
+  background-color: #25d366; /* Cor oficial do WhatsApp */
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px; /* Tamanho do ícone interno (se usar fonte de ícone) */
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: var(--transition-fast);
+  display: flex; /* Para centralizar a imagem */
+  justify-content: center;
+  align-items: center;
+}
+
+.whatsapp-float img {
+  width: 35px; /* Ajuste o tamanho do ícone conforme necessário */
+  height: 35px;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+}
+
+/* Ajustes para telas menores se necessário */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    left: 20px;
+  }
+  .whatsapp-float img {
+    width: 30px;
+    height: 30px;
+  }
+}
+

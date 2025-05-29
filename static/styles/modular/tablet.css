@@ -31,15 +31,22 @@
     padding: 6px 10px;
   }
 
-  /* Ajustes no carrossel para tablets */
+  /* Ajustes no carrossel para tablets - ALTURA DOBRADA NOVAMENTE */
   #carouselExampleIndicators {
-    max-width: 90%;
-    height: 350px;
+    width: 100%;
+    height: 80vh; /* Altura ajustada pelo usuário */
+    margin: 0;
+  }
+
+  #carouselExampleIndicators .carousel-inner,
+  #carouselExampleIndicators .carousel-item {
+    height: 100%;
   }
 
   #carouselExampleIndicators .carousel-inner img {
     width: 100%;
-    height: 350px;
+    height: 100%;
+    object-fit: cover;
   }
 
   .carousel-caption {
@@ -86,6 +93,6 @@
   .container2,
   .container3,
   .container4 {
-    padding: 0.6em;
+    padding: 1.8em 0.6em; /* Ajustar padding vertical */
   }
 } 

@@ -28,6 +28,12 @@
             </a>
         </div>
         <nav>
+            <!-- Botão Hamburger para Mobile (será visível apenas em telas pequenas via CSS) -->
+            <button class="menu-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="menu">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="nossaIgrejaDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -160,12 +166,17 @@
   
         </footer>
 
+    <!-- Botão Fixo WhatsApp -->
+    <a href="https://wa.me/message/YHZLZY6LT73HO1" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+        <img src="{% static 'fotos/ícones/whatsapp.png' %}" alt="WhatsApp">
+    </a>
+
     <!-- JavaScript Bootstrap e personalizado -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{% static 'js/2ibca.js' %}"></script>
+    <!-- <script src="{% static 'js/2ibca.js' %}"></script> --> <!-- Comentado se não existir ou não for necessário -->
     <script src="{% static 'js/mobile-menu.js' %}"></script>
 
 </body>

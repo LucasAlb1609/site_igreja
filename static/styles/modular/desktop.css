@@ -96,6 +96,8 @@ nav a:hover {
   margin-top: 0px;
   transition: var(--transition-fast);
   min-width: 200px;
+  padding-top: var(--spacing-sm); /* Espaço para a primeira divisória */
+  padding-bottom: var(--spacing-sm); /* Espaço para a última divisória */
 }
 
 .dropdown-menu a {
@@ -108,6 +110,18 @@ nav a:hover {
 .dropdown-item {
   color: var(--secondary-color);
   font-weight: 700;
+  position: relative; /* Para a divisória */
+}
+
+/* Divisória entre itens do dropdown - MODIFICADA */
+.dropdown-item + .dropdown-item::before {
+  content: '';
+  position: absolute;
+  top: -5px; /* Ajuste a posição vertical conforme necessário */
+  left: 10%; /* Começa um pouco para dentro */
+  right: 10%; /* Termina um pouco para dentro */
+  height: 2px; /* Linha mais grossa */
+  background-color: rgba(0, 0, 0, 0.15); /* Cor da divisória um pouco mais escura */
 }
 
 .dropdown-item:hover {
@@ -124,18 +138,22 @@ nav a:hover {
   display: inline-block;
 }
 
-/* Estilo do carrossel para desktop */
+/* Estilo do carrossel para desktop - ALTURA AJUSTADA PELO USUÁRIO */
 #carouselExampleIndicators {
-  padding-top: 1.0em;
-  max-width: 800px;
-  height: 400px;
-  margin: auto;
+  width: 100%;
+  height: 100vh; /* Altura ajustada pelo usuário */
+  margin: 0;
   overflow: hidden;
 }
 
+#carouselExampleIndicators .carousel-inner,
+#carouselExampleIndicators .carousel-item {
+  height: 100%;
+}
+
 #carouselExampleIndicators .carousel-inner img {
-  width: 800px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
