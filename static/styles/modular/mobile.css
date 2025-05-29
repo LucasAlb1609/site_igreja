@@ -85,7 +85,7 @@
     width: 100%;
     text-align: center;
     margin-bottom: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Linha divisória mais sutil */
+    border-top: 1px solid rgba(0, 0, 0, 0.400); /* Linha divisória mais sutil */
   }
 
   .menu li:first-child {
@@ -199,18 +199,62 @@
     max-width: none;
   }
 
-  /* Ajustes no footer para mobile */
+  /* Ajustes no footer para mobile - MODIFICADO */
+  .footer {
+    background-color: #ffffff !important; /* Fundo branco */
+    padding: 20px 0 15px; /* Reduzindo o padding vertical para diminuir a altura */
+  }
+
   .footer-container {
     flex-direction: column;
     text-align: center;
-    padding: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
   }
 
   .footer-left {
     margin-bottom: var(--spacing-md);
   }
 
-  .footer-about,
+  .footer-left h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .footer-left p {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  /* Nova coluna de endereço para mobile */
+  .footer-endereco {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-endereco h4 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .footer-endereco ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-endereco ul li {
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .contato-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
   .footer-services,
   .footer-other {
     margin-bottom: var(--spacing-md);
@@ -223,9 +267,13 @@
   }
 
   /* Ajuste no componente Spotify */
+  .spotify-component {
+    margin-top: 10px;
+  }
+
   .spotify-component iframe {
     width: 95%;
-    height: 300px;
+    height: 60px; /* Reduzindo a altura do player */
   }
 
   /* Ajustes nos containers */
@@ -235,4 +283,4 @@
   .container4 {
     padding: 1.5em 0.5em; /* Ajustar padding vertical */
   }
-} 
+}

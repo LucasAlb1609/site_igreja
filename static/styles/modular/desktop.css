@@ -121,7 +121,7 @@ nav a:hover {
   left: 10%; /* Começa um pouco para dentro */
   right: 10%; /* Termina um pouco para dentro */
   height: 2px; /* Linha mais grossa */
-  background-color: rgba(0, 0, 0, 0.15); /* Cor da divisória um pouco mais escura */
+  background-color: rgba(0, 0, 0, 0.400); /* Cor da divisória um pouco mais escura */
 }
 
 .dropdown-item:hover {
@@ -164,29 +164,102 @@ nav a:hover {
   vertical-align: top;
 }
 
-/* Rodapé para desktop */
+/* Rodapé para desktop - MODIFICADO */
+.footer {
+  background-color: #ffffff !important; /* Fundo branco */
+  color: #333; /* Texto escuro para contraste */
+  padding: 30px 0 20px; /* Reduzindo o padding vertical para diminuir a altura */
+  margin-top: 1px;
+}
+
 .footer-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: var(--spacing-lg);
+  padding: 0 var(--spacing-md);
 }
 
 .footer-left {
   flex-basis: 40%;
 }
 
-.footer-about, 
+.footer-left h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.footer-left p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* Nova coluna de endereço */
+.footer-endereco {
+  flex-basis: 20%;
+}
+
+.footer-endereco h4 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.footer-endereco ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.footer-endereco ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.contato-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
 .footer-services, 
 .footer-other {
   flex-basis: 18%;
 }
 
 /* Spotify embed */
+.spotify-component {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .spotify-component iframe {
   width: 80%;
-  height: 380px;
+  height: 80px; /* Reduzindo a altura do player */
   margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 } 
+
+.social-links {
+  display: flex;
+  align-items: center;
+}
+
+.social-links a {
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+.social-links img {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s ease;
+}
+
+.social-links img:hover {
+  transform: scale(1.2);
+}

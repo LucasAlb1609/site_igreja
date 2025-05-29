@@ -98,73 +98,60 @@
     </main>
 
     <!-- Rodapé -->
-    <footer class="footer" style="background-color: #fc9c69;">
-
-        <!--  (Aqui também deve ajustar os ícones para usar static se tiver imagens no rodapé) -->
-      
-        <footer class="footer-container">
-          <div class="footer-container">
+    <footer class="footer">
+        <div class="footer-container">
             <div class="footer-left">
-              <h3>Gálatas 6. 2-10</h3>
-              <p>² Levai as cargas uns dos outros, e assim cumprireis a lei de Cristo.</br>
-                 ³ Porque, se alguém cuida ser alguma coisa, não sendo nada, engana-se a si mesmo.</br>
-                 ⁴ Mas prove cada um a sua própria obra, e terá glória só em si mesmo, e não noutro.</br>
-                 ⁵ Porque cada qual levará a sua própria carga.</br>
-                 ⁶ E o que é instruído na palavra reparta de todos os seus bens com aquele que o instrui.</br>
-                 ⁷ Não erreis: Deus não se deixa escarnecer; porque tudo o que o homem semear, isso também ceifará.</br>
-                 ⁸ Porque o que semeia na sua carne, da carne ceifará a corrupção; mas o que semeia no Espírito, do Espírito ceifará a vida eterna.</br>
-                 ⁹ E não nos cansemos de fazer bem, porque a seu tempo ceifaremos, se não houvermos desfalecido.</br>
-                 ¹⁰ Então, enquanto temos tempo, façamos bem a todos, mas principalmente aos domésticos da fé.</p>
+                <h3>Gálatas 6. 2-10</h3>
+                <p>² Levai as cargas uns dos outros, e assim cumprireis a lei de Cristo.</br>
+                    ³ Porque, se alguém cuida ser alguma coisa, não sendo nada, engana-se a si mesmo.</br>
+                    ⁴ Mas prove cada um a sua própria obra, e terá glória só em si mesmo, e não noutro.</br>
+                    ⁵ Porque cada qual levará a sua própria carga.</br>
+                    ⁶ E o que é instruído na palavra reparta de todos os seus bens com aquele que o instrui.</br>
+                    ⁷ Não erreis: Deus não se deixa escarnecer; porque tudo o que o homem semear, isso também ceifará.</br>
+                    ⁸ Porque o que semeia na sua carne, da carne ceifará a corrupção; mas o que semeia no Espírito,</br> 
+                      do Espírito ceifará a vida eterna.</br>
+                    ⁹ E não nos cansemos de fazer bem, porque a seu tempo ceifaremos, se não houvermos desfalecido.</br>
+                    ¹⁰ Então, enquanto temos tempo, façamos bem a todos, mas principalmente aos domésticos da fé.</p>
+                
+                <div class="social-links">
+                    <a href="https://www.instagram.com/_2ibca/" target="_blank"><img src="{% static '/fotos/ícones/instagram-preta.png' %}" alt="Instagram"></a>
+                    <a href="https://www.youtube.com/@2IBCARECIFE " target="_blank"><img src="{% static '/fotos/ícones/youtube-preta.png' %}" alt="YouTube"></a>
+                    <a href="https://wa.me/message/YHZLZY6LT73HO1" target="_blank"><img src="{% static '/fotos/ícones/whatsapp-preta.png' %}" alt="WhatsApp"></a>
+                </div>
+            </div>
             
-              
-              <div class="social-links">
-                <a href="https://www.instagram.com/_2ibca/" target="_blank"><img src="{% static '/fotos/ícones/instagram-preta.png' %}" alt="Instagram"></a>
-                <a href="https://www.youtube.com/@2IBCARECIFE " target="_blank"><img src="{% static '/fotos/ícones/youtube-preta.png' %}" alt="YouTube"></a>
-                <a href="https://wa.me/message/YHZLZY6LT73HO1" target="_blank"><img src="{% static '/fotos/ícones/whatsapp-preta.png' %}" alt="WhatsApp"></a>
-              </div>
+            <div class="footer-endereco">
+                <h4>Contato</h4>
+                <ul>
+                    <li><img src="{% static '/fotos/ícones/whatsapp-preta.png' %}" alt="WhatsApp" class="contato-icon"> (81) 99615-1339</li>
+                    <li><img src="{% static '/fotos/ícones/telefone.png' %}" alt="Telefone" class="contato-icon"> (81) 3221-1583</li>
+                    <li><img src="{% static '/fotos/ícones/email.png' %}" alt="Email" class="contato-icon"> contato@segundaigreja.org.br</li>
+                    <li><img src="{% static '/fotos/ícones/localizacao.png' %}" alt="Localização" class="contato-icon"> Rua Santa Izabel, 425</li>
+                    <li><img src="{% static '/fotos/ícones/localizacao.png' %}" alt="Localização" class="contato-icon" style="opacity: 0;"> Casa Amarela, Recife - PE</li>
+                </ul>
             </div>
-            <div class="footer-about">
-              <h4>About</h4>
-              <ul>
-                <li><a href="#">History</a></li>
-                <li><a href="#">Our Team</a></li>
-                <li><a href="#">Brand Guidelines</a></li>
-                <li><a href="#">Terms & Condition</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-              </ul>
-            </div>
-            <div class="footer-services">
-              <h4>Services</h4>
-              <ul>
-                <li><a href="#">How to Order</a></li>
-                <li><a href="#">Our Product</a></li>
-                <li><a href="#">Order Status</a></li>
-                <li><a href="#">Promo</a></li>
-                <li><a href="#">Payment Method</a></li>
-              </ul>
-            </div>
+            
+            
+            
             <div class="footer-other">
-              <h4>Other</h4>
-              <ul>
-                <li><a href="http://127.0.0.1:8000/admin/" target="_blank">Painel de Controle</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Privacy</a></li>
-              </ul>
+                <h4>Other</h4>
+                <ul>
+                    <li><a href="http://127.0.0.1:8000/admin/" target="_blank">Painel de Controle</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
             </div>
-          </div>
-          
-          </br>
-          
-          <div class="spotify-component">
-              <iframe src="https://open.spotify.com/embed/playlist/4s4pYRb5VFlQ2LqYtX5xhY? utm_source=generator&theme=0" 
-                  width="80%"
-                  frameborder="0" 
-                  allowtransparency="true" 
-                  allow="encrypted-media">
-              </iframe>
-          </div>
-  
-        </footer>
+        </div>
+        
+        <div class="spotify-component">
+            <iframe src="https://open.spotify.com/embed/playlist/4s4pYRb5VFlQ2LqYtX5xhY? utm_source=generator&theme=0" 
+                width="80%"
+                frameborder="0" 
+                allowtransparency="true" 
+                allow="encrypted-media">
+            </iframe>
+        </div>
+    </footer>
 
     <!-- Botão Fixo WhatsApp -->
     <a href="https://wa.me/message/YHZLZY6LT73HO1" class="whatsapp-float" target="_blank" aria-label="Fale conosco pelo WhatsApp">
@@ -172,7 +159,6 @@
     </a>
 
     <!-- JavaScript Bootstrap e personalizado -->
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

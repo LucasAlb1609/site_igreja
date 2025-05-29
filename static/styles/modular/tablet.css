@@ -65,10 +65,15 @@
     max-width: 300px;
   }
 
-  /* Ajustes no footer para tablets */
+  /* Ajustes no footer para tablets - MODIFICADO */
+  .footer {
+    background-color: #ffffff !important; /* Fundo branco */
+    padding: 25px 0 15px; /* Reduzindo o padding vertical para diminuir a altura */
+  }
+
   .footer-container {
     flex-wrap: wrap;
-    padding: var(--spacing-md);
+    padding: 0 var(--spacing-md);
   }
 
   .footer-left {
@@ -76,16 +81,51 @@
     margin-bottom: var(--spacing-md);
   }
 
-  .footer-about,
+  .footer-left h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-left p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  /* Nova coluna de endereço para tablet */
+  .footer-endereco {
+    flex-basis: 30%;
+  }
+
+  .footer-endereco h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-endereco ul li {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+  }
+
+  .contato-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
   .footer-services,
   .footer-other {
     flex-basis: 30%;
   }
 
   /* Ajuste no componente Spotify */
+  .spotify-component {
+    margin-top: 15px;
+  }
+
   .spotify-component iframe {
     width: 90%;
-    height: 350px;
+    height: 70px; /* Reduzindo a altura do player */
   }
 
   /* Ajustes nos containers */
@@ -95,4 +135,4 @@
   .container4 {
     padding: 1.8em 0.6em; /* Ajustar padding vertical */
   }
-} 
+}
