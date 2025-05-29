@@ -7,26 +7,21 @@ INSTRUÇÕES DE INSTALAÇÃO
 
 -Certifique-se de ter instalado em sua máquina:
     python 3.10.11 ou superior
-    Django 4.2 ou superior
     IDE de sua preferência
 
 
 -Configurando o=seu ambiente virtual:
 
   1. Crie o ambiente virtual:
-  Abra o terminal e navegue até o diretório do seu projeto Django.
-  Execute o comando python -m venv nome_do_ambiente (substitua nome_do_ambiente pelo nome desejado para o seu ambiente virtual). 
-
+  Abra o terminal e navegue até o diretório do seu projeto Django: Exemplo: cd C:\VSCode\meu_site
+  
+  Execute os comandos: 
+      python -m venv venv
+      venv\Scripts\activate
+      pip install django
+      pip install -r requirements.txt
+      
   2. Ative o ambiente virtual:
-  Linux/macOS: Execute o comando source nome_do_ambiente/bin/activate. 
-  Windows: Execute o comando nome_do_ambiente\\Scripts\\activate. 
-  Você verá o nome do ambiente virtual entre parênteses no prompt do terminal, indicando que está ativo. 
-
-  3. Verifique se o ambiente está ativo:
-  Execute python --version e observe que o Python sendo usado é o da versão instalada no ambiente virtual. 
-  Você também pode verificar os pacotes instalados com pip freeze. 
-
-  4. Instale o Django no ambiente virtual:
-  Execute pip install django para instalar o Django no ambiente virtual ativado. 
-
-  5. Comece a trabalhar:
+     python manage.py runserver 8000
+     
+  4. Comece a trabalhar:
