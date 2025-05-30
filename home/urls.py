@@ -7,6 +7,10 @@ from django.contrib import admin
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
+    path("historia/", views.historia, name="historia"),
+    path("lideranca/", views.lideranca, name="lideranca"),
+    path("departamentos/", views.departamentos, name="departamentos"),
+    path("congregacoes/", views.congregacoes, name="congregacoes"),
 ]
 
 # Adicione isso ao final do arquivo

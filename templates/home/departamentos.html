@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Departamentos - {{ block.super }}{% endblock %}
+
+{# Adicionar link para o CSS específico desta página #}
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/modular/departamentos.css' %}">
+
+<div class="departamentos-page-container">
+    <h1 class="departamentos-page-titulo">Departamentos</h1>
+
+    <div class="ministerio-tabs-container">
+        {% for cat_key, cat_display_name in categorias_para_abas %}
+            <div class="ministerio-tab-item" data-target="#carousel-{{ cat_key }}">
+                <h3>{{ cat_display_name }}</h3>
+            </div>
+        {% empty %}
+            <p>Nenhum departamento cadastrado ainda.</p>
+        {% endfor %}
+    </div>
+
+    {% for cat_key, cat_data in departamentos_agrupados.items %}
+        <div class="departamentos-carrossel-wrapper" id="carousel-wrapper-{{ cat_key }}">
+            {% if cat_data.lista %}
+                <div id="carousel-{{ cat_key }}" class="carousel slide carousel-departamentos" data-ride="carousel" data-interval="false"> <!-- data-interval="false" para não girar sozinho -->
+                    <div class="carousel-inner">
+                        {% for depto in cat_data.lista %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <div class="departamento-card">
+                                    <div class="departamento-card-imagem">
+                                        {% if depto.imagem %}
+                                            <img src="{{ depto.imagem.url }}" alt="{{ depto.nome }}">
+                                        {% else %}
+                                            <div style="width:100%; height:100%; background-color: #ccc;"></div> <!-- Placeholder cinza -->
+                                        {% endif %}
+                                    </div>
+                                    <div class="departamento-card-conteudo">
+                                        <h4>{{ depto.nome }}</h4>
+                                        <p>{{ depto.descricao|default:"Sem descrição." }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if cat_data.lista|length > 1 %} {# Só mostra setas se houver mais de 1 item #}
+                        <a class="carousel-control-prev" href="#carousel-{{ cat_key }}" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Anterior</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-{{ cat_key }}" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Próximo</span>
+                        </a>
+                    {% endif %}
+                </div>
+            {% else %}
+                 <p style="text-align: center; margin-top: 20px;">Nenhum departamento cadastrado para este ministério.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.ministerio-tab-item');
+    const carouselsWrappers = document.querySelectorAll('.departamentos-carrossel-wrapper');
+    const tabsContainer = document.querySelector('.ministerio-tabs-container');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('mouseenter', () => {
+            const targetCarouselId = tab.getAttribute('data-target'); // e.g., #carousel-TREINAMENTO
+            const targetWrapper = document.querySelector('#carousel-wrapper-' + targetCarouselId.substring(10)); // e.g., #carousel-wrapper-TREINAMENTO
+
+            // Esconde todos os wrappers de carrossel
+            carouselsWrappers.forEach(wrapper => wrapper.style.display = 'none');
+            
+            // Mostra o wrapper do carrossel alvo
+            if (targetWrapper) {
+                targetWrapper.style.display = 'block';
+                // Força o Bootstrap a recalcular o layout do carrossel (útil se estava display:none)
+                $(targetCarouselId).carousel('dispose').carousel(); 
+            }
+        });
+    });
+
+    // Opcional: Esconder carrosséis se o mouse sair da área das abas
+    if (tabsContainer) {
+        tabsContainer.addEventListener('mouseleave', () => {
+            // Poderia esconder todos os carrosséis aqui, mas pode ser irritante para o usuário.
+            // Deixar o último carrossel visível pode ser uma experiência melhor.
+            // carouselsWrappers.forEach(wrapper => wrapper.style.display = 'none');
+        });
+    }
+
+    // Lógica para múltiplos itens por slide (adaptada para responsividade)
+    $('.carousel-departamentos').each(function(){
+        var $carousel = $(this);
+        var itemsPerSlide = 3; // Default para desktop
+        if (window.innerWidth < 992) {
+            itemsPerSlide = 2; // Tablet
+        }
+        if (window.innerWidth < 768) {
+            itemsPerSlide = 1; // Mobile
+        }
+
+        var totalItems = $carousel.find('.carousel-item').length;
+
+        if (totalItems > itemsPerSlide) {
+            $carousel.on('slide.bs.carousel', function (e) {
+                var $e = $(e.relatedTarget);
+                var idx = $e.index();
+                var itemsMove = e.direction === 'left' ? 1 : -1;
+                var newIdx = (idx + itemsMove + totalItems) % totalItems;
+
+                // Mover itens para criar loop infinito visual
+                // Esta lógica pode precisar de ajustes finos dependendo do comportamento exato desejado
+                // if (e.direction == 'left') {
+                //     $carousel.find('.carousel-item').eq(newIdx).appendTo($carousel.find('.carousel-inner'));
+                // } else {
+                //     $carousel.find('.carousel-item').eq((idx - itemsPerSlide + totalItems) % totalItems).prependTo($carousel.find('.carousel-inner'));
+                // }
+            });
+        }
+    });
+
+     // Inicializa os carrosséis (importante para que as setas funcionem)
+     $('.carousel-departamentos').carousel();
+
+});
+</script>
+
+{% endblock %}
+

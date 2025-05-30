@@ -77,3 +77,26 @@ class ConfiguracaoSite(models.Model):
         else:
             # Retorna o caminho para a imagem padrão
             return f"{settings.STATIC_URL}fotos/{self.tipo_imagem}.jpeg"
+
+
+# --- NOVO MODELO APENAS PARA DEPARTAMENTOS --- 
+class Departamento(models.Model):
+    CATEGORIAS = [
+        ("TREINAMENTO", "Ministério de Treinamento e Crescimento Cristão"),
+        ("MUSICA", "Ministério de Música"),
+        # Adicione mais categorias se necessário no futuro
+    ]
+
+    nome = models.CharField(max_length=100, verbose_name="Nome do Departamento")
+    descricao = models.TextField(blank=True, help_text="Uma breve descrição do departamento.", verbose_name="Descrição")
+    imagem = models.ImageField(upload_to="departamentos/", help_text="Imagem representativa do departamento.", verbose_name="Imagem")
+    categoria = models.CharField(max_length=50, choices=CATEGORIAS, verbose_name="Ministério Principal")
+    ordem = models.PositiveIntegerField(default=0, help_text="Define a ordem de exibição dentro do ministério (menor número aparece primeiro).", verbose_name="Ordem de Exibição")
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = "Departamento"
+        verbose_name_plural = "Departamentos"
+        ordering = ["categoria", "ordem"] # Ordena por ministério e depois pela ordem definida

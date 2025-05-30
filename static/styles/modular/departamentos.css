@@ -1,0 +1,186 @@
+/* Estilos específicos para a página de departamentos - Modular */
+.departamentos-page-container {
+    padding: 40px 20px;
+    background-color: var(--primary-color); /* Fundo azul como na imagem */
+    color: var(--text-light);
+    min-height: 70vh; /* Para dar espaço */
+}
+
+.departamentos-page-titulo {
+    text-align: left; /* Alinhar título à esquerda */
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding-left: 15px; /* Pequeno padding */
+}
+
+.ministerio-tabs-container {
+    display: flex;
+    justify-content: center; /* Centralizar as abas */
+    gap: 30px;
+    margin-bottom: 50px;
+    flex-wrap: wrap; /* Permitir quebra de linha em telas menores */
+}
+
+.ministerio-tab-item {
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    transition: var(--transition-medium);
+    text-align: center;
+    border: 2px solid transparent;
+    flex-basis: 40%; /* Ocupar espaço, mas permitir 2 por linha */
+    max-width: 400px; /* Limitar largura máxima */
+}
+
+.ministerio-tab-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--text-light);
+    transform: translateY(-5px);
+}
+
+.ministerio-tab-item h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.departamentos-carrossel-wrapper {
+    display: none; /* Escondido por padrão */
+    margin-top: 30px;
+    padding: 0 5%; /* Espaço nas laterais para as setas */
+    width: 100%;
+}
+
+/* Estilo do card do departamento (baseado na imagem) */
+.departamento-card {
+    background-color: var(--text-light);
+    color: var(--text-dark);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    text-align: left;
+    height: 380px; /* Altura fixa aumentada para os cards */
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px; /* Espaçamento entre cards no carrossel */
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-fast);
+}
+
+.departamento-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.departamento-card-imagem {
+    height: 60%; /* Espaço para a imagem */
+    background-color: #e0e0e0; /* Fundo cinza claro enquanto a imagem carrega */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.departamento-card-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.departamento-card-conteudo {
+    padding: 20px;
+    height: 40%; /* Espaço para o texto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.departamento-card-conteudo h4 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.departamento-card-conteudo p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    /* Limitar descrição */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 linhas */
+    -webkit-box-orient: vertical;
+}
+
+/* Estilos para o Carrossel Bootstrap com Setas */
+.carousel-departamentos .carousel-inner {
+    padding: 1em 0; /* Espaço interno */
+}
+
+/* Ajustar múltiplos itens por slide */
+.carousel-departamentos .carousel-item {
+    margin-right: 0;
+    flex: 0 0 100%; /* Padrão para mobile */
+    display: block;
+}
+.carousel-departamentos .carousel-inner {
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    /* 2 itens para tablet */
+    .carousel-departamentos .carousel-item {
+        flex: 0 0 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    /* 3 itens para desktop */
+    .carousel-departamentos .carousel-item {
+        flex: 0 0 33.333333%;
+    }
+}
+
+/* Esconder indicadores padrão */
+.carousel-departamentos .carousel-indicators {
+    display: none;
+}
+
+/* Estilizar controles (setas) */
+.carousel-departamentos .carousel-control-prev,
+.carousel-departamentos .carousel-control-next {
+    width: 5%; /* Largura das setas */
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo branco semi-transparente */
+    border-radius: var(--border-radius-sm);
+    opacity: 0.8;
+    transition: var(--transition-fast);
+    height: 80px; /* Altura das setas */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-departamentos .carousel-control-prev:hover,
+.carousel-departamentos .carousel-control-next:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+}
+
+.carousel-departamentos .carousel-control-prev-icon,
+.carousel-departamentos .carousel-control-next-icon {
+    background-image: none; /* Remover imagem padrão */
+    color: var(--primary-color); /* Cor da seta */
+    font-size: 2rem; /* Tamanho da seta (usando texto) */
+    font-weight: bold;
+}
+
+/* Adicionar setas como texto (exemplo) */
+.carousel-departamentos .carousel-control-prev-icon::before {
+    content: '<';
+}
+.carousel-departamentos .carousel-control-next-icon::before {
+    content: '>';
+}
+
