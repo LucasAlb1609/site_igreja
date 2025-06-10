@@ -112,6 +112,7 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3; /* Limita a 3 linhas */
+    line-clamp: 3; /* Propriedade padrão para compatibilidade */
     -webkit-box-orient: vertical;
 }
 

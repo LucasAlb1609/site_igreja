@@ -1,5 +1,10 @@
 /* Estilos para a página de História da Igreja */
 
+.historia-banner {
+    background: linear-gradient(90deg, #6ab7e2 0%, #f8a978 100%);
+    min-height: 300px;
+}
+
 /* Estilos para a imagem da fachada */
 .fachada-img {
     max-height: 400px;
@@ -13,6 +18,8 @@
     width: 80px;
     height: 80px;
     transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
 }
 
 .missao-card:hover .missao-icon {
@@ -33,6 +40,8 @@
     width: 150px;
     height: 150px;
     object-fit: cover;
+    display: block;
+    margin: 0 auto;
 }
 
 .pastor-nome {
@@ -63,11 +72,14 @@
 /* Estilos para a seção de chamada para participação */
 .participacao-banner {
     background: linear-gradient(90deg, #6ab7e2 0%, #f8a978 100%);
+    min-height: 300px;
 }
 
 /* Estilos para a seção de tragédia */
 .memorial-img {
     max-width: 300px;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Estilos para os destaques de texto */
