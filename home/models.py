@@ -100,3 +100,34 @@ class Departamento(models.Model):
         verbose_name = "Departamento"
         verbose_name_plural = "Departamentos"
         ordering = ["categoria", "ordem"] # Ordena por ministério e depois pela ordem definida
+
+# --- ADIÇÕES NO MODELO PARA LIDERANÇA ---
+class SecaoLideranca(models.Model):
+    titulo = models.CharField(max_length=200, verbose_name="Título da Seção")
+    descricao = models.TextField(blank=True, verbose_name="Texto de Descrição")
+    ordem = models.PositiveIntegerField(default=0, help_text="Define a ordem de exibição na página (menor número aparece primeiro).")
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = "Seção de Liderança"
+        verbose_name_plural = "Seções de Liderança"
+        ordering = ['ordem']
+
+
+class Pessoa(models.Model):
+    secao = models.ForeignKey(SecaoLideranca, on_delete=models.CASCADE, related_name='pessoas')
+    nome = models.CharField(max_length=100)
+    cargo = models.CharField(max_length=100, verbose_name="Cargo ou Função")
+    descricao = models.TextField(blank=True, verbose_name="Descrição")
+    foto = models.ImageField(upload_to='lideranca/', verbose_name="Foto")
+    ordem = models.PositiveIntegerField(default=0, help_text="Define a ordem de exibição dentro da seção.")
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = "Pessoa da Liderança"
+        verbose_name_plural = "Pessoas da Liderança"
+        ordering = ['ordem']

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import ConfiguracaoSite, Departamento
+from .models import ConfiguracaoSite, Departamento, SecaoLideranca, Pessoa
 
 class ConfiguracaoSiteAdmin(admin.ModelAdmin):
     list_display = ('titulo_video', 'link_youtube', 'tipo_imagem', 'preview_imagem', 'data_atualizacao')
@@ -63,3 +63,17 @@ class DepartamentoAdmin(admin.ModelAdmin):
                 return "(Erro ao carregar imagem)"
         return "(Sem imagem)"
     imagem_preview.short_description = "Prévia da Imagem"
+
+
+# Permite editar Pessoas dentro da página da Seção
+class PessoaInline(admin.TabularInline):
+    model = Pessoa
+    extra = 1  # Quantos formulários em branco exibir
+    fields = ('nome', 'cargo', 'descricao', 'foto', 'ordem')
+
+
+@admin.register(SecaoLideranca)
+class SecaoLiderancaAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'ordem')
+    list_editable = ('ordem',)
+    inlines = [PessoaInline]

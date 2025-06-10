@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import ConfiguracaoSite, Departamento
+from .models import ConfiguracaoSite, Departamento, SecaoLideranca
 from django.conf import settings
 
 def index(request):
@@ -65,3 +65,11 @@ def departamentos(request):
 
 def congregacoes(request):
     return render(request, 'congregacoes.html')
+
+def lideranca(request):
+    # Busca todas as seções, ordenadas pela ordem definida
+    secoes = SecaoLideranca.objects.prefetch_related('pessoas').all()
+    context = {
+        'secoes': secoes
+    }
+    return render(request, 'lideranca.html', context)

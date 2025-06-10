@@ -20,9 +20,9 @@ from home import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Esta linha direciona todas as URLs principais (como 'historia', etc.)
+    # para serem gerenciadas pelo arquivo 'urls.py' do app 'home'.
+    # Isso significa que todas as URLs que começam com 'historia', 'lideranca', etc.
+    # serão tratadas pelo sistema de URLs do app 'home'.
     path('', include('home.urls')),
-    path('historia/', views.historia, name='historia'),
-    path('lideranca/', views.lideranca, name='lideranca'),
-    path('departamentos/', views.departamentos, name='departamentos'),
-    path('congregacoes/', views.congregacoes, name='congregacoes'),
 ]

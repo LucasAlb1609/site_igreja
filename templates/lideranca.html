@@ -3,58 +3,36 @@
 
 {% block content %}
 
+{% for secao in secoes %}
 <section class="pessoa-card-section">
   <div class="container">
-    <h2 class="titulo-pessoa">Corpo Pastoral</h2>
+    <h2 class="titulo-pessoa">{{ secao.titulo }}</h2>
     
+    {% if secao.descricao %}
     <p class="descricao-pessoa">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+        {{ secao.descricao }}
     </p>
+    {% endif %}
 
     <div class="pessoas-wrapper">
-      <!-- Card 1 -->
+      {% for pessoa in secao.pessoas.all %}
       <div class="pessoa-card animate-fade-in animate-delay">
         <div class="page-image-container">
-          <img src="{% static '/fotos/joao.jpg' %}" alt="Pastor João">
+          {% if pessoa.foto %}
+            <img src="{{ pessoa.foto.url }}" alt="{{ pessoa.nome }}">
+          {% else %}
+            <img src="{% static '/fotos/default-user.jpg' %}" alt="Foto padrão">
+          {% endif %}
         </div>
-        <h3>Pastor João Gomes</h3>
-        <h4 class="cargo">Pastor Presidente</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+        <h3>{{ pessoa.nome }}</h3>
+        <h4 class="cargo">{{ pessoa.cargo }}</h4>
+        <p>{{ pessoa.descricao }}</p>
       </div>
-
-      <!-- Card 2 -->
-      <div class="pessoa-card animate-fade-in animate-delay">
-        <div class="page-image-container">
-          <img src="{% static '/fotos/romildo.jpg' %}" alt="Pastor Romildo">
-        </div>
-        <h3>Pastor Romildo Melo</h3>
-        <h4 class="cargo">Pastor Vice-Presidente</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor</p>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
-
-<section class="pessoa-card-section">
-  <div class="container">
-    <h2 class="titulo-pessoa">Conselho Diaconal</h2>
-
-    <p class="descricao-pessoa">
-      Conheça os membros do Corpo Diaconal da nossa igreja.
-    </p>
-
-    <div class="pessoas-wrapper">
-      <div class="pessoa-card animate-fade-in">
-        <div class="page-image-container">
-          <img src="{% static '/fotos/diacono.jpg' %}" alt="Dc. Wanderley Cavalcante">
-        </div>
-        <h3>Dc. Wanderley Cavalcanti</h3>
-        <h4 class="cargo">Presidente do Conselho Diaconal</h4>
-        <p>Consagrado ao diaconato na Assembléia de Deus PE em 2009, têm servido na nossa igreja desde 2019</p>
-      </div>
-    </div>
-  </div>
-</section>
+{% endfor %}
 
 
 {% endblock %}
