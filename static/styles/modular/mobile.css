@@ -78,14 +78,14 @@
     width: 100%;
     z-index: 999;
     box-shadow: var(--shadow-md);
-    background-color: var(--primary-color); /* Cor de fundo principal */
+    background-color: var(--text-light); /* Cor de fundo principal */
   }
 
   .menu li {
     width: 100%;
     text-align: center;
     margin-bottom: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.400); /* Linha divisória mais sutil */
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Linha divisória mais sutil */
   }
 
   .menu li:first-child {
@@ -96,20 +96,23 @@
     display: block;
     padding: 12px 15px;
     width: 100%;
-    color: var(--text-light); /* Cor do texto */
+    color: var(--primary-color); /* Cor do texto */
     font-weight: bold;
     transition: var(--transition-fast);
   }
 
   .menu li a:hover {
     background-color: var(--secondary-color); /* Cor de fundo ao passar o mouse */
+    color: var(--text-light); /* Garante que o texto fique branco ao passar o mouse */
   }
+
 
   /* Estilo do dropdown no mobile */
   .dropdown-menu {
     position: static;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.15); /* Fundo ligeiramente mais escuro para contraste */
+    /* Fundo já é branco por herança do .menu.show, mas garantimos aqui */
+    background-color: var(--text-light); 
     box-shadow: none;
     border: none;
     border-radius: 0;
@@ -118,9 +121,23 @@
     display: none;
   }
 
+  /* Estilo do dropdown no mobile */
+  .dropdown-menu .dropdown-item{
+    padding: 10px;
+    color: var(--secondary-color);
+    font-weight: normal;
+    text-align: center;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
   .dropdown-item {
     padding: 10px;
-    color: var(--text-light); /* Cor do texto do dropdown */
+    color: var(--secondary-color); /* Cor do texto do dropdown */
     font-weight: normal; /* Peso normal para itens de dropdown */
     text-align: center;
     /* Ajustes para manter ícone e texto na mesma linha */
@@ -129,15 +146,22 @@
     align-items: center;
     white-space: nowrap;
     position: relative; /* Para a divisória */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Divisória sutil */
+    border-top: 1px solid rgba(0, 0, 0, 0.400); /* Cor da divisória ajustada para ser visível no fundo branco. */
   }
 
   .dropdown-menu .dropdown-item:first-child {
-      border-top: none; /* Remover borda do primeiro item do dropdown */
+    border-top: 1px solid rgba(0,0,0,0.25); /* Linha inicial um pouco mais forte */
+  }
+
+  /* Estado HOVER para os itens do submenu */
+  .dropdown-menu .dropdown-item:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
   }
 
   .dropdown-item:hover {
     background-color: var(--secondary-color); /* Cor de fundo ao passar o mouse */
+    color: var(--text-light); /* Garante que o texto fique branco ao passar o mouse */
   }
 
   /* Ícones no menu mobile */
@@ -163,6 +187,7 @@
   .nav-item.show > .nav-link {
     background-color: var(--secondary-color); /* Cor de fundo para item ativo */
     font-weight: bold;
+    color: var(--text-light);
   }
 
   /* Carrossel para mobile - ALTURA DOBRADA NOVAMENTE */
