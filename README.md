@@ -16,10 +16,10 @@ INSTRUÇÕES DE INSTALAÇÃO
   Abra o terminal e navegue até o diretório do seu projeto Django: Exemplo: cd C:\VSCode\meu_site
   
   Execute os comandos: 
-      python -m venv venv
-      venv\Scripts\activate
-      pip install django
-      pip install -r requirements.txt
+      python -m venv venv </br>
+      venv\Scripts\activate </br>
+      pip install django </br>
+      pip install -r requirements.txt </br>
       
   2. Ative o ambiente virtual:
      python manage.py runserver 8000
