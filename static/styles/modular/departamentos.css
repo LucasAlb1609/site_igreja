@@ -53,28 +53,35 @@
     width: 100%;
 }
 
-/* Estilo do card do departamento (baseado na imagem) */
+/* Estilo do card do departamento (baseado na imagem) - MODIFICADO PARA FORMATO RETRATO */
 .departamento-card {
     background-color: var(--text-light);
     color: var(--text-dark);
     border-radius: var(--border-radius-lg);
     overflow: hidden;
     text-align: left;
-    height: 380px; /* Altura fixa aumentada para os cards */
+    width: 300px; /* Largura fixa para formato retrato */
+    height: 450px; /* Altura maior para formato retrato */
     display: flex;
     flex-direction: column;
-    margin: 0 10px; /* Espaçamento entre cards no carrossel */
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-fast);
+    margin: 0 15px; /* Espaçamento maior entre cards no carrossel */
+    /* Borda mais notável */
+    border: 4px solid white;
+    /* Sombra mais pronunciada */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease; /* Transição mais suave para todos os efeitos */
+    cursor: pointer; /* Indicar que é clicável */
 }
 
 .departamento-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    /* Animação mais intensa ao passar o mouse */
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    border-color: var(--primary-color);
 }
 
 .departamento-card-imagem {
-    height: 60%; /* Espaço para a imagem */
+    height: 70%; /* Mais espaço para a imagem no formato retrato */
     background-color: #e0e0e0; /* Fundo cinza claro enquanto a imagem carrega */
     display: flex;
     align-items: center;
@@ -90,14 +97,15 @@
 
 .departamento-card-conteudo {
     padding: 20px;
-    height: 40%; /* Espaço para o texto */
+    height: 30%; /* Menos espaço para o texto no formato retrato */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: white; /* Garantir fundo branco como na imagem de referência */
 }
 
 .departamento-card-conteudo h4 {
-    font-size: 1.3rem;
+    font-size: 1.5rem; /* Título maior */
     font-weight: bold;
     margin-bottom: 8px;
     color: var(--primary-color);
@@ -111,8 +119,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limita a 3 linhas */
-    line-clamp: 3; /* Propriedade padrão para compatibilidade */
+    -webkit-line-clamp: 2; /* Limita a 2 linhas para caber melhor no formato retrato */
+    line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -121,7 +129,7 @@
     padding: 1em 0; /* Espaço interno */
 }
 
-/* Ajustar múltiplos itens por slide */
+/* Ajustar múltiplos itens por slide - ajustado para o novo formato retrato */
 .carousel-departamentos .carousel-item {
     margin-right: 0;
     flex: 0 0 100%; /* Padrão para mobile */
@@ -185,3 +193,124 @@
     content: '>';
 }
 
+/* Estilos para o Modal de Expansão do Card */
+.departamento-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1050;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.departamento-modal.show {
+    opacity: 1;
+}
+
+.departamento-modal-content {
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.departamento-modal.show .departamento-modal-content {
+    transform: scale(1);
+}
+
+.departamento-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-dark);
+    cursor: pointer;
+    z-index: 1060;
+    transition: color 0.2s;
+}
+
+.departamento-modal-close:hover {
+    color: var(--primary-color);
+}
+
+.departamento-modal-body {
+    display: flex;
+    flex-direction: row; /* Modo paisagem */
+    width: 100%;
+    height: 100%;
+}
+
+.departamento-modal-imagem {
+    flex: 0 0 60%;
+    background-color: #e0e0e0;
+    overflow: hidden;
+}
+
+.departamento-modal-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.departamento-modal-info {
+    flex: 0 0 40%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.departamento-modal-info h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.departamento-modal-info p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* Responsividade do Modal */
+@media (max-width: 768px) {
+    .departamento-modal-body {
+        flex-direction: column; /* Empilhar em dispositivos móveis */
+    }
+    
+    .departamento-modal-imagem,
+    .departamento-modal-info {
+        flex: 0 0 100%;
+    }
+    
+    .departamento-modal-imagem {
+        height: 50vh;
+    }
+    
+    .departamento-modal-info {
+        padding: 20px;
+    }
+    
+    .departamento-modal-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .departamento-modal-info p {
+        font-size: 1rem;
+    }
+}

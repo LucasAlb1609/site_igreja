@@ -27,7 +27,7 @@
                     <div class="carousel-inner">
                         {% for depto in cat_data.lista %}
                             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <div class="departamento-card">
+                                <div class="departamento-card" data-depto-id="{{ depto.id }}" data-depto-nome="{{ depto.nome }}" data-depto-descricao="{{ depto.descricao|default:'Sem descrição.' }}">
                                     <div class="departamento-card-imagem">
                                         {% if depto.imagem %}
                                             <img src="{{ depto.imagem.url }}" alt="{{ depto.nome }}">
@@ -60,6 +60,21 @@
         </div>
     {% endfor %}
 
+    <!-- Modal para exibir o card expandido -->
+    <div class="departamento-modal" id="departamentoModal">
+        <div class="departamento-modal-content">
+            <span class="departamento-modal-close">&times;</span>
+            <div class="departamento-modal-body">
+                <div class="departamento-modal-imagem">
+                    <img id="modalImagem" src="" alt="">
+                </div>
+                <div class="departamento-modal-info">
+                    <h3 id="modalTitulo"></h3>
+                    <p id="modalDescricao"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -68,6 +83,77 @@ document.addEventListener('DOMContentLoaded', function() {
     const carouselsWrappers = document.querySelectorAll('.departamentos-carrossel-wrapper');
     const tabsContainer = document.querySelector('.ministerio-tabs-container');
 
+    // Modal elements
+    const modal = document.getElementById('departamentoModal');
+    const modalClose = document.querySelector('.departamento-modal-close');
+    const modalImagem = document.getElementById('modalImagem');
+    const modalTitulo = document.getElementById('modalTitulo');
+    const modalDescricao = document.getElementById('modalDescricao');
+
+    // Adicionar evento de clique a todos os cards
+    document.querySelectorAll('.departamento-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Evitar que o clique no card acione o carrossel
+            e.stopPropagation();
+            
+            // Obter dados do card
+            const nome = this.getAttribute('data-depto-nome');
+            const descricao = this.getAttribute('data-depto-descricao');
+            const imagem = this.querySelector('img');
+            
+            // Preencher o modal com os dados do card
+            modalTitulo.textContent = nome;
+            modalDescricao.textContent = descricao;
+            
+            if (imagem) {
+                modalImagem.src = imagem.src;
+                modalImagem.alt = imagem.alt;
+            } else {
+                // Se não houver imagem, usar um placeholder
+                modalImagem.src = '';
+                modalImagem.alt = 'Sem imagem';
+                modalImagem.style.backgroundColor = '#e0e0e0';
+            }
+            
+            // Exibir o modal
+            modal.style.display = 'flex';
+            
+            // Adicionar classe para animar a entrada
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        });
+    });
+    
+    // Fechar o modal ao clicar no X
+    modalClose.addEventListener('click', function() {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300); // Tempo da animação de saída
+    });
+    
+    // Fechar o modal ao clicar fora do conteúdo
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300); // Tempo da animação de saída
+        }
+    });
+    
+    // Fechar o modal com a tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300); // Tempo da animação de saída
+        }
+    });
+
+    // Lógica das abas e carrosséis
     tabs.forEach(tab => {
         tab.addEventListener('mouseenter', () => {
             const targetCarouselId = tab.getAttribute('data-target'); // e.g., #carousel-TREINAMENTO
@@ -113,23 +199,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 var idx = $e.index();
                 var itemsMove = e.direction === 'left' ? 1 : -1;
                 var newIdx = (idx + itemsMove + totalItems) % totalItems;
-
-                // Mover itens para criar loop infinito visual
-                // Esta lógica pode precisar de ajustes finos dependendo do comportamento exato desejado
-                // if (e.direction == 'left') {
-                //     $carousel.find('.carousel-item').eq(newIdx).appendTo($carousel.find('.carousel-inner'));
-                // } else {
-                //     $carousel.find('.carousel-item').eq((idx - itemsPerSlide + totalItems) % totalItems).prependTo($carousel.find('.carousel-inner'));
-                // }
             });
         }
     });
 
      // Inicializa os carrosséis (importante para que as setas funcionem)
      $('.carousel-departamentos').carousel();
-
 });
 </script>
 
 {% endblock %}
-
