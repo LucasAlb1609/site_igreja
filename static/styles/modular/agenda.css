@@ -26,8 +26,8 @@
 /* Dias da Semana */
 .dias-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 30px;
 }
 
 .dia-card {
@@ -47,24 +47,24 @@
 .dia-card h3 {
     background-color: var(--primary-color);
     color: var(--text-light);
-    padding: 15px;
+    padding: 20px;
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
 .dia-card-icon {
-    padding: 25px 0 10px;
+    padding: 35px 0 15px;
 }
 
 .dia-card-icon img {
-    height: 40px;
+    height: 50px;
     margin: 0 auto;
 }
 
 .dia-card p {
     color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 20px;
+    font-size: 1rem;
+    margin-bottom: 25px;
 }
 
 .dia-card:hover, .dia-card.active {
