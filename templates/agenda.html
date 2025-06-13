@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/modular/agenda.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="agenda-container">
+    <section class="agenda-semanal">
+        <h2 class="agenda-titulo">Agenda Semanal</h2>
+        <p class="agenda-subtitulo">Confira nossa programação semanal e participe conosco. 
+                                    Clique em um dia para ver os eventos.</p>
+
+        <div class="dias-wrapper">
+            {% for dia in dias_semana %}
+            <div class="dia-card {% if dia.nome == 0 %}domingo-card{% endif %}" 
+                 data-target="#eventos-{{ dia.get_nome_display|slugify }}">
+                    <h3>{{ dia.get_nome_display }}</h3>
+                    <div class="dia-card-icon">
+                        <img src="{% static 'fotos/ícones/'|add:dia.icone|add:'.png' %}" alt="">
+                    </div>
+                    <p>{{ dia.resumo }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="eventos-container">
+            {% for dia in dias_semana %}
+                <div class="eventos-do-dia" id="eventos-{{ dia.get_nome_display|slugify }}">
+                    <h4>Eventos de {{ dia.get_nome_display }}</h4>
+                    <ul>
+                        {% for evento in dia.eventos.all %}
+                            <li class="evento-item">
+                                <div class="evento-info">
+                                    <h5>{{ evento.titulo }}</h5>
+                                    <p>{{ evento.descricao }}</p>
+                                </div>
+                                <div class="evento-horario">
+                                    <span>{{ evento.horario|time:"H:i" }}</span>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li class="evento-item-empty">Nenhum evento programado para este dia.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="eventos-especiais">
+        <h2 class="agenda-titulo">Eventos Especiais</h2>
+        <div class="eventos-especiais-wrapper">
+            {% for evento in eventos_especiais %}
+                <div class="evento-especial-card">
+                    <div class="evento-especial-info">
+                        <h3>{{ evento.titulo }}</h3>
+                        <p>{{ evento.descricao }}</p>
+                    </div>
+                    <div class="evento-especial-periodo">
+                        <span>{{ evento.periodo }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/agenda.js' %}"></script>
+{% endblock %}

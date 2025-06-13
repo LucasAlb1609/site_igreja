@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import ConfiguracaoSite, Departamento, SecaoLideranca, Pessoa
+from .models import ConfiguracaoSite, Departamento, SecaoLideranca, Pessoa, DiaSemana, Evento, EventoEspecial
 
 class ConfiguracaoSiteAdmin(admin.ModelAdmin):
     list_display = ('titulo_video', 'link_youtube', 'tipo_imagem', 'preview_imagem', 'data_atualizacao')
@@ -77,3 +77,24 @@ class SecaoLiderancaAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'ordem')
     list_editable = ('ordem',)
     inlines = [PessoaInline]
+
+
+class EventoInline(admin.TabularInline):
+    model = Evento
+    extra = 1
+
+@admin.register(DiaSemana)
+class DiaSemanaAdmin(admin.ModelAdmin):
+    list_display = ('get_nome_display', 'resumo')
+    inlines = [EventoInline]
+
+    def get_nome_display(self, obj):
+        return obj.get_nome_display()
+    get_nome_display.short_description = 'Dia da Semana'
+    get_nome_display.admin_order_field = 'nome'
+
+
+@admin.register(EventoEspecial)
+class EventoEspecialAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'periodo', 'ordem')
+    list_editable = ('ordem',)

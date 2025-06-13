@@ -16,7 +16,7 @@
 
     <div class="pessoas-wrapper">
       {% for pessoa in secao.pessoas.all %}
-      <div class="pessoa-card animate-fade-in animate-delay">
+      <div class="pessoa-card animate-delay">
         <div class="page-image-container">
           {% if pessoa.foto %}
             <img src="{{ pessoa.foto.url }}" alt="{{ pessoa.nome }}">

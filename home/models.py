@@ -131,3 +131,56 @@ class Pessoa(models.Model):
         verbose_name = "Pessoa da Liderança"
         verbose_name_plural = "Pessoas da Liderança"
         ordering = ['ordem']
+
+
+class DiaSemana(models.Model):
+    DIAS = [
+        (0, 'Domingo'), (1, 'Segunda-feira'), (2, 'Terça-feira'),
+        (3, 'Quarta-feira'), (4, 'Quinta-feira'), (5, 'Sexta-feira'),
+        (6, 'Sábado')
+    ]
+    
+    nome = models.IntegerField(choices=DIAS, unique=True, verbose_name="Dia da Semana")
+    resumo = models.CharField(max_length=100, verbose_name="Resumo (ex: Dia de celebração)")
+    icone = models.CharField(max_length=50, help_text="Nome do ícone (ex: 'celebracao', 'oracao'). Use o nome do arquivo sem a extensão.", verbose_name="Ícone")
+
+    def __str__(self):
+        return self.get_nome_display()
+
+    class Meta:
+        verbose_name = "Dia da Semana"
+        verbose_name_plural = "Dias da Semana"
+        ordering = ['nome']
+
+
+class Evento(models.Model):
+    dia = models.ForeignKey(DiaSemana, on_delete=models.CASCADE, related_name='eventos')
+    titulo = models.CharField(max_length=100)
+    descricao = models.TextField(blank=True)
+    horario = models.TimeField()
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = "Evento da Semana"
+        verbose_name_plural = "Eventos da Semana"
+        ordering = ['horario']
+
+
+class EventoEspecial(models.Model):
+    titulo = models.CharField(max_length=100)
+    descricao = models.TextField()
+    periodo = models.CharField(max_length=50, verbose_name="Período (ex: 15-17 Julho)")
+    ordem = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = "Evento Especial"
+        verbose_name_plural = "Eventos Especiais"
+        ordering = ['ordem']
+
+
+

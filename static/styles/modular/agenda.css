@@ -1,0 +1,205 @@
+/* styles/modular/agenda.css */
+
+.agenda-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.agenda-titulo {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.agenda-subtitulo {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Dias da Semana */
+.dias-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.dia-card {
+    background-color: #fff;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    overflow: hidden;
+
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+.dia-card h3 {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 15px;
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.dia-card-icon {
+    padding: 25px 0 10px;
+}
+
+.dia-card-icon img {
+    height: 40px;
+    margin: 0 auto;
+}
+
+.dia-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.dia-card:hover, .dia-card.active {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    background-color: #f0f8ff;
+}
+
+.dia-card.active h3 {
+    background-color: var(--secondary-color);
+}
+
+/* Eventos que aparecem ao clicar */
+.eventos-container {
+    margin-top: 30px;
+}
+
+.eventos-do-dia {
+    display: none;
+    background-color: #f7f7f9;
+    padding: 20px;
+    border-radius: var(--border-radius-lg);
+}
+
+.eventos-do-dia.show {
+    display: block;
+}
+
+.eventos-do-dia h4 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.eventos-do-dia ul {
+    list-style: none;
+    padding: 0;
+}
+
+.evento-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+.evento-item:last-child {
+    border-bottom: none;
+}
+.evento-info h5 {
+    margin: 0 0 5px;
+    font-size: 1.1rem;
+    color: #333;
+}
+.evento-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+.evento-horario span {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+.evento-item-empty {
+    color: var(--text-muted);
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Eventos Especiais */
+.eventos-especiais {
+    margin-top: 60px;
+}
+
+.eventos-especiais-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.evento-especial-card {
+    background-color: #e4eaf5;
+    padding: 20px;
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: all var(--transition-fast);
+
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+.evento-especial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-sm);
+}
+.evento-especial-info h3 {
+    margin: 0 0 10px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+.evento-especial-info p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.evento-especial-periodo span {
+    background-color: #fff;
+    color: var(--primary-color);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-left: 15px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Estilo especial para o card de Domingo */
+.dia-card.domingo-card {
+    grid-column: 1 / -1; /* Faz o item ocupar todas as colunas da grade, da primeira à última */
+}
+
+/* Opcional: Ajuste para o conteúdo do card de Domingo quando ele estiver largo */
+.dia-card.domingo-card .dia-card-icon {
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.dia-card.domingo-card p {
+    margin-bottom: 15px;
+}

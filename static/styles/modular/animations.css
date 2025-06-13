@@ -76,3 +76,17 @@
 .slide-in {
   animation: slideInRight 0.5s ease forwards;
 } 
+
+/* Animação de recorte ao aparecer na tela */
+@keyframes appear {
+  from {
+    opacity: 0;
+    /* Inicia com uma linha horizontal na parte inferior (altura zero) */
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+  to {
+    opacity: 1;
+    /* Termina com o card completamente visível */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}

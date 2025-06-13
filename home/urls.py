@@ -11,6 +11,7 @@ urlpatterns = [
     path("lideranca/", views.lideranca, name="lideranca"),
     path("departamentos/", views.departamentos, name="departamentos"),
     path("congregacoes/", views.congregacoes, name="congregacoes"),
+    path("agenda/", views.agenda, name="agenda"),
 ]
 
 # Adicione isso ao final do arquivo

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import ConfiguracaoSite, Departamento, SecaoLideranca
+from .models import ConfiguracaoSite, Departamento, SecaoLideranca, DiaSemana, EventoEspecial, Evento
 from django.conf import settings
 
 def index(request):
@@ -73,3 +73,12 @@ def lideranca(request):
         'secoes': secoes
     }
     return render(request, 'lideranca.html', context)
+
+def agenda(request):
+    dias_semana = DiaSemana.objects.prefetch_related('eventos').all()
+    eventos_especiais = EventoEspecial.objects.all()
+    context = {
+        'dias_semana': dias_semana,
+        'eventos_especiais': eventos_especiais,
+    }
+    return render(request, 'agenda.html', context)
