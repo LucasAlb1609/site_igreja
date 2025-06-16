@@ -9,41 +9,37 @@
 <div class="agenda-container">
     <section class="agenda-semanal">
         <h2 class="agenda-titulo">Agenda Semanal</h2>
-        <p class="agenda-subtitulo">Confira nossa programação semanal e participe conosco. 
-                                    Clique em um dia para ver os eventos.</p>
-
+        <p class="agenda-subtitulo">Confira nossa programação semanal e participe dos eventos e celebrações da nossa comunidade. Clique em um dia para ver os eventos.</p>
+    
         <div class="dias-wrapper">
             {% for dia in dias_semana %}
-            <div class="dia-card {% if dia.nome == 0 %}domingo-card{% endif %}" 
-                 data-target="#eventos-{{ dia.get_nome_display|slugify }}">
-                    <h3>{{ dia.get_nome_display }}</h3>
-                    <div class="dia-card-icon">
-                        <img src="{% static 'fotos/ícones/'|add:dia.icone|add:'.png' %}" alt="">
+                <div class="dia-item-wrapper {% if dia.nome == 0 %}domingo-item-wrapper{% endif %}">
+                    
+                    <div class="dia-card" data-target="eventos-{{ dia.get_nome_display|slugify }}">
+                        <h3>{{ dia.get_nome_display }}</h3>
+                        <div class="dia-card-icon">
+                            <img src="{% static 'fotos/ícones/agenda/'|add:dia.icone|add:'.png' %}" alt="">
+                        </div>
+                        <p>{{ dia.resumo }}</p>
                     </div>
-                    <p>{{ dia.resumo }}</p>
-                </div>
-            {% endfor %}
-        </div>
-
-        <div class="eventos-container">
-            {% for dia in dias_semana %}
-                <div class="eventos-do-dia" id="eventos-{{ dia.get_nome_display|slugify }}">
-                    <h4>Eventos de {{ dia.get_nome_display }}</h4>
-                    <ul>
-                        {% for evento in dia.eventos.all %}
-                            <li class="evento-item">
-                                <div class="evento-info">
-                                    <h5>{{ evento.titulo }}</h5>
-                                    <p>{{ evento.descricao }}</p>
-                                </div>
-                                <div class="evento-horario">
-                                    <span>{{ evento.horario|time:"H:i" }}</span>
-                                </div>
-                            </li>
-                        {% empty %}
-                            <li class="evento-item-empty">Nenhum evento programado para este dia.</li>
-                        {% endfor %}
-                    </ul>
+                    
+                    <div class="eventos-do-dia" id="eventos-{{ dia.get_nome_display|slugify }}">
+                        <ul>
+                            {% for evento in dia.eventos.all %}
+                                <li class="evento-item">
+                                    <div class="evento-info">
+                                        <h5>{{ evento.titulo }}</h5>
+                                        <p>{{ evento.descricao }}</p>
+                                    </div>
+                                    <div class="evento-horario">
+                                        <span>{{ evento.horario|time:"H:i" }}</span>
+                                    </div>
+                                </li>
+                            {% empty %}
+                                <li class="evento-item-empty">Nenhum evento programado para este dia.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             {% endfor %}
         </div>

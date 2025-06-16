@@ -28,6 +28,16 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 30px;
+     /* Adicionando container de visualização para controlar a animação por linha */
+     container-type: inline-size;
+     container-name: dias-grid;
+}
+
+/* Estilo para cada linha da grid */
+.dias-row {
+    display: contents; /* Isso mantém a estrutura da grid original */
+    container-type: inline-size;
+    container-name: dias-row;
 }
 
 .dia-card {
@@ -39,9 +49,14 @@
     transition: all var(--transition-fast);
     overflow: hidden;
 
+    /* Animação para usar o container da linha como referência */
     animation: appear linear;
     animation-timeline: view();
-    animation-range: entry 0% cover 40%;
+    animation-range: entry 10% cover 35%;
+
+    /* Garantir que cards na mesma linha tenham a mesma animação */
+    view-timeline-name: --card-reveal;
+    view-timeline-axis: block;
 }
 
 .dia-card h3 {
@@ -77,26 +92,26 @@
     background-color: var(--secondary-color);
 }
 
-/* Eventos que aparecem ao clicar */
-.eventos-container {
-    margin-top: 30px;
-}
-
+/* Eventos que aparecem ao clicar (NOVAS REGRAS PARA ANIMAÇÃO) */
 .eventos-do-dia {
-    display: none;
     background-color: #f7f7f9;
-    padding: 20px;
-    border-radius: var(--border-radius-lg);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+    margin: -10px 10px 0; /* Margem negativa para "conectar" com o card */
+    padding: 0 20px; /* Padding lateral, o vertical será animado */
+    
+    /* Estado inicial para a animação */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, padding 0.5s ease-in-out;
 }
 
 .eventos-do-dia.show {
-    display: block;
-}
-
-.eventos-do-dia h4 {
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+    /* Estado final quando visível */
+    max-height: 1000px; /* Um valor alto para garantir que todo o conteúdo caiba */
+    opacity: 1;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
 }
 
 .eventos-do-dia ul {
@@ -138,6 +153,21 @@
     text-align: center;
 }
 
+
+/* Estilo especial para o wrapper de Domingo */
+.dia-item-wrapper.domingo-item-wrapper {
+    grid-column: 1 / -1;
+}
+
+/* Opcional: Ajuste para o conteúdo do card de Domingo (não precisa mudar) */
+.dia-card.domingo-card .dia-card-icon {
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+.dia-card.domingo-card p {
+    margin-bottom: 15px;
+}
+
 /* Eventos Especiais */
 .eventos-especiais {
     margin-top: 60px;
@@ -158,9 +188,7 @@
     align-items: flex-start;
     transition: all var(--transition-fast);
 
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 40%;
+   
 }
 .evento-especial-card:hover {
     transform: translateY(-5px);
