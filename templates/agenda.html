@@ -6,61 +6,79 @@
 {% endblock %}
 
 {% block content %}
-<div class="agenda-container">
-    <section class="agenda-semanal">
-        <h2 class="agenda-titulo">Agenda Semanal</h2>
-        <p class="agenda-subtitulo">Confira nossa programação semanal e participe dos eventos e celebrações da nossa comunidade. Clique em um dia para ver os eventos.</p>
-    
+<div class="agenda-wrapper">
+    <div class="container">
+
         <div class="dias-wrapper">
+            
+            <div class="agenda-header">
+                {# Título atualizado com 'Semanal' em negrito #}
+                <h1>Agenda <strong>Semanal</strong></h1>
+                <p>Confira nossa programação semanal e participe dos eventos e celebrações da nossa comunidade.</p>
+                <p class="subtle-text">Clique em um dia para ver os eventos.</p>
+            </div>
+
             {% for dia in dias_semana %}
-                <div class="dia-item-wrapper {% if dia.nome == 0 %}domingo-item-wrapper{% endif %}">
-                    
-                    <div class="dia-card" data-target="eventos-{{ dia.get_nome_display|slugify }}">
+            <div class="dia-item-wrapper">
+                
+                {# --- NOVA ESTRUTURA DO CARD --- #}
+                <div class="dia-card">
+                    {# 1. Cabeçalho azul com o nome do dia #}
+                    <div class="dia-card-header">
                         <h3>{{ dia.get_nome_display }}</h3>
-                        <div class="dia-card-icon">
-                            <img src="{% static 'fotos/ícones/agenda/'|add:dia.icone|add:'.png' %}" alt="">
-                        </div>
+                    </div>
+                    {# 2. Corpo branco com ícone e resumo centralizados #}
+                    <div class="dia-card-body">
+                        <img src="{% static 'fotos/ícones/agenda/'|add:dia.icone|add:'.png' %}" alt="Ícone de {{ dia.get_nome_display }}" class="dia-card-icon">
                         <p>{{ dia.resumo }}</p>
                     </div>
-                    
-                    <div class="eventos-do-dia" id="eventos-{{ dia.get_nome_display|slugify }}">
+                </div>
+
+                {# --- Conteúdo Expansível (Eventos do Dia) --- #}
+                <div class="eventos-do-dia">
+                    {% if dia.eventos.all %}
                         <ul>
                             {% for evento in dia.eventos.all %}
-                                <li class="evento-item">
-                                    <div class="evento-info">
-                                        <h5>{{ evento.titulo }}</h5>
-                                        <p>{{ evento.descricao }}</p>
-                                    </div>
-                                    <div class="evento-horario">
-                                        <span>{{ evento.horario|time:"H:i" }}</span>
-                                    </div>
-                                </li>
-                            {% empty %}
-                                <li class="evento-item-empty">Nenhum evento programado para este dia.</li>
+                            <li class="evento-item">
+                                <div class="evento-info">
+                                    <h5>{{ evento.titulo }}</h5>
+                                    <p>{{ evento.descricao }}</p>
+                                </div>
+                                <div class="evento-horario">
+                                    <span>{{ evento.horario|time:"H:i" }}</span>
+                                </div>
+                            </li>
                             {% endfor %}
                         </ul>
-                    </div>
+                    {% else %}
+                        <div class="evento-item-empty">
+                            <p>Nenhum evento programado para este dia.</p>
+                        </div>
+                    {% endif %}
                 </div>
+            </div>
             {% endfor %}
         </div>
-    </section>
 
-    <section class="eventos-especiais">
-        <h2 class="agenda-titulo">Eventos Especiais</h2>
-        <div class="eventos-especiais-wrapper">
-            {% for evento in eventos_especiais %}
+        {% if eventos_especiais %}
+        <div class="eventos-especiais">
+            <h2>Eventos Especiais</h2>
+            <div class="eventos-especiais-wrapper">
+                {% for evento in eventos_especiais %}
                 <div class="evento-especial-card">
                     <div class="evento-especial-info">
                         <h3>{{ evento.titulo }}</h3>
                         <p>{{ evento.descricao }}</p>
                     </div>
-                    <div class="evento-especial-periodo">
-                        <span>{{ evento.periodo }}</span>
+                    <div class="evento-especial-data">
+                        <div class="periodo-texto">{{ evento.periodo }}</div>
                     </div>
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </section>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
 

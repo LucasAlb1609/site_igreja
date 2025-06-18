@@ -1,91 +1,56 @@
-/* Estilos específicos para a página de departamentos - Modular */
-.departamentos-page-container {
-    padding: 40px 20px;
-    background-color: var(--primary-color); /* Fundo azul como na imagem */
-    color: var(--text-light);
-    min-height: 70vh; /* Para dar espaço */
-}
-
-.departamentos-page-titulo {
-    text-align: left; /* Alinhar título à esquerda */
-    margin-bottom: 40px;
-    font-size: 2.5rem;
+/* Estilos para a página de departamentos */
+.page-departamentos .departamentos-page-titulo {
+    font-size: 2.8rem;
     font-weight: bold;
-    padding-left: 15px; /* Pequeno padding */
-}
-
-.ministerio-tabs-container {
-    display: flex;
-    justify-content: center; /* Centralizar as abas */
-    gap: 30px;
-    margin-bottom: 50px;
-    flex-wrap: wrap; /* Permitir quebra de linha em telas menores */
-}
-
-.ministerio-tab-item {
-    padding: 20px 40px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius-lg);
-    cursor: pointer;
-    transition: var(--transition-medium);
+    color: #333;
+    padding: 40px 0 20px 0;
     text-align: center;
-    border: 2px solid transparent;
-    flex-basis: 40%; /* Ocupar espaço, mas permitir 2 por linha */
-    max-width: 400px; /* Limitar largura máxima */
 }
 
-.ministerio-tab-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: var(--text-light);
-    transform: translateY(-5px);
+.ministerio-secao {
+    padding: 40px 0;
+    position: relative;
 }
 
-.ministerio-tab-item h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
+.ministerio-titulo {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.departamentos-carrossel-wrapper {
-    display: none; /* Escondido por padrão */
-    margin-top: 30px;
-    padding: 0 5%; /* Espaço nas laterais para as setas */
-    width: 100%;
+/* --- ESTILO DO CARROSSEL E CARDS --- */
+.carousel-item .cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espaçamento entre os cards */
 }
 
-/* Estilo do card do departamento (baseado na imagem) - MODIFICADO PARA FORMATO RETRATO */
 .departamento-card {
-    background-color: var(--text-light);
-    color: var(--text-dark);
-    border-radius: var(--border-radius-lg);
+    background-color: #fff;
+    color: #333;
+    border-radius: 18px;
     overflow: hidden;
     text-align: left;
-    width: 300px; /* Largura fixa para formato retrato */
-    height: 450px; /* Altura maior para formato retrato */
+    /* A largura é controlada pelo flex container */
+    flex: 0 0 300px; /* Largura fixa do card */
+    height: 420px;
     display: flex;
     flex-direction: column;
-    margin: 0 15px; /* Espaçamento maior entre cards no carrossel */
-    /* Borda mais notável */
-    border: 4px solid white;
-    /* Sombra mais pronunciada */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease; /* Transição mais suave para todos os efeitos */
-    cursor: pointer; /* Indicar que é clicável */
+    border: 6px solid white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .departamento-card:hover {
-    /* Animação mais intensa ao passar o mouse */
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-    border-color: var(--primary-color);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .departamento-card-imagem {
-    height: 70%; /* Mais espaço para a imagem no formato retrato */
-    background-color: #e0e0e0; /* Fundo cinza claro enquanto a imagem carrega */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 70%;
+    background-color: #f0f0f0;
     overflow: hidden;
 }
 
@@ -97,220 +62,80 @@
 
 .departamento-card-conteudo {
     padding: 20px;
-    height: 30%; /* Menos espaço para o texto no formato retrato */
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: white; /* Garantir fundo branco como na imagem de referência */
 }
 
 .departamento-card-conteudo h4 {
-    font-size: 1.5rem; /* Título maior */
+    font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 8px;
-    color: var(--primary-color);
+    margin: 0 0 5px 0;
 }
 
 .departamento-card-conteudo p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    line-height: 1.5;
-    /* Limitar descrição */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limita a 2 linhas para caber melhor no formato retrato */
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
 }
 
-/* Estilos para o Carrossel Bootstrap com Setas */
-.carousel-departamentos .carousel-inner {
-    padding: 1em 0; /* Espaço interno */
-}
-
-/* Ajustar múltiplos itens por slide - ajustado para o novo formato retrato */
-.carousel-departamentos .carousel-item {
-    margin-right: 0;
-    flex: 0 0 100%; /* Padrão para mobile */
-    display: block;
-}
-.carousel-departamentos .carousel-inner {
-    display: flex;
-}
-
-@media (min-width: 768px) {
-    /* 2 itens para tablet */
-    .carousel-departamentos .carousel-item {
-        flex: 0 0 50%;
+/* --- Layout Responsivo --- */
+@media (max-width: 1024px) {
+    /* Esconde o terceiro card em telas de tablet */
+    .departamento-card:nth-child(3) {
+        display: none;
     }
 }
 
-@media (min-width: 992px) {
-    /* 3 itens para desktop */
-    .carousel-departamentos .carousel-item {
-        flex: 0 0 33.333333%;
+@media (max-width: 767px) {
+    /* Esconde o segundo e terceiro cards em telas de celular */
+    .departamento-card:nth-child(2),
+    .departamento-card:nth-child(3) {
+        display: none;
+    }
+    .departamento-card {
+        /* Ocupa mais espaço na tela do celular */
+        flex: 0 0 90%;
+        max-width: 320px;
     }
 }
 
-/* Esconder indicadores padrão */
-.carousel-departamentos .carousel-indicators {
-    display: none;
-}
 
-/* Estilizar controles (setas) */
-.carousel-departamentos .carousel-control-prev,
-.carousel-departamentos .carousel-control-next {
-    width: 5%; /* Largura das setas */
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo branco semi-transparente */
-    border-radius: var(--border-radius-sm);
+/* Estilo das setas de controle */
+.carousel-control-prev, .carousel-control-next {
+    width: 5%; /* Largura da área clicável da seta */
     opacity: 0.8;
-    transition: var(--transition-fast);
-    height: 80px; /* Altura das setas */
-    top: 50%;
-    transform: translateY(-50%);
 }
 
-.carousel-departamentos .carousel-control-prev:hover,
-.carousel-departamentos .carousel-control-next:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+.carousel-control-prev:hover, .carousel-control-next:hover {
     opacity: 1;
 }
 
-.carousel-departamentos .carousel-control-prev-icon,
-.carousel-departamentos .carousel-control-next-icon {
-    background-image: none; /* Remover imagem padrão */
-    color: var(--primary-color); /* Cor da seta */
-    font-size: 2rem; /* Tamanho da seta (usando texto) */
-    font-weight: bold;
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    padding: 20px;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-/* Adicionar setas como texto (exemplo) */
-.carousel-departamentos .carousel-control-prev-icon::before {
-    content: '<';
-}
-.carousel-departamentos .carousel-control-next-icon::before {
-    content: '>';
-}
+#carouselTreinamento .carousel-control-prev-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e"); }
+#carouselTreinamento .carousel-control-next-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e"); }
+#carouselMusica .carousel-control-prev-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e"); }
+#carouselMusica .carousel-control-next-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e"); }
 
-/* Estilos para o Modal de Expansão do Card */
-.departamento-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1050;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.departamento-modal.show {
-    opacity: 1;
-}
-
-.departamento-modal-content {
-    background-color: white;
-    border-radius: var(--border-radius-lg);
-    width: 90%;
-    max-width: 1000px;
-    max-height: 90vh;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-}
-
-.departamento-modal.show .departamento-modal-content {
-    transform: scale(1);
-}
-
-.departamento-modal-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: var(--text-dark);
-    cursor: pointer;
-    z-index: 1060;
-    transition: color 0.2s;
-}
-
-.departamento-modal-close:hover {
-    color: var(--primary-color);
-}
-
-.departamento-modal-body {
-    display: flex;
-    flex-direction: row; /* Modo paisagem */
-    width: 100%;
-    height: 100%;
-}
-
-.departamento-modal-imagem {
-    flex: 0 0 60%;
-    background-color: #e0e0e0;
-    overflow: hidden;
-}
-
-.departamento-modal-imagem img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.departamento-modal-info {
-    flex: 0 0 40%;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.departamento-modal-info h3 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.departamento-modal-info p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-muted);
-}
-
-/* Responsividade do Modal */
-@media (max-width: 768px) {
-    .departamento-modal-body {
-        flex-direction: column; /* Empilhar em dispositivos móveis */
-    }
-    
-    .departamento-modal-imagem,
-    .departamento-modal-info {
-        flex: 0 0 100%;
-    }
-    
-    .departamento-modal-imagem {
-        height: 50vh;
-    }
-    
-    .departamento-modal-info {
-        padding: 20px;
-    }
-    
-    .departamento-modal-info h3 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-    }
-    
-    .departamento-modal-info p {
-        font-size: 1rem;
-    }
-}
+/* Estilos do Modal (Inalterados) */
+.departamento-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1050; justify-content: center; align-items: center; opacity: 0; transition: opacity .3s ease; }
+.departamento-modal.show { opacity: 1; }
+.departamento-modal-content { background-color: #fff; border-radius: 18px; width: 90%; max-width: 900px; max-height: 80vh; overflow: hidden; position: relative; display: flex; transform: scale(0.9); transition: transform .3s ease; }
+.departamento-modal.show .departamento-modal-content { transform: scale(1); }
+.departamento-modal-close { position: absolute; top: 10px; right: 20px; font-size: 2.5rem; font-weight: bold; color: #fff; cursor: pointer; z-index: 10; text-shadow: 0 1px 5px rgba(0,0,0,0.4); }
+.departamento-modal-close:hover { color: #ddd; }
+.departamento-modal-imagem { flex: 0 0 60%; }
+.departamento-modal-imagem img { width: 100%; height: 100%; object-fit: cover; }
+.departamento-modal-info { flex: 0 0 40%; padding: 40px; overflow-y: auto; }
+.departamento-modal-info h3 { font-size: 2.2rem; font-weight: bold; margin-bottom: 20px; }
+.departamento-modal-info p { font-size: 1.1rem; line-height: 1.7; color: #555; }
+@media(max-width:768px){.departamento-modal-content{flex-direction:column;max-height:90vh;}.departamento-modal-imagem{flex-basis:50%;}.departamento-modal-info{flex-basis:50%;padding:25px;}.departamento-modal-close{color:#333;text-shadow:none;}}

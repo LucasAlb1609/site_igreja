@@ -3,64 +3,109 @@
 
 {% block title %}Departamentos - {{ block.super }}{% endblock %}
 
-{# Adicionar link para o CSS específico desta página #}
 {% block content %}
 <link rel="stylesheet" href="{% static 'styles/modular/departamentos.css' %}">
 
-<div class="departamentos-page-container">
-    <h1 class="departamentos-page-titulo">Departamentos</h1>
+<div class="page-departamentos">
+    <div class="container-fluid px-0">
+        <h1 class="departamentos-page-titulo">Departamentos</h1>
 
-    <div class="ministerio-tabs-container">
-        {% for cat_key, cat_display_name in categorias_para_abas %}
-            <div class="ministerio-tab-item" data-target="#carousel-{{ cat_key }}">
-                <h3>{{ cat_display_name }}</h3>
-            </div>
-        {% empty %}
-            <p>Nenhum departamento cadastrado ainda.</p>
-        {% endfor %}
-    </div>
-
-    {% for cat_key, cat_data in departamentos_agrupados.items %}
-        <div class="departamentos-carrossel-wrapper" id="carousel-wrapper-{{ cat_key }}">
-            {% if cat_data.lista %}
-                <div id="carousel-{{ cat_key }}" class="carousel slide carousel-departamentos" data-ride="carousel" data-interval="false"> <!-- data-interval="false" para não girar sozinho -->
+        {# --- Seção Ministério de Músicas --- #}
+        {% if departamentos_agrupados.MUSICA.lista %}
+        <section class="ministerio-secao" style="background-color: #f5eedf;">
+            <div class="container py-5">
+                <h2 class="ministerio-titulo" style="color: #333;">{{ departamentos_agrupados.MUSICA.nome_display }}</h2>
+                
+                <div id="carouselMusica" class="carousel slide" data-ride="carousel" data-interval="4000">
                     <div class="carousel-inner">
-                        {% for depto in cat_data.lista %}
-                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                <div class="departamento-card" data-depto-id="{{ depto.id }}" data-depto-nome="{{ depto.nome }}" data-depto-descricao="{{ depto.descricao|default:'Sem descrição.' }}">
-                                    <div class="departamento-card-imagem">
-                                        {% if depto.imagem %}
-                                            <img src="{{ depto.imagem.url }}" alt="{{ depto.nome }}">
-                                        {% else %}
-                                            <div style="width:100%; height:100%; background-color: #ccc;"></div> <!-- Placeholder cinza -->
-                                        {% endif %}
-                                    </div>
-                                    <div class="departamento-card-conteudo">
-                                        <h4>{{ depto.nome }}</h4>
-                                        <p>{{ depto.descricao|default:"Sem descrição." }}</p>
+                        
+                        {# --- NOVA LÓGICA DE AGRUPAMENTO --- #}
+                        {% for depto in departamentos_agrupados.MUSICA.lista %}
+                            {# A cada 3 itens (ou no primeiro), abre um novo slide #}
+                            {% if forloop.counter0|divisibleby:3 %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <div class="cards-wrapper">
+                            {% endif %}
+
+                                        {# Renderiza o card do departamento #}
+                                        <div class="departamento-card" data-depto-nome="{{ depto.nome }}" data-depto-descricao="{{ depto.descricao|default:'Sem descrição.' }}" data-depto-imagem="{% if depto.imagem %}{{ depto.imagem.url }}{% endif %}">
+                                            <div class="departamento-card-imagem">
+                                                {% if depto.imagem %}
+                                                    <img src="{{ depto.imagem.url }}" alt="{{ depto.nome }}">
+                                                {% endif %}
+                                            </div>
+                                            <div class="departamento-card-conteudo">
+                                                <h4>{{ depto.nome }}</h4>
+                                                <p>{{ depto.get_categoria_display }}</p>
+                                            </div>
+                                        </div>
+
+                            {# A cada 3 itens (ou no último), fecha o slide #}
+                            {% if forloop.counter|divisibleby:3 or forloop.last %}
                                     </div>
                                 </div>
-                            </div>
+                            {% endif %}
                         {% endfor %}
+                        {# --- FIM DA NOVA LÓGICA --- #}
+
                     </div>
-                    {% if cat_data.lista|length > 1 %} {# Só mostra setas se houver mais de 1 item #}
-                        <a class="carousel-control-prev" href="#carousel-{{ cat_key }}" role="button" data-slide="prev">
+                    {% if departamentos_agrupados.MUSICA.lista|length > 3 %}
+                        <a class="carousel-control-prev" href="#carouselMusica" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Anterior</span>
                         </a>
-                        <a class="carousel-control-next" href="#carousel-{{ cat_key }}" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#carouselMusica" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Próximo</span>
                         </a>
                     {% endif %}
                 </div>
-            {% else %}
-                 <p style="text-align: center; margin-top: 20px;">Nenhum departamento cadastrado para este ministério.</p>
-            {% endif %}
-        </div>
-    {% endfor %}
+            </div>
+        </section>
+        {% endif %}
 
-    <!-- Modal para exibir o card expandido -->
+        {# --- Seção Ministério de Treinamento e Crescimento Cristão --- #}
+        {% if departamentos_agrupados.TREINAMENTO.lista %}
+        <section class="ministerio-secao" style="background-color: #0caaed;">
+            <div class="container py-5">
+                <h2 class="ministerio-titulo" style="color: #fff;">{{ departamentos_agrupados.TREINAMENTO.nome_display }}</h2>
+
+                <div id="carouselTreinamento" class="carousel slide" data-ride="carousel" data-interval="4000">
+                    <div class="carousel-inner">
+                        {% for depto in departamentos_agrupados.TREINAMENTO.lista %}
+                            {% if forloop.counter0|divisibleby:3 %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <div class="cards-wrapper">
+                            {% endif %}
+                                        <div class="departamento-card" data-depto-nome="{{ depto.nome }}" data-depto-descricao="{{ depto.descricao|default:'Sem descrição.' }}" data-depto-imagem="{% if depto.imagem %}{{ depto.imagem.url }}{% endif %}">
+                                            <div class="departamento-card-imagem">
+                                                {% if depto.imagem %}
+                                                    <img src="{{ depto.imagem.url }}" alt="{{ depto.nome }}">
+                                                {% endif %}
+                                            </div>
+                                            <div class="departamento-card-conteudo">
+                                                <h4>{{ depto.nome }}</h4>
+                                                <p>{{ depto.get_categoria_display }}</p>
+                                            </div>
+                                        </div>
+                            {% if forloop.counter|divisibleby:3 or forloop.last %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                     {% if departamentos_agrupados.TREINAMENTO.lista|length > 3 %}
+                        <a class="carousel-control-prev" href="#carouselTreinamento" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselTreinamento" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </div>
+
     <div class="departamento-modal" id="departamentoModal">
         <div class="departamento-modal-content">
             <span class="departamento-modal-close">&times;</span>
@@ -79,133 +124,37 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const tabs = document.querySelectorAll('.ministerio-tab-item');
-    const carouselsWrappers = document.querySelectorAll('.departamentos-carrossel-wrapper');
-    const tabsContainer = document.querySelector('.ministerio-tabs-container');
-
-    // Modal elements
+    // A lógica do Modal permanece a mesma e funcionará corretamente.
     const modal = document.getElementById('departamentoModal');
-    const modalClose = document.querySelector('.departamento-modal-close');
-    const modalImagem = document.getElementById('modalImagem');
-    const modalTitulo = document.getElementById('modalTitulo');
-    const modalDescricao = document.getElementById('modalDescricao');
+    if (modal) {
+        const modalClose = document.querySelector('.departamento-modal-close');
+        const modalImagem = document.getElementById('modalImagem');
+        const modalTitulo = document.getElementById('modalTitulo');
+        const modalDescricao = document.getElementById('modalDescricao');
 
-    // Adicionar evento de clique a todos os cards
-    document.querySelectorAll('.departamento-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            // Evitar que o clique no card acione o carrossel
-            e.stopPropagation();
-            
-            // Obter dados do card
-            const nome = this.getAttribute('data-depto-nome');
-            const descricao = this.getAttribute('data-depto-descricao');
-            const imagem = this.querySelector('img');
-            
-            // Preencher o modal com os dados do card
-            modalTitulo.textContent = nome;
-            modalDescricao.textContent = descricao;
-            
-            if (imagem) {
-                modalImagem.src = imagem.src;
-                modalImagem.alt = imagem.alt;
-            } else {
-                // Se não houver imagem, usar um placeholder
-                modalImagem.src = '';
-                modalImagem.alt = 'Sem imagem';
-                modalImagem.style.backgroundColor = '#e0e0e0';
-            }
-            
-            // Exibir o modal
-            modal.style.display = 'flex';
-            
-            // Adicionar classe para animar a entrada
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
+        document.querySelectorAll('.departamento-card').forEach(card => {
+            card.addEventListener('click', function() {
+                modalTitulo.textContent = this.getAttribute('data-depto-nome');
+                modalDescricao.textContent = this.getAttribute('data-depto-descricao');
+                modalImagem.src = this.getAttribute('data-depto-imagem');
+                
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('show'), 10);
+            });
         });
-    });
-    
-    // Fechar o modal ao clicar no X
-    modalClose.addEventListener('click', function() {
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 300); // Tempo da animação de saída
-    });
-    
-    // Fechar o modal ao clicar fora do conteúdo
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
+
+        function closeModal() {
             modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300); // Tempo da animação de saída
+            setTimeout(() => modal.style.display = 'none', 300);
         }
-    });
-    
-    // Fechar o modal com a tecla ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300); // Tempo da animação de saída
-        }
-    });
 
-    // Lógica das abas e carrosséis
-    tabs.forEach(tab => {
-        tab.addEventListener('mouseenter', () => {
-            const targetCarouselId = tab.getAttribute('data-target'); // e.g., #carousel-TREINAMENTO
-            const targetWrapper = document.querySelector('#carousel-wrapper-' + targetCarouselId.substring(10)); // e.g., #carousel-wrapper-TREINAMENTO
-
-            // Esconde todos os wrappers de carrossel
-            carouselsWrappers.forEach(wrapper => wrapper.style.display = 'none');
-            
-            // Mostra o wrapper do carrossel alvo
-            if (targetWrapper) {
-                targetWrapper.style.display = 'block';
-                // Força o Bootstrap a recalcular o layout do carrossel (útil se estava display:none)
-                $(targetCarouselId).carousel('dispose').carousel(); 
-            }
-        });
-    });
-
-    // Opcional: Esconder carrosséis se o mouse sair da área das abas
-    if (tabsContainer) {
-        tabsContainer.addEventListener('mouseleave', () => {
-            // Poderia esconder todos os carrosséis aqui, mas pode ser irritante para o usuário.
-            // Deixar o último carrossel visível pode ser uma experiência melhor.
-            // carouselsWrappers.forEach(wrapper => wrapper.style.display = 'none');
-        });
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
     }
 
-    // Lógica para múltiplos itens por slide (adaptada para responsividade)
-    $('.carousel-departamentos').each(function(){
-        var $carousel = $(this);
-        var itemsPerSlide = 3; // Default para desktop
-        if (window.innerWidth < 992) {
-            itemsPerSlide = 2; // Tablet
-        }
-        if (window.innerWidth < 768) {
-            itemsPerSlide = 1; // Mobile
-        }
-
-        var totalItems = $carousel.find('.carousel-item').length;
-
-        if (totalItems > itemsPerSlide) {
-            $carousel.on('slide.bs.carousel', function (e) {
-                var $e = $(e.relatedTarget);
-                var idx = $e.index();
-                var itemsMove = e.direction === 'left' ? 1 : -1;
-                var newIdx = (idx + itemsMove + totalItems) % totalItems;
-            });
-        }
-    });
-
-     // Inicializa os carrosséis (importante para que as setas funcionem)
-     $('.carousel-departamentos').carousel();
+    // Inicialização padrão do Bootstrap para os carrosséis.
+    $('.carousel').carousel();
 });
 </script>
-
 {% endblock %}

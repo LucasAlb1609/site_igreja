@@ -1,233 +1,296 @@
-/* styles/modular/agenda.css */
+/* static/styles/modular/agenda.css */
 
-.agenda-container {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+/* --- Variáveis de Estilo --- */
+:root {
+    --cor-fundo-pagina: #f2f0e4;
+    --cor-header-card: #0caaed;
+    --cor-corpo-card: #FFFFFF;
+    --cor-texto-header-card: #FFFFFF;
+    --cor-texto-titulo: #212529;
+    --cor-texto-corpo: #495057;
+    --cor-texto-sutil: #6C757D;
+    --cor-fundo-evento-item: #FFFFFF;
+    --cor-borda-evento-item: #E9ECEF;
+    --cor-horario-bg: #f0f0f0;
+    --cor-fundo-evento-especial: #F0F4FF; /* Cor para eventos especiais */
+    --cor-borda-evento-especial: #D9E2FF; /* Cor para eventos especiais */
+    --raio-borda: 12px;
+    --sombra-card: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --sombra-card-hover: 0 7px 20px rgba(0, 0, 0, 0.1);
 }
 
-.agenda-titulo {
-    text-align: center;
-    color: var(--primary-color);
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+/* --- Estrutura Geral --- */
+.agenda-wrapper {
+    background-color: var(--cor-fundo-pagina);
+    padding: 50px 0;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
-.agenda-subtitulo {
-    text-align: center;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Dias da Semana */
+/* --- Grid Principal da Agenda --- */
 .dias-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 30px;
-     /* Adicionando container de visualização para controlar a animação por linha */
-     container-type: inline-size;
-     container-name: dias-grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 }
 
-/* Estilo para cada linha da grid */
-.dias-row {
-    display: contents; /* Isso mantém a estrutura da grid original */
-    container-type: inline-size;
-    container-name: dias-row;
-}
-
-.dia-card {
-    background-color: #fff;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-sm);
-    text-align: center;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    overflow: hidden;
-
-    /* Animação para usar o container da linha como referência */
-    animation: appear linear;
-    animation-timeline: view();
-    animation-range: entry 10% cover 35%;
-
-    /* Garantir que cards na mesma linha tenham a mesma animação */
-    view-timeline-name: --card-reveal;
-    view-timeline-axis: block;
-}
-
-.dia-card h3 {
-    background-color: var(--primary-color);
-    color: var(--text-light);
+/* --- Cabeçalho (Título e Descrição) --- */
+.agenda-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 20px;
-    margin: 0;
-    font-size: 1.5rem;
 }
-
-.dia-card-icon {
-    padding: 35px 0 15px;
+.agenda-header h1 {
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: var(--cor-texto-titulo);
+    line-height: 1.2;
+    margin-bottom: 16px;
 }
-
-.dia-card-icon img {
-    height: 50px;
-    margin: 0 auto;
+.agenda-header h1 strong {
+    font-weight: 700;
 }
-
-.dia-card p {
-    color: var(--text-muted);
+.agenda-header p {
     font-size: 1rem;
-    margin-bottom: 25px;
+    color: var(--cor-texto-corpo);
+    margin-bottom: 8px;
+}
+.agenda-header .subtle-text {
+    font-size: 0.9rem;
+    color: var(--cor-texto-sutil);
 }
 
-.dia-card:hover, .dia-card.active {
+/* --- Estilo dos Wrappers dos Cards --- */
+.dia-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+    transition: transform 0.3s ease; /* Transição apenas para o transform */
+}
+.dia-item-wrapper:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    background-color: #f0f8ff;
 }
 
-.dia-card.active h3 {
-    background-color: var(--secondary-color);
+/* Animação escalonada */
+.dia-item-wrapper:nth-child(2) { animation-delay: 0.1s; }
+.dia-item-wrapper:nth-child(3) { animation-delay: 0.2s; }
+.dia-item-wrapper:nth-child(4) { animation-delay: 0.3s; }
+.dia-item-wrapper:nth-child(5) { animation-delay: 0.4s; }
+
+/* --- NOVO ESTILO DE CARD --- */
+.dia-card {
+    background-color: var(--cor-corpo-card);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease; /* Transição para a sombra no próprio card */
 }
 
-/* Eventos que aparecem ao clicar (NOVAS REGRAS PARA ANIMAÇÃO) */
+/* CORREÇÃO: Aplica a sombra mais forte no card ao passar o mouse no wrapper */
+.dia-item-wrapper:hover .dia-card,
+.dia-item-wrapper.active .dia-card {
+    box-shadow: var(--sombra-card-hover);
+}
+
+.dia-card-header {
+    background-color: var(--cor-header-card);
+    padding: 12px;
+    text-align: center;
+}
+.dia-card-header h3 {
+    color: var(--cor-texto-header-card);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.dia-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px;
+}
+.dia-card-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+}
+.dia-card-body p {
+    font-size: 1rem;
+    color: var(--cor-texto-sutil);
+    margin: 0;
+    text-align: center;
+}
+
+/* --- NOVO ESTILO DO CONTEÚDO EXPANSÍVEL --- */
 .eventos-do-dia {
-    background-color: #f7f7f9;
-    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
-    margin: -10px 10px 0; /* Margem negativa para "conectar" com o card */
-    padding: 0 20px; /* Padding lateral, o vertical será animado */
-    
-    /* Estado inicial para a animação */
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transition: max-height 0.5s ease-out, opacity 0.4s ease-out, margin-top 0.5s ease-out;
+    border-radius: var(--raio-borda);
 }
-
 .eventos-do-dia.show {
-    /* Estado final quando visível */
-    max-height: 1000px; /* Um valor alto para garantir que todo o conteúdo caiba */
+    max-height: 1000px;
     opacity: 1;
-    padding: 20px;
-    border-top: 1px solid #e0e0e0;
+    margin-top: 4px;
 }
 
 .eventos-do-dia ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    background-color: var(--cor-corpo-card);
+    border-radius: var(--raio-borda);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    transition: box-shadow 0.3s ease;
+}
+
+/* CORREÇÃO: Sombra mais forte na lista expandida quando o wrapper está em hover ou ativo */
+.dia-item-wrapper:hover .eventos-do-dia ul,
+.dia-item-wrapper.active .eventos-do-dia ul {
+    box-shadow: var(--sombra-card-hover);
 }
 
 .evento-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 16px;
+    border-bottom: 1px solid var(--cor-borda-evento-item);
 }
 .evento-item:last-child {
     border-bottom: none;
 }
+
 .evento-info h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cor-texto-titulo);
     margin: 0 0 5px;
-    font-size: 1.1rem;
-    color: #333;
 }
 .evento-info p {
-    margin: 0;
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--cor-texto-corpo);
+    margin: 0;
+    line-height: 1.5;
 }
 .evento-horario span {
-    background-color: #e9ecef;
-    color: #495057;
-    padding: 5px 10px;
+    background-color: var(--cor-horario-bg);
+    color: var(--cor-texto-corpo);
+    padding: 5px 12px;
     border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: 15px;
 }
 .evento-item-empty {
-    color: var(--text-muted);
-    padding: 20px 0;
+    padding: 20px;
     text-align: center;
+    background-color: var(--cor-corpo-card);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+}
+.evento-item-empty p {
+    margin: 0;
+    color: var(--cor-texto-sutil);
 }
 
-
-/* Estilo especial para o wrapper de Domingo */
-.dia-item-wrapper.domingo-item-wrapper {
-    grid-column: 1 / -1;
-}
-
-/* Opcional: Ajuste para o conteúdo do card de Domingo (não precisa mudar) */
-.dia-card.domingo-card .dia-card-icon {
-    padding-top: 20px;
-    padding-bottom: 5px;
-}
-.dia-card.domingo-card p {
-    margin-bottom: 15px;
-}
-
-/* Eventos Especiais */
+/* --- Seção de Eventos Especiais --- */
 .eventos-especiais {
     margin-top: 60px;
 }
-
+.eventos-especiais h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--cor-texto-titulo);
+    margin-bottom: 24px;
+    text-align: left;
+}
 .eventos-especiais-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: 1fr;
+    gap: 16px;
 }
-
 .evento-especial-card {
-    background-color: #e4eaf5;
-    padding: 20px;
-    border-radius: var(--border-radius-lg);
+    background-color: var(--cor-fundo-evento-especial);
+    border: 1px solid var(--cor-borda-evento-especial);
+    border-radius: var(--raio-borda);
+    padding: 24px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    transition: all var(--transition-fast);
-
-   
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .evento-especial-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--sombra-card-hover);
+}
+
+.evento-especial-info {
+    flex-grow: 1;
 }
 .evento-especial-info h3 {
-    margin: 0 0 10px;
-    color: var(--primary-color);
-    font-size: 1.2rem;
+    margin: 0 0 8px 0;
+    color: #334D99;
 }
 .evento-especial-info p {
     margin: 0;
-    color: #555;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    color: #4A5C94;
+    max-width: 80%;
 }
-.evento-especial-periodo span {
-    background-color: #fff;
-    color: var(--primary-color);
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    margin-left: 15px;
-    box-shadow: var(--shadow-sm);
+.evento-especial-data {
+    text-align: center;
+    margin-left: 20px;
+}
+.periodo-texto {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #334D99;
+    line-height: 1.2;
 }
 
-/* Estilo especial para o card de Domingo */
-.dia-card.domingo-card {
-    grid-column: 1 / -1; /* Faz o item ocupar todas as colunas da grade, da primeira à última */
+/* --- Animação (Mantida) --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Opcional: Ajuste para o conteúdo do card de Domingo quando ele estiver largo */
-.dia-card.domingo-card .dia-card-icon {
-    padding-top: 20px;
-    padding-bottom: 5px;
-}
-
-.dia-card.domingo-card p {
-    margin-bottom: 15px;
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .dias-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .agenda-header {
+        text-align: center;
+    }
+    .evento-especial-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .evento-especial-data {
+        align-self: flex-end;
+    }
+    .evento-especial-info p {
+        max-width: 100%;
+    }
 }
