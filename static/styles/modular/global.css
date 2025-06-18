@@ -1,0 +1,62 @@
+/* Definição das variáveis globais de fonte na raiz do documento */
+:root {
+    /* -- FAMÍLIA DA FONTE -- */
+    --font-family-principal: 'Poppins', sans-serif;
+
+    /* -- PESOS DA FONTE -- */
+    --peso-extralight: 200;
+    --peso-light: 300;
+    --peso-regular: 400;
+    --peso-medium: 500;
+    --peso-semibold: 600;
+    --peso-bold: 700;
+}
+
+/* --- APLICAÇÃO SEMÂNTICA DOS ESTILOS --- */
+/* Estilos baseados nas suas imagens de exemplo */
+
+/* Estilo para Títulos Principais (Ex: "Nossa História") */
+h1, .titulo-principal {
+    font-family: var(--font-family-principal);
+    font-style: italic;
+    font-weight: var(--peso-semibold); /* Semibold Italic */
+    font-size: 2.8rem; /* Tamanho de exemplo, ajuste se necessário */
+}
+
+/* Estilo para Subtítulos (Ex: "Segunda Igreja Batista...") */
+h2, .subtitulo {
+    font-family: var(--font-family-principal);
+    font-style: italic;
+    font-weight: var(--peso-medium); /* Medium Italic */
+    font-size: 2rem; /* Tamanho de exemplo */
+}
+
+/* Estilo para Corpo de Texto Padrão (Parágrafos) */
+body {
+    font-family: var(--font-family-principal);
+    font-style: italic;
+    font-weight: var(--peso-light); /* Light Italic */
+    font-size: 1rem; /* Tamanho padrão */
+    line-height: 1.6;
+}
+
+/* Estilo para Texto Terciário (Ex: Datas, legendas pequenas) */
+small, .texto-terciario {
+    font-family: var(--font-family-principal);
+    font-style: italic;
+    font-weight: var(--peso-extralight); /* Extralight Italic */
+    font-size: 0.9rem; /* Tamanho de exemplo */
+}
+
+/* --- AJUSTES ADICIONAIS --- */
+/* Você pode querer que alguns elementos, como botões ou o menu, não sejam itálicos. */
+
+header nav, .btn, strong, b {
+    font-style: normal; /* Garante que o menu e textos em negrito não fiquem em itálico */
+}
+
+/* Ajusta o H5 do seu logo no cabeçalho para não ser afetado */
+header .logo h5 {
+    font-style: normal;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif; /* Mantém a fonte original do logo */
+}
