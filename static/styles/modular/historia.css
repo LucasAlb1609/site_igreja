@@ -1,93 +1,181 @@
-/* Estilos para a página de História da Igreja */
+/* Estilo do Título Principal */
+.page-title {
+    font-weight: 700 !important; /* !important para garantir a sobreposição do estilo de 'display-4' */
+}
 
-.historia-banner {
+/* Estilos dos Banners */
+.participacao-banner {
     background: linear-gradient(90deg, #6ab7e2 0%, #f8a978 100%);
-    min-height: 300px;
+    padding: 4rem 0;
 }
 
-/* Estilos para a imagem da fachada */
-.fachada-img {
-    max-height: 400px;
-    object-fit: cover;
-    margin: 0 auto;
-    display: block;
+/* Cores de Fundo Alternadas */
+.bg-color-1 {
+    background-color: #f6efdf; /* Bege Claro */
+}
+.bg-color-2 {
+    background-color: #0caaed; /* Azul */
+    color: #ffffff; /* Cor padrão do texto para seções azuis */
 }
 
-/* Estilos para os ícones da missão */
-.missao-icon {
-    width: 80px;
-    height: 80px;
-    transition: transform 0.3s ease;
-    display: block;
-    margin: 0 auto;
+/* Ajuste de cor de texto para seções com fundo azul */
+.bg-color-2 h1,
+.bg-color-2 h2,
+.bg-color-2 h3,
+.bg-color-2 h4,
+.bg-color-2 .lead {
+    color: #ffffff;
 }
 
-.missao-card:hover .missao-icon {
-    transform: scale(1.2);
+/* Garante que o texto DENTRO dos cards (que são brancos) mantenha a cor escura padrão */
+.bg-color-2 .card {
+    color: #212529; /* Cor de texto padrão do Bootstrap */
 }
 
-.missao-card {
-    height: 100%;
-    cursor: pointer;
+.bg-color-2 .card h5 {
+    color: #343a40; /* Cor escura para os títulos dos cards (Missão, Memorial) */
 }
 
-/* Estilos para os cards de pastores */
-.pastor-card {
-    height: 100%;
-}
-
-.pastor-img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto;
-}
-
-.pastor-nome {
+/* Restaura a cor laranja customizada para nomes de pastores e títulos de campos missionários */
+.bg-color-2 .card .pastor-nome,
+.bg-color-2 .card .campo-missionario-titulo {
     color: #f8a978;
 }
 
-/* Estilos para a seção de igrejas geradas */
-.igreja-card {
+/* Restaura a cor cinza para texto "muted" dentro de cards */
+.bg-color-2 .card .text-muted {
+    color: #6c757d !important;
+}
+
+/* AJUSTE RÁPIDO: Reduz o tamanho da imagem nas seções */
+.section-image {
+    max-width: 85%; /* Define a largura máxima da imagem (ajuste conforme necessário) */
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Estilos para a seção Missão */
+.missao-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
 }
 
-/* Estilos para a seção de campos missionários */
-.campo-missionario-img-container {
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.missao-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
+.missao-icon {
+    width: 70px;
+    height: 70px;
+    transition: transform 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.missao-card:hover .missao-icon {
+    transform: scale(1.15);
+}
+
+/* Estilos para os Carrosséis */
+.pastor-carousel .slick-slide,
+.memorial-carousel .slick-slide {
+    padding: 0 15px;
+    height: auto;
+}
+
+.pastor-card-wrapper,
+.memorial-card-wrapper {
+    padding: 10px 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Padronização de altura dos cards */
+.pastor-card,
+.memorial-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pastor-card .card-body,
+.memorial-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Força o corpo do card a ocupar todo o espaço vertical disponível */
+}
+
+.pastor-card .card-text {
+    flex-grow: 1; /* Força os parágrafos de texto a se expandirem, alinhando os rodapés do card */
+}
+
+.pastor-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    margin: 0 auto;
+    border: 4px solid #f8a978;
+    flex-shrink: 0; /* Impede que a imagem encolha */
+}
+
+.pastor-nome {
+    color: #343a40;
+    font-weight: bold;
+}
+
+.memorial-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin: 0 auto;
+    border: 3px solid #6c757d;
+    flex-shrink: 0; /* Impede que a imagem encolha */
+}
+
+.memorial-card .card-title {
+    margin-top: auto; /* Empurra o título para a base do card, forçando a expansão vertical */
+}
+
+/* Campos Missionários */
 .campo-missionario-img {
-    max-height: 100px;
+    height: 80px;
+    width: auto;
+    object-fit: contain;
 }
 
 .campo-missionario-titulo {
     color: #f8a978;
+    font-weight: bold;
 }
 
-/* Estilos para a seção de chamada para participação */
-.participacao-banner {
-    background: linear-gradient(90deg, #6ab7e2 0%, #f8a978 100%);
-    min-height: 300px;
+/* Estilos para Setas e Pontos do Carrossel (Slick) */
+.slick-prev, .slick-next {
+    width: 40px;
+    height: 40px;
+    z-index: 1;
 }
 
-/* Estilos para a seção de tragédia */
-.memorial-img {
-    max-width: 300px;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Estilos para os destaques de texto */
-.destaque-laranja {
+.slick-prev:before, .slick-next:before {
+    font-size: 30px;
     color: #f8a978;
 }
 
-/* Estilos para os cards especiais */
-.card-destaque-laranja {
-    background-color: #f8a978;
+/* Muda a cor das setas em seções azuis para melhor contraste */
+.bg-color-2 .slick-prev:before,
+.bg-color-2 .slick-next:before {
+    color: #ffffff;
+}
+
+.slick-dots li button:before {
+    font-size: 12px;
+    color: #f8a978;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #6ab7e2;
 }
