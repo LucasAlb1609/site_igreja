@@ -6,16 +6,17 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'styles/modular/departamentos.css' %}">
 
-<div class="page-departamentos">
-    <div class="container-fluid px-0">
+<div style="background-color: #f5eedf;"> {# Cor de fundo da primeira seção aplicada ao container geral #}
+    <div class="container">
         <h1 class="departamentos-page-titulo">Departamentos</h1>
+    </div>
 
-        {# --- Seção Ministério de Músicas --- #}
-        {% if departamentos_agrupados.MUSICA.lista %}
-        <section class="ministerio-secao" style="background-color: #f5eedf;">
-            <div class="container py-5">
-                <h2 class="ministerio-titulo" style="color: #333;">{{ departamentos_agrupados.MUSICA.nome_display }}</h2>
-                
+    {# --- Seção Ministério de Músicas --- #}
+    {% if departamentos_agrupados.MUSICA %}
+    <section class="ministerio-secao" style="background-color: #f5eedf;">
+        <div class="container pt-2 pb-5"> {# Padding superior reduzido para aproximar do título #}
+            <h2 class="ministerio-titulo" style="color: #333;">{{ departamentos_agrupados.MUSICA.nome_display }}</h2>
+                           
                 <div id="carouselMusica" class="carousel slide" data-ride="carousel" data-interval="4000">
                     <div class="carousel-inner">
                         
