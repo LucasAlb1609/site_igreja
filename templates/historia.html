@@ -12,12 +12,16 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <img src="{% static 'fotos/Fachada.jpg' %}" alt="Fachada da Igreja" class="img-fluid rounded shadow-sm mb-4 mb-md-0 section-image">
+                <div class="img-frame">
+                    <img src="{% static 'fotos/Fachada.jpg' %}" alt="Fachada da Igreja" class="img-fluid section-image">
+                </div>
             </div>
             <div class="col-md-6">
-                <h1 class="display-4 mb-3 page-title">Nossa História</h1>
-                <p class="lead text-muted">Uma jornada de fé e dedicação desde 1943.</p>
-                <h2 class="text-start mb-3">Segunda Igreja Batista em Casa Amarela</h2>
+                <div class="titulo-principal">
+                    <h1 class="display-4 mb-1 page-title">Nossa História</h1>
+                    <h2 class="lead mb-4"><strong>Uma jornada de fé e dedicação desde 1943.</strong></h2>
+                </div>
+                <h2 class="text-start mb-3"><h3>Segunda Igreja Batista em Casa Amarela</h3></h2>
                 <p>Nossa igreja tem uma rica história de fé, dedicação e serviço à comunidade. Ao longo de décadas, temos sido abençoados com crescimento e transformação, sempre mantendo nosso compromisso com a proclamação do Evangelho.</p>
             </div>
         </div>
@@ -28,7 +32,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 order-md-2">
-                <img src="{% static 'fotos/membros_fundadores.jpeg' %}" alt="Membros fundadores da igreja" class="img-fluid rounded shadow-sm mb-4 mb-md-0 section-image">
+                <div class="img-frame">
+                    <img src="{% static 'fotos/membros_fundadores.jpeg' %}" alt="Membros fundadores da igreja" class="img-fluid section-image">
+                </div>
             </div>
             <div class="col-md-6 order-md-1">
                 <h2 class="text-start mb-3">Fundação</h2>
@@ -46,7 +52,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <img src="{% static 'fotos/joao-2.jpg' %}" alt="Perfil da Igreja" class="img-fluid rounded shadow-sm mb-4 mb-md-0 section-image">
+                <div class="img-frame">
+                    <img src="{% static 'fotos/joao-2.jpg' %}" alt="Perfil da Igreja" class="img-fluid section-image">
+                </div>
             </div>
             <div class="col-md-6">
                 <h2 class="text-start mb-3">Perfil da Igreja</h2>
@@ -58,8 +66,10 @@
 
 <section class="py-5 bg-color-2">
     <div class="container">
-        <h2 class="text-center mb-4">Missão</h2>
-        <p class="text-center lead mb-5">Missão baseada em cinco pilares fundamentais:</p>
+        <div class="missao-header">
+            <h2>Missão</h2>
+            <p class="lead">Missão baseada em cinco pilares fundamentais:</p>
+        </div>
         <div class="row justify-content-center">
             <div class="col-lg col-md-4 col-6 mb-4">
                 <div class="card border-0 shadow-sm missao-card">
@@ -107,13 +117,17 @@
 
 <section class="py-5 bg-color-1">
     <div class="container">
-        <h2 class="text-center mb-5">Pastorado</h2>
-        <p class="text-center">Conheça os pastores que lideraram nossa igreja ao longo dos anos:</p>
+        <div class="pastorado-header">
+            <h2>Pastorado</h2>
+            <p>Conheça os pastores que lideraram nossa igreja ao longo dos anos:</p>
+        </div>
         <div class="pastor-carousel mt-4">
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Severino Belo" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Severino Belo" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Severino Belo</h5>
                         <p class="card-text text-muted">Pastor Fundador</p>
                         <p class="card-text">1943 - aprox. 3 meses</p>
@@ -123,7 +137,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Manoel Machado" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Manoel Machado" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Manoel Machado</h5>
                         <p class="card-text text-muted">Adm. Construção do 1º Templo</p>
                         <p class="card-text">1944 a 1953</p>
@@ -133,7 +149,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Albérico de Souza" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Albérico de Souza" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Albérico de Souza</h5>
                         <p class="card-text text-muted">Amava as crianças e as flores</p>
                         <p class="card-text">1954 a 1957</p>
@@ -143,7 +161,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Severino Cardoso" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Severino Cardoso" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Severino Cardoso</h5>
                         <p class="card-text text-muted">Adm. Construção da Casa Pastoral</p>
                         <p class="card-text">1958 a 1962</p>
@@ -153,7 +173,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Rosivaldo de Araújo" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Rosivaldo de Araújo" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Rosivaldo de Araújo</h5>
                         <p class="card-text text-muted">Período de Avivamento Espiritual</p>
                         <p class="card-text">1963 a 1971</p>
@@ -163,7 +185,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Leandro Dias" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Leandro Dias" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Leandro Dias</h5>
                         <p class="card-text text-muted">Pastor</p>
                         <p class="card-text">1971 - 11 meses</p>
@@ -173,7 +197,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Pedro Andrade" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Pedro Andrade" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Pedro Andrade</h5>
                         <p class="card-text text-muted">Expansão do Evangelho</p>
                         <p class="card-text">Interino (1971) e Efetivo (1975)</p>
@@ -183,7 +209,9 @@
              <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Carlos Pezzotti" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Carlos Pezzotti" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Carlos Pezzotti</h5>
                         <p class="card-text text-muted">Pastor</p>
                         <p class="card-text">1972 a 1974</p>
@@ -193,7 +221,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/joao.jpg' %}" alt="Pastor João Gomes" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/joao.jpg' %}" alt="Pastor João Gomes" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor João Gomes</h5>
                         <p class="card-text text-muted">Evangelismo e Discipulado</p>
                         <p class="card-text">Desde 1999</p>
@@ -203,7 +233,9 @@
             <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Elcias Rodrigues Martins" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Pastor Elcias Rodrigues Martins" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Elcias R. Martins</h5>
                         <p class="card-text text-muted">Vice-presidente</p>
                         <p class="card-text">A partir de 2008</p>
@@ -213,7 +245,9 @@
              <div class="pastor-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm pastor-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/romildo.jpg' %}" alt="Pastor Romildo Silva de Melo" class="img-fluid rounded-circle mb-3 pastor-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/romildo.jpg' %}" alt="Pastor Romildo Silva de Melo" class="img-fluid pastor-img">
+                        </div>
                         <h5 class="card-title pastor-nome">Pastor Romildo S. de Melo</h5>
                         <p class="card-text text-muted">Vice-presidente</p>
                         <p class="card-text">2018</p>
@@ -226,17 +260,17 @@
 
 <section class="py-5 bg-color-2">
     <div class="container">
-        <h2 class="text-center mb-4">Memorial de 13 de setembro de 2008</h2>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <p>Durante uma viagem missionária a Bom Jardim do Araripe, um acidente de ônibus causou a perda de sete vidas preciosas, incluindo o Pastor Pedro Pereira de Andrade e o Pastor Solon de Araujo Oliveira. Foi um momento de grande dor para a igreja e toda a comunidade.</p>
-            </div>
+        <div class="memorial-header">
+            <h2>Memorial de 13 de setembro de 2008</h2>
+            <p>Durante uma viagem missionária a Bom Jardim do Araripe, um acidente de ônibus causou a perda de sete vidas preciosas, incluindo o Pastor Pedro Pereira de Andrade e o Pastor Solon de Araujo Oliveira. Foi um momento de grande dor para a igreja e toda a comunidade.</p>
         </div>
         <div class="memorial-carousel mt-4">
             <div class="memorial-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm memorial-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid rounded-circle mb-3 memorial-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid memorial-img">
+                        </div>
                         <h5 class="card-title">Pr. Pedro Pereira de Andrade</h5>
                     </div>
                 </div>
@@ -244,7 +278,9 @@
             <div class="memorial-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm memorial-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid rounded-circle mb-3 memorial-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid memorial-img">
+                        </div>
                         <h5 class="card-title">Pr. Solon Oliveira Araújo</h5>
                     </div>
                 </div>
@@ -252,7 +288,9 @@
             <div class="memorial-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm memorial-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid rounded-circle mb-3 memorial-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid memorial-img">
+                        </div>
                         <h5 class="card-title">Jorge Freitas</h5>
                     </div>
                 </div>
@@ -260,7 +298,9 @@
             <div class="memorial-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm memorial-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid rounded-circle mb-3 memorial-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid memorial-img">
+                        </div>
                         <h5 class="card-title">Jaqueline Nogueira</h5>
                     </div>
                 </div>
@@ -268,7 +308,9 @@
             <div class="memorial-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm memorial-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid rounded-circle mb-3 memorial-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid memorial-img">
+                        </div>
                         <h5 class="card-title">Ana Paula Vilanova da Silva</h5>
                     </div>
                 </div>
@@ -276,7 +318,9 @@
             <div class="memorial-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm memorial-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid rounded-circle mb-3 memorial-img">
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid memorial-img">
+                        </div>
                         <h5 class="card-title">Severina Farias</h5>
                     </div>
                 </div>
@@ -284,88 +328,19 @@
             <div class="memorial-card-wrapper">
                 <div class="card h-100 border-0 shadow-sm memorial-card">
                     <div class="card-body text-center">
-                        <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid rounded-circle mb-3 memorial-img">
-                        <h5 class="card-title">Cinara</h5>
+                        <div class="img-frame">
+                            <img src="{% static 'fotos/logo.jpg' %}" alt="Memorial" class="img-fluid memorial-img">
+                        </div>
+                        <h5 class="card-title">Josefa Alves</h5>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="py-5 bg-color-1">
-    <div class="container">
-        <h2 class="text-center mb-5">Igrejas Geradas</h2>
-        <div class="row">
-            <div class="col-md-6 mb-3"><div class="card border-0 shadow-sm"><div class="card-body">Igreja Batista na Várzea <small class="text-muted">(RMR)</small></div></div></div>
-            <div class="col-md-6 mb-3"><div class="card border-0 shadow-sm"><div class="card-body">Igreja Batista em Paratibe <small class="text-muted">(RMR)</small></div></div></div>
-            <div class="col-md-6 mb-3"><div class="card border-0 shadow-sm"><div class="card-body">Igreja Batista Central da Iputinga <small class="text-muted">(RMR)</small></div></div></div>
-            <div class="col-md-6 mb-3"><div class="card border-0 shadow-sm"><div class="card-body">Igreja Batista em Paudalho <small class="text-muted">(Zona da Mata)</small></div></div></div>
-            <div class="col-md-6 mb-3"><div class="card border-0 shadow-sm"><div class="card-body">Igreja Batista no Arruda <small class="text-muted">(RMR)</small></div></div></div>
-            <div class="col-md-6 mb-3"><div class="card border-0 shadow-sm"><div class="card-body">Igreja Batista em Surubim <small class="text-muted">(Zona da Mata)</small></div></div></div>
-        </div>
-    </div>
-</section>
-
-<section class="py-5 bg-color-2">
-    <div class="container">
-        <h2 class="text-center mb-5">Campos Missionários</h2>
-        <p class="text-center lead mb-5">Apoiamos trabalhos missionários ao redor do mundo.</p>
-        <div class="row justify-content-center">
-            <div class="col-lg-2 col-md-4 col-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center">
-                        <img src="{% static 'fotos/bandeira-tailandia.png' %}" alt="Bandeira da Tailândia" class="img-fluid campo-missionario-img mb-3">
-                        <h5 class="card-title campo-missionario-titulo">Tailândia</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center">
-                        <img src="{% static 'fotos/bandeira-niger.png' %}" alt="Bandeira do Níger" class="img-fluid campo-missionario-img mb-3">
-                        <h5 class="card-title campo-missionario-titulo">Níger</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center">
-                        <img src="{% static 'fotos/bandeira-egito.png' %}" alt="Bandeira do Egito" class="img-fluid campo-missionario-img mb-3">
-                        <h5 class="card-title campo-missionario-titulo">Egito</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center">
-                        <img src="{% static 'fotos/bandeira-mexico.png' %}" alt="Bandeira do México" class="img-fluid campo-missionario-img mb-3">
-                        <h5 class="card-title campo-missionario-titulo">México</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-center">
-                        <img src="{% static 'fotos/bandeira-guine-bissau.png' %}" alt="Bandeira da Guiné-Bissau" class="img-fluid campo-missionario-img mb-3">
-                        <h5 class="card-title campo-missionario-titulo">Guiné-Bissau</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-5 participacao-banner">
-    <div class="container text-center">
-        <h2 class="text-white mb-4">Faça Parte da Nossa História</h2>
-        <a href="#" class="btn btn-light px-4 py-2 shadow">Visite-nos</a>
     </div>
 </section>
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="{% static 'js/historia.js' %}"></script>
 {% endblock %}

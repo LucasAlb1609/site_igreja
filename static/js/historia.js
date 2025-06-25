@@ -1,7 +1,7 @@
 $(document).ready(function(){
     // Carrossel para a seção de Pastorado
     $('.pastor-carousel').slick({
-        slidesToShow: 4,
+        slidesToShow: 3, // Reduzido para 3 para acomodar cards maiores
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
@@ -11,13 +11,13 @@ $(document).ready(function(){
             {
                 breakpoint: 992,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 2
                 }
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2
+                    slidesToShow: 1
                 }
             },
             {
@@ -31,7 +31,7 @@ $(document).ready(function(){
 
     // Carrossel para a seção do Memorial
     $('.memorial-carousel').slick({
-        slidesToShow: 5,
+        slidesToShow: 4, // Reduzido para 4 para acomodar cards maiores
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2500,

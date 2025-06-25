@@ -3,6 +3,20 @@
     font-weight: 700 !important; /* !important para garantir a sobreposição do estilo de 'display-4' */
 }
 
+/* Bloco de título e subtítulo na primeira seção */
+.titulo-principal {
+    margin-bottom: 2rem;
+}
+
+.titulo-principal h1 {
+    margin-bottom: 0.2rem !important;
+}
+
+.titulo-principal p {
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+
 /* Estilos dos Banners */
 .participacao-banner {
     background: linear-gradient(90deg, #6ab7e2 0%, #f8a978 100%);
@@ -47,13 +61,31 @@
     color: #6c757d !important;
 }
 
+/* Aumentando o tamanho das seções para transições mais suaves */
+section.py-5 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+    margin-bottom: 1.5rem;
+}
+
+/* Moldura branca para todas as imagens */
+.img-frame {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
 /* AJUSTE RÁPIDO: Reduz o tamanho da imagem nas seções */
 .section-image {
-    max-width: 85%; /* Define a largura máxima da imagem (ajuste conforme necessário) */
+    max-width: 100%; /* Define a largura máxima da imagem (ajuste conforme necessário) */
     height: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 10px;
 }
 
 /* Estilos para a seção Missão */
@@ -79,6 +111,46 @@
 
 .missao-card:hover .missao-icon {
     transform: scale(1.15);
+}
+
+/* Alinhamento de títulos e subtítulos */
+.missao-header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+}
+
+.missao-header h2 {
+    margin-bottom: 0.5rem;
+}
+
+.missao-header p {
+    margin-top: 0;
+}
+
+.pastorado-header {
+    text-align: right;
+    margin-bottom: 2.5rem;
+}
+
+.pastorado-header h2 {
+    margin-bottom: 0.5rem;
+}
+
+.pastorado-header p {
+    margin-top: 0;
+}
+
+.memorial-header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+}
+
+.memorial-header h2 {
+    margin-bottom: 0.5rem;
+}
+
+.memorial-header p {
+    margin-top: 0;
 }
 
 /* Estilos para os Carrosséis */
@@ -114,31 +186,38 @@
     flex-grow: 1; /* Força os parágrafos de texto a se expandirem, alinhando os rodapés do card */
 }
 
+/* Modificação dos cards de pastores para formato retangular */
 .pastor-img {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
     margin: 0 auto;
     border: 4px solid #f8a978;
     flex-shrink: 0; /* Impede que a imagem encolha */
+    border-radius: 10px; /* Formato retangular com cantos arredondados */
 }
 
 .pastor-nome {
     color: #343a40;
     font-weight: bold;
+    font-size: 1.25rem;
+    margin-top: 1rem;
 }
 
+/* Mantém o formato redondo para os cards do memorial, mas aumenta o tamanho */
 .memorial-img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     margin: 0 auto;
     border: 3px solid #6c757d;
     flex-shrink: 0; /* Impede que a imagem encolha */
+    border-radius: 50%; /* Mantém o formato redondo */
 }
 
 .memorial-card .card-title {
     margin-top: auto; /* Empurra o título para a base do card, forçando a expansão vertical */
+    font-size: 1.1rem;
 }
 
 /* Campos Missionários */
@@ -178,4 +257,19 @@
 
 .slick-dots li.slick-active button:before {
     color: #6ab7e2;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .titulo-principal {
+        text-align: center;
+    }
+    
+    .pastorado-header {
+        text-align: center;
+    }
+    
+    .missao-header, .memorial-header {
+        text-align: center;
+    }
 }
