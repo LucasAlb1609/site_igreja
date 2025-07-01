@@ -20,6 +20,8 @@ from home import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # URLs do app usuarios (sistema de login/cadastro)
+    path('usuarios/', include('usuarios.urls')),
     # Esta linha direciona todas as URLs principais (como 'historia', etc.)
     # para serem gerenciadas pelo arquivo 'urls.py' do app 'home'.
     # Isso significa que todas as URLs que começam com 'historia', 'lideranca', etc.

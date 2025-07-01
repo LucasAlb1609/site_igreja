@@ -1,0 +1,200 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Dashboard - Sistema da Igreja{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-tachometer-alt me-2"></i>
+                Dashboard
+            </h1>
+            <div class="badge bg-primary fs-6">
+                {{ user.get_papel_display }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Informações do usuário -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-user me-2"></i>
+                    Bem-vindo, {{ user.nome_completo|default:user.username }}!
+                </h5>
+                <p class="card-text">
+                    Você está logado como <strong>{{ user.get_papel_display }}</strong>.
+                    {% if not user.aprovado %}
+                        <span class="badge bg-warning text-dark ms-2">
+                            <i class="fas fa-clock me-1"></i>Aguardando Aprovação
+                        </span>
+                    {% else %}
+                        <span class="badge bg-success ms-2">
+                            <i class="fas fa-check me-1"></i>Aprovado
+                        </span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Funcionalidades por papel -->
+<div class="row">
+    {% if user.is_secretario %}
+        <!-- Funcionalidades do Secretário -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="fas fa-users-cog me-2"></i>
+                        Gestão de Usuários
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p>Gerencie cadastros e aprovações de usuários.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check-circle text-success me-2"></i>Aprovar/Rejeitar cadastros</li>
+                        <li><i class="fas fa-user-tag text-info me-2"></i>Alterar papéis de usuários</li>
+                        <li><i class="fas fa-list text-primary me-2"></i>Visualizar todos os usuários</li>
+                    </ul>
+                    <a href="{% url 'usuarios:usuarios_pendentes' %}" class="btn btn-warning">
+                        <i class="fas fa-clock me-2"></i>
+                        Usuários Pendentes
+                        {% if usuarios_pendentes > 0 %}
+                            <span class="badge bg-danger">{{ usuarios_pendentes }}</span>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Estatísticas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h3 class="text-primary">{{ total_usuarios }}</h3>
+                            <small>Total de Usuários</small>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-warning">{{ usuarios_pendentes }}</h3>
+                            <small>Pendentes</small>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <h3 class="text-success">{{ total_membros }}</h3>
+                            <small>Membros</small>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <h3 class="text-info">{{ total_congregados }}</h3>
+                            <small>Congregados</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if user.is_membro %}
+        <!-- Funcionalidades do Membro -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-certificate me-2"></i>
+                        Certificados Disponíveis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p>Como membro, você tem acesso a todos os tipos de certificados:</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-water text-primary me-2"></i>Certificado de Batismo</li>
+                        <li><i class="fas fa-heart text-danger me-2"></i>Certificado de Casamento</li>
+                        <li><i class="fas fa-graduation-cap text-success me-2"></i>Certificado de Curso</li>
+                        <li><i class="fas fa-user-check text-info me-2"></i>Declaração de Membro</li>
+                    </ul>
+                    <button class="btn btn-success" disabled>
+                        <i class="fas fa-download me-2"></i>
+                        Solicitar Certificado
+                        <small class="d-block">(Em desenvolvimento)</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if user.is_congregado %}
+        <!-- Funcionalidades do Congregado -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-certificate me-2"></i>
+                        Certificados Disponíveis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p>Como congregado, você tem acesso aos seguintes certificados:</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-graduation-cap text-success me-2"></i>Certificado de Curso</li>
+                        <li><i class="fas fa-user-check text-info me-2"></i>Declaração de Frequência</li>
+                    </ul>
+                    <button class="btn btn-info" disabled>
+                        <i class="fas fa-download me-2"></i>
+                        Solicitar Certificado
+                        <small class="d-block">(Em desenvolvimento)</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Perfil do usuário (para todos) -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-user-edit me-2"></i>
+                    Meu Perfil
+                </h5>
+            </div>
+            <div class="card-body">
+                <p>Visualize e edite suas informações pessoais.</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-eye text-primary me-2"></i>Visualizar dados cadastrais</li>
+                    <li><i class="fas fa-edit text-warning me-2"></i>Editar informações</li>
+                    <li><i class="fas fa-key text-danger me-2"></i>Alterar senha</li>
+                </ul>
+                <a href="{% url 'usuarios:perfil' %}" class="btn btn-secondary">
+                    <i class="fas fa-user me-2"></i>
+                    Ver Perfil
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Avisos importantes -->
+{% if not user.aprovado %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Atenção:</strong> Seu cadastro ainda não foi aprovado por um secretário. 
+            Algumas funcionalidades podem estar limitadas até a aprovação.
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+

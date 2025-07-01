@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'usuarios',
 ]
 
 MIDDLEWARE = [
@@ -129,4 +130,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Configurações para arquivos de mídia (uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Modelo de usuário personalizado
+AUTH_USER_MODEL = 'usuarios.User'
+
+
+# Configurações de login e logout
+LOGIN_URL = '/usuarios/login/'
+LOGIN_REDIRECT_URL = '/usuarios/dashboard/'
+LOGOUT_REDIRECT_URL = '/'
 

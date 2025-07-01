@@ -1,0 +1,212 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Meu Perfil - Sistema da Igreja{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-user me-2"></i>
+                    Meu Perfil
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Informações Básicas -->
+                    <div class="col-md-6">
+                        <h5 class="text-primary border-bottom pb-2">
+                            <i class="fas fa-id-card me-2"></i>Informações Básicas
+                        </h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Nome Completo:</strong></td>
+                                <td>{{ user.nome_completo|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nome de Usuário:</strong></td>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>E-mail:</strong></td>
+                                <td>{{ user.email|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data de Nascimento:</strong></td>
+                                <td>{{ user.data_nascimento|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Estado Civil:</strong></td>
+                                <td>{{ user.get_estado_civil_display|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Telefone:</strong></td>
+                                <td>{{ user.telefone|default:"-" }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Endereço -->
+                    <div class="col-md-6">
+                        <h5 class="text-primary border-bottom pb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>Endereço
+                        </h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Endereço:</strong></td>
+                                <td>{{ user.endereco|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bairro:</strong></td>
+                                <td>{{ user.bairro|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cidade:</strong></td>
+                                <td>{{ user.cidade|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CEP:</strong></td>
+                                <td>{{ user.cep|default:"-" }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <!-- Profissão e Educação -->
+                    <div class="col-md-6">
+                        <h5 class="text-primary border-bottom pb-2">
+                            <i class="fas fa-briefcase me-2"></i>Profissão e Educação
+                        </h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Profissão:</strong></td>
+                                <td>{{ user.profissao|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nível Escolar:</strong></td>
+                                <td>{{ user.get_nivel_escolar_display|default:"-" }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Informações da Igreja -->
+                    <div class="col-md-6">
+                        <h5 class="text-primary border-bottom pb-2">
+                            <i class="fas fa-church me-2"></i>Informações da Igreja
+                        </h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Data de Conversão:</strong></td>
+                                <td>{{ user.data_conversao|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aceito por:</strong></td>
+                                <td>{{ user.get_aceito_por_display|default:"-" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Membro de Congregação:</strong></td>
+                                <td>
+                                    {% if user.membro_congregacao %}
+                                        <span class="badge bg-success">Sim</span>
+                                        {% if user.qual_congregacao %}
+                                            <br><small>{{ user.qual_congregacao }}</small>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="badge bg-secondary">Não</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Escola Bíblica:</strong></td>
+                                <td>
+                                    {% if user.frequenta_escola_biblica %}
+                                        <span class="badge bg-success">Frequenta</span>
+                                        {% if user.qual_classe_escola_biblica %}
+                                            <br><small>{{ user.qual_classe_escola_biblica }}</small>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="badge bg-secondary">Não frequenta</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Status do Sistema -->
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="text-primary border-bottom pb-2">
+                            <i class="fas fa-cog me-2"></i>Status no Sistema
+                        </h5>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <div class="badge bg-info fs-6 mb-2">{{ user.get_papel_display }}</div>
+                                    <div><small>Papel</small></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    {% if user.aprovado %}
+                                        <div class="badge bg-success fs-6 mb-2">Aprovado</div>
+                                    {% else %}
+                                        <div class="badge bg-warning fs-6 mb-2">Pendente</div>
+                                    {% endif %}
+                                    <div><small>Status</small></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    {% if user.ativo %}
+                                        <div class="badge bg-success fs-6 mb-2">Ativo</div>
+                                    {% else %}
+                                        <div class="badge bg-danger fs-6 mb-2">Inativo</div>
+                                    {% endif %}
+                                    <div><small>Conta</small></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <div class="badge bg-secondary fs-6 mb-2">{{ user.data_cadastro|date:"d/m/Y" }}</div>
+                                    <div><small>Cadastro</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if user.aprovado and user.aprovado_por %}
+                            <div class="mt-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-check-circle text-success me-1"></i>
+                                    Aprovado por {{ user.aprovado_por.nome_completo|default:user.aprovado_por.username }} 
+                                    em {{ user.data_aprovacao|date:"d/m/Y H:i" }}
+                                </small>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Botões de Ação -->
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'usuarios:dashboard' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Voltar ao Dashboard
+                    </a>
+                    <div>
+                        <button class="btn btn-warning" disabled>
+                            <i class="fas fa-edit me-2"></i>Editar Perfil
+                            <small class="d-block">(Em desenvolvimento)</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,310 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Cadastro - Sistema da Igreja{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-section {
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #dee2e6;
+    }
+    
+    .form-section h4 {
+        color: #495057;
+        border-bottom: 2px solid #0d6efd;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .required-field label::after {
+        content: " *";
+        color: #dc3545;
+    }
+    
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+    
+    .checkbox-wrapper {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        border: 1px solid #dee2e6;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Cadastro de Usuário
+                </h3>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">
+                    Preencha os campos abaixo para se cadastrar no sistema da igreja. 
+                    Campos marcados com <span class="text-danger">*</span> são obrigatórios.
+                    Após o cadastro, aguarde a aprovação de um secretário.
+                </p>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    <!-- Seção: Informações de Login -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-key me-2"></i>Informações de Login</h4>
+                        <div class="row">
+                            <div class="col-md-6 required-field">
+                                <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
+                                {{ form.username }}
+                                {% if form.username.errors %}
+                                    <div class="text-danger small">{{ form.username.errors.0 }}</div>
+                                {% endif %}
+                                <div class="form-text">Nome que você usará para fazer login</div>
+                            </div>
+                            <div class="col-md-6 required-field">
+                                <label for="{{ form.nome_completo.id_for_label }}" class="form-label">{{ form.nome_completo.label }}</label>
+                                {{ form.nome_completo }}
+                                {% if form.nome_completo.errors %}
+                                    <div class="text-danger small">{{ form.nome_completo.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4 required-field">
+                                <label for="{{ form.password1.id_for_label }}" class="form-label">{{ form.password1.label }}</label>
+                                {{ form.password1 }}
+                                {% if form.password1.errors %}
+                                    <div class="text-danger small">{{ form.password1.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 required-field">
+                                <label for="{{ form.password2.id_for_label }}" class="form-label">{{ form.password2.label }}</label>
+                                {{ form.password2 }}
+                                {% if form.password2.errors %}
+                                    <div class="text-danger small">{{ form.password2.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 required-field">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger small">{{ form.email.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção: Dados Pessoais -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user me-2"></i>Dados Pessoais</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="{{ form.data_nascimento.id_for_label }}" class="form-label">{{ form.data_nascimento.label }}</label>
+                                {{ form.data_nascimento }}
+                                {% if form.data_nascimento.errors %}
+                                    <div class="text-danger small">{{ form.data_nascimento.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.estado_civil.id_for_label }}" class="form-label">{{ form.estado_civil.label }}</label>
+                                {{ form.estado_civil }}
+                                {% if form.estado_civil.errors %}
+                                    <div class="text-danger small">{{ form.estado_civil.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.telefone.id_for_label }}" class="form-label">{{ form.telefone.label }}</label>
+                                {{ form.telefone }}
+                                {% if form.telefone.errors %}
+                                    <div class="text-danger small">{{ form.telefone.errors.0 }}</div>
+                                {% endif %}
+                                <div class="form-text">Formato: (XX) XXXXX-XXXX</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção: Endereço -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-map-marker-alt me-2"></i>Endereço</h4>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="{{ form.endereco.id_for_label }}" class="form-label">{{ form.endereco.label }}</label>
+                                {{ form.endereco }}
+                                {% if form.endereco.errors %}
+                                    <div class="text-danger small">{{ form.endereco.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                <label for="{{ form.cep.id_for_label }}" class="form-label">{{ form.cep.label }}</label>
+                                {{ form.cep }}
+                                {% if form.cep.errors %}
+                                    <div class="text-danger small">{{ form.cep.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="{{ form.bairro.id_for_label }}" class="form-label">{{ form.bairro.label }}</label>
+                                {{ form.bairro }}
+                                {% if form.bairro.errors %}
+                                    <div class="text-danger small">{{ form.bairro.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.cidade.id_for_label }}" class="form-label">{{ form.cidade.label }}</label>
+                                {{ form.cidade }}
+                                {% if form.cidade.errors %}
+                                    <div class="text-danger small">{{ form.cidade.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção: Profissão e Educação -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-briefcase me-2"></i>Profissão e Educação</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="{{ form.profissao.id_for_label }}" class="form-label">{{ form.profissao.label }}</label>
+                                {{ form.profissao }}
+                                {% if form.profissao.errors %}
+                                    <div class="text-danger small">{{ form.profissao.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.nivel_escolar.id_for_label }}" class="form-label">{{ form.nivel_escolar.label }}</label>
+                                {{ form.nivel_escolar }}
+                                {% if form.nivel_escolar.errors %}
+                                    <div class="text-danger small">{{ form.nivel_escolar.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção: Informações da Igreja -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-church me-2"></i>Informações da Igreja</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="{{ form.data_conversao.id_for_label }}" class="form-label">{{ form.data_conversao.label }}</label>
+                                {{ form.data_conversao }}
+                                {% if form.data_conversao.errors %}
+                                    <div class="text-danger small">{{ form.data_conversao.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{ form.aceito_por.id_for_label }}" class="form-label">{{ form.aceito_por.label }}</label>
+                                {{ form.aceito_por }}
+                                {% if form.aceito_por.errors %}
+                                    <div class="text-danger small">{{ form.aceito_por.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Membro de Congregação -->
+                        <div class="checkbox-wrapper mt-3">
+                            <div class="form-check">
+                                {{ form.membro_congregacao }}
+                                <label class="form-check-label" for="{{ form.membro_congregacao.id_for_label }}">
+                                    {{ form.membro_congregacao.label }}
+                                </label>
+                            </div>
+                            <div class="mt-2" id="congregacao-field" style="display: none;">
+                                <label for="{{ form.qual_congregacao.id_for_label }}" class="form-label">{{ form.qual_congregacao.label }}</label>
+                                {{ form.qual_congregacao }}
+                                {% if form.qual_congregacao.errors %}
+                                    <div class="text-danger small">{{ form.qual_congregacao.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Escola Bíblica -->
+                        <div class="checkbox-wrapper mt-3">
+                            <div class="form-check">
+                                {{ form.frequenta_escola_biblica }}
+                                <label class="form-check-label" for="{{ form.frequenta_escola_biblica.id_for_label }}">
+                                    {{ form.frequenta_escola_biblica.label }}
+                                </label>
+                            </div>
+                            <div class="mt-2" id="escola-biblica-field" style="display: none;">
+                                <label for="{{ form.qual_classe_escola_biblica.id_for_label }}" class="form-label">{{ form.qual_classe_escola_biblica.label }}</label>
+                                {{ form.qual_classe_escola_biblica }}
+                                {% if form.qual_classe_escola_biblica.errors %}
+                                    <div class="text-danger small">{{ form.qual_classe_escola_biblica.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Erros gerais do formulário -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                                <div><i class="fas fa-exclamation-circle me-2"></i>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- Botões -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Voltar
+                        </a>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>Cadastrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mostrar/ocultar campo de congregação
+    const membroCongregacao = document.getElementById('{{ form.membro_congregacao.id_for_label }}');
+    const congregacaoField = document.getElementById('congregacao-field');
+    
+    function toggleCongregacao() {
+        if (membroCongregacao.checked) {
+            congregacaoField.style.display = 'block';
+        } else {
+            congregacaoField.style.display = 'none';
+        }
+    }
+    
+    membroCongregacao.addEventListener('change', toggleCongregacao);
+    toggleCongregacao(); // Executar na inicialização
+
+    // Mostrar/ocultar campo de escola bíblica
+    const frequentaEscolaBiblica = document.getElementById('{{ form.frequenta_escola_biblica.id_for_label }}');
+    const escolaBiblicaField = document.getElementById('escola-biblica-field');
+    
+    function toggleEscolaBiblica() {
+        if (frequentaEscolaBiblica.checked) {
+            escolaBiblicaField.style.display = 'block';
+        } else {
+            escolaBiblicaField.style.display = 'none';
+        }
+    }
+    
+    frequentaEscolaBiblica.addEventListener('change', toggleEscolaBiblica);
+    toggleEscolaBiblica(); // Executar na inicialização
+});
+</script>
+{% endblock %}
+

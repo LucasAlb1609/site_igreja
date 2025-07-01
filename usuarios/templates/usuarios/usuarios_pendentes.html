@@ -1,0 +1,188 @@
+{% extends 'usuarios/base.html' %}
+
+{% block title %}Usuários Pendentes - Sistema da Igreja{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-clock me-2"></i>
+                Usuários Pendentes de Aprovação
+            </h1>
+            <div class="badge bg-warning text-dark fs-6">
+                {{ usuarios_pendentes.count }} pendente{{ usuarios_pendentes.count|pluralize }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if usuarios_pendentes %}
+    <div class="row">
+        {% for usuario in usuarios_pendentes %}
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-user me-2"></i>
+                            {{ usuario.nome_completo|default:usuario.username }}
+                        </h5>
+                        <small class="text-muted">
+                            {{ usuario.data_cadastro|date:"d/m/Y H:i" }}
+                        </small>
+                    </div>
+                    <div class="card-body">
+                        <!-- Informações Básicas -->
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <strong>E-mail:</strong><br>
+                                <small>{{ usuario.email|default:"-" }}</small>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Telefone:</strong><br>
+                                <small>{{ usuario.telefone|default:"-" }}</small>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <strong>Data de Nascimento:</strong><br>
+                                <small>{{ usuario.data_nascimento|default:"-" }}</small>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Estado Civil:</strong><br>
+                                <small>{{ usuario.get_estado_civil_display|default:"-" }}</small>
+                            </div>
+                        </div>
+
+                        <!-- Endereço -->
+                        {% if usuario.endereco or usuario.cidade %}
+                            <div class="mb-3">
+                                <strong>Endereço:</strong><br>
+                                <small>
+                                    {% if usuario.endereco %}{{ usuario.endereco }}{% endif %}
+                                    {% if usuario.bairro %}, {{ usuario.bairro }}{% endif %}
+                                    {% if usuario.cidade %}<br>{{ usuario.cidade }}{% endif %}
+                                    {% if usuario.cep %} - {{ usuario.cep }}{% endif %}
+                                </small>
+                            </div>
+                        {% endif %}
+
+                        <!-- Informações da Igreja -->
+                        <div class="row mb-3">
+                            <div class="col-sm-6">
+                                <strong>Data de Conversão:</strong><br>
+                                <small>{{ usuario.data_conversao|default:"-" }}</small>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Aceito por:</strong><br>
+                                <small>{{ usuario.get_aceito_por_display|default:"-" }}</small>
+                            </div>
+                        </div>
+
+                        <!-- Congregação e Escola Bíblica -->
+                        {% if usuario.membro_congregacao %}
+                            <div class="mb-2">
+                                <span class="badge bg-info">Membro de Congregação</span>
+                                {% if usuario.qual_congregacao %}
+                                    <small class="ms-2">{{ usuario.qual_congregacao }}</small>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        {% if usuario.frequenta_escola_biblica %}
+                            <div class="mb-2">
+                                <span class="badge bg-success">Frequenta Escola Bíblica</span>
+                                {% if usuario.qual_classe_escola_biblica %}
+                                    <small class="ms-2">{{ usuario.qual_classe_escola_biblica }}</small>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        <!-- Profissão e Educação -->
+                        {% if usuario.profissao or usuario.nivel_escolar %}
+                            <div class="mt-3 pt-3 border-top">
+                                {% if usuario.profissao %}
+                                    <div class="mb-1">
+                                        <strong>Profissão:</strong> {{ usuario.profissao }}
+                                    </div>
+                                {% endif %}
+                                {% if usuario.nivel_escolar %}
+                                    <div class="mb-1">
+                                        <strong>Escolaridade:</strong> {{ usuario.get_nivel_escolar_display }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form method="post" action="{% url 'usuarios:alterar_papel_usuario' usuario.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text">Papel:</span>
+                                        <select name="papel" class="form-select">
+                                            <option value="congregado" {% if usuario.papel == 'congregado' %}selected{% endif %}>Congregado</option>
+                                            <option value="membro" {% if usuario.papel == 'membro' %}selected{% endif %}>Membro</option>
+                                            <option value="secretario" {% if usuario.papel == 'secretario' %}selected{% endif %}>Secretário</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                            <i class="fas fa-save"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <div class="btn-group" role="group">
+                                    <form method="post" action="{% url 'usuarios:aprovar_usuario' usuario.id %}" class="d-inline" id="form-aprovar-{{ usuario.id }}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="papel" value="congregado" id="papel-{{ usuario.id }}">
+                                        <button type="submit" class="btn btn-success btn-sm"
+                                               onclick="
+                                                   var select = this.closest('.card-footer').querySelector('select[name=papel]');
+                                                   document.getElementById('papel-{{ usuario.id }}').value = select.value;
+                                                   return confirm('Tem certeza que deseja aprovar este usuário como ' + select.options[select.selectedIndex].text + '?');
+                                               ">
+                                            <i class="fas fa-check me-1"></i>Aprovar
+                                        </button>
+                                    </form>
+                                    <a href="{% url 'usuarios:rejeitar_usuario' usuario.id %}" 
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Tem certeza que deseja rejeitar e excluir este usuário?')">
+                                        <i class="fas fa-times me-1"></i>Rejeitar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    <h3 class="mt-3">Nenhum usuário pendente!</h3>
+                    <p class="text-muted">Todos os cadastros foram processados.</p>
+                    <a href="{% url 'usuarios:dashboard' %}" class="btn btn-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Voltar ao Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class="row mt-4">
+    <div class="col-12">
+        <a href="{% url 'usuarios:dashboard' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Voltar ao Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}
+
