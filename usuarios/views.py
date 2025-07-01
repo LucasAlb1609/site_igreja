@@ -1,21 +1,37 @@
+# usuarios/views.py
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-from .forms import CadastroUsuarioForm
-from .models import User
+from django.forms import formset_factory
+from django.db import transaction
+from .forms import CadastroUsuarioForm, FilhoForm
+from .models import User, Filho
+import json
 
-
+@transaction.atomic
 def cadastro_usuario(request):
     """
-    View para cadastro de novos usuários.
+    View para cadastro de novos usuários, incluindo o formset para filhos.
     """
+    FilhoFormSet = formset_factory(FilhoForm, extra=1, can_delete=False)
+
     if request.method == 'POST':
-        form = CadastroUsuarioForm(request.POST)
-        if form.is_valid():
+        form = CadastroUsuarioForm(request.POST, request.FILES)
+        filhos_formset = FilhoFormSet(request.POST, prefix='filhos')
+
+        if form.is_valid() and filhos_formset.is_valid():
             try:
+                # Salva o usuário principal primeiro
                 user = form.save()
+
+                # Processa e salva os filhos
+                for filho_form in filhos_formset:
+                    if filho_form.has_changed():
+                        filho = filho_form.save(commit=False)
+                        filho.user = user
+                        filho.save()
+
                 messages.success(
                     request, 
                     'Cadastro realizado com sucesso! Seu cadastro está aguardando aprovação de um secretário.'
@@ -27,14 +43,37 @@ def cadastro_usuario(request):
                     f'Erro ao realizar cadastro: {str(e)}'
                 )
         else:
-            messages.error(
-                request, 
-                'Por favor, corrija os erros abaixo.'
+            # --- LÓGICA DE DEPURAÇÃO DE ERRO ADICIONADA AQUI ---
+            error_list = []
+            if form.errors:
+                # Adiciona erros do formulário principal
+                for field, errors in form.errors.items():
+                    error_list.append(f'Campo "{field}": {", ".join(errors)}')
+            
+            if filhos_formset.errors:
+                # Adiciona erros dos formulários de filhos
+                for i, form_errors in enumerate(filhos_formset.errors):
+                    if form_errors:
+                        for field, errors in form_errors.items():
+                            error_list.append(f'Filho #{i+1}, campo "{field}": {", ".join(errors)}')
+
+            error_message = (
+                "Por favor, corrija os erros abaixo. Detalhes: " + 
+                "; ".join(error_list) if error_list 
+                else "Ocorreu um erro de validação não identificado."
             )
+            messages.error(request, error_message)
+            # --- FIM DA LÓGICA DE DEPURAÇÃO ---
+
     else:
         form = CadastroUsuarioForm()
+        filhos_formset = FilhoFormSet(prefix='filhos')
     
-    return render(request, 'usuarios/cadastro.html', {'form': form})
+    context = {
+        'form': form,
+        'filhos_formset': filhos_formset
+    }
+    return render(request, 'usuarios/cadastro.html', context)
 
 
 def cadastro_sucesso(request):
@@ -66,7 +105,6 @@ def dashboard(request):
         'is_congregado': user.is_congregado,
     }
     
-    # Se for secretário, adicionar estatísticas
     if user.is_secretario:
         context.update({
             'total_usuarios': User.objects.count(),
@@ -83,7 +121,6 @@ def listar_usuarios_pendentes(request):
     """
     View para secretários visualizarem usuários pendentes de aprovação.
     """
-    # Verificar se o usuário é secretário
     if not request.user.is_secretario:
         messages.error(request, 'Acesso negado. Apenas secretários podem acessar esta página.')
         return redirect('usuarios:dashboard')
@@ -107,7 +144,6 @@ def aprovar_usuario(request, user_id):
     try:
         usuario = User.objects.get(id=user_id)
         
-        # Se há um papel especificado no POST, usar esse papel
         if request.method == 'POST':
             novo_papel = request.POST.get('papel')
             if novo_papel in ['congregado', 'membro', 'secretario']:
@@ -171,4 +207,3 @@ def alterar_papel_usuario(request, user_id):
             messages.error(request, 'Papel inválido.')
     
     return redirect('usuarios:usuarios_pendentes')
-
