@@ -1,6 +1,6 @@
 {% extends 'usuarios/base.html' %}
 
-{% block title %}Cadastro - Sistema da Igreja{% endblock %}
+{% block title %}{{ page_title|default:"Cadastro" }} - Sistema da Igreja{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -61,18 +61,21 @@
             <div class="card-header bg-primary text-white">
                 <h3 class="card-title mb-0">
                     <i class="fas fa-user-plus me-2"></i>
-                    Ficha Cadastral de Novo Membro
+                    {{ page_title|default:"Ficha Cadastral de Novo Membro" }}
                 </h3>
             </div>
             <div class="card-body">
                 <p class="text-muted mb-4">
                     Preencha os campos abaixo. Campos marcados com <span class="text-danger">*</span> são obrigatórios.
+                    {% if not form.instance.pk %}
                     Após o cadastro, aguarde a aprovação de um secretário.
+                    {% endif %}
                 </p>
 
                 <form method="post" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
                     
+                    {% if not form.instance.pk %}
                     <div class="form-section">
                         <h4><i class="fas fa-key me-2"></i>Informações de Login</h4>
                         <div class="row">
@@ -101,6 +104,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
 
                     <div class="form-section">
                         <h4><i class="fas fa-user me-2"></i>Dados Pessoais</h4>
@@ -112,6 +116,12 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="{{ form.foto_perfil.id_for_label }}">{{ form.foto_perfil.label }}</label>
+                                {% if form.instance.foto_perfil %}
+                                    <div class="mb-2">
+                                        <p class="mb-1">Foto atual:</p>
+                                        <img src="{{ form.instance.foto_perfil.url }}" alt="Foto de perfil" style="max-height: 100px; border-radius: 5px;">
+                                    </div>
+                                {% endif %}
                                 {{ form.foto_perfil }}
                                 {% if form.foto_perfil.errors %}<div class="text-danger small">{{ form.foto_perfil.errors.0 }}</div>{% endif %}
                             </div>
@@ -179,26 +189,25 @@
                             <div id="filhos-forms-container">
                                 {% for filho_form in filhos_formset %}
                                     <div class="filho-form">
-                                        {{ filho_form.id }}
-                                        {% for hidden_field in filho_form.hidden_fields %}{{ hidden_field }}{% endfor %}
-                                        
+                                        {% if form.instance.pk %}{{ filho_form.id }}{% endif %}
+                                        {% for hidden_field in filho_form.hidden_fields %}{% if not form.instance.pk %}{{ hidden_field }}{% endif %}{% endfor %}
+                                        {% if filho_form.instance.pk %}
+                                            <div class="form-check float-end">
+                                                {{ filho_form.DELETE }}
+                                                <label for="{{ filho_form.DELETE.id_for_label }}">Remover</label>
+                                            </div>
+                                        {% endif %}
                                         {% for field in filho_form.visible_fields %}
                                             <div class="mb-2">
                                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                                 {{ field }}
-                                                {% if field.errors %}
-                                                    <div class="text-danger small mt-1">
-                                                        {% for error in field.errors %}{{ error }}{% endfor %}
-                                                    </div>
-                                                {% endif %}
+                                                {% if field.errors %}<div class="text-danger small mt-1">{% for error in field.errors %}{{ error }}{% endfor %}</div>{% endif %}
                                             </div>
                                         {% endfor %}
                                     </div>
                                 {% endfor %}
                             </div>
-                            <button type="button" id="add-filho-btn" class="btn btn-outline-primary btn-sm mt-2">
-                                <i class="fas fa-plus me-2"></i>Adicionar outro filho
-                            </button>
+                            <button type="button" id="add-filho-btn" class="btn btn-outline-primary btn-sm mt-2"><i class="fas fa-plus me-2"></i>Adicionar outro filho</button>
                         </div>
                         <hr>
                         <div class="radio-wrapper mt-3">
@@ -223,10 +232,7 @@
                         <h4><i class="fas fa-map-marker-alt me-2"></i>Contato e Endereço</h4>
                         <div class="row">
                             <div class="col-md-4 mb-3"><label for="{{ form.telefone.id_for_label }}">{{ form.telefone.label }}</label>{{ form.telefone }}</div>
-                             <div class="col-md-4 mb-3">
-                                <label for="{{ form.cep.id_for_label }}">{{ form.cep.label }}</label>
-                                {{ form.cep }}
-                            </div>
+                             <div class="col-md-4 mb-3"><label for="{{ form.cep.id_for_label }}">{{ form.cep.label }}</label>{{ form.cep }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-8 mb-3"><label for="{{ form.endereco.id_for_label }}">{{ form.endereco.label }}</label>{{ form.endereco }}</div>
@@ -309,8 +315,11 @@
                     {% endif %}
 
                     <div class="d-flex justify-content-between mt-4">
-                        <a href="/" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Voltar</a>
-                        <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-user-plus me-2"></i>Cadastrar</button>
+                        <a href="{% if form.instance.pk %}{% url 'usuarios:perfil' %}{% else %}/{% endif %}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Voltar</a>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save me-2"></i>
+                            {{ button_text|default:"Cadastrar" }}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -336,18 +345,15 @@
 {% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
-    // Função genérica para mostrar/ocultar elementos
     function toggleVisibility(triggerElement, targetElement, showValue) {
         let shouldHide;
         const type = triggerElement.type;
-
         if (type === 'checkbox') {
             shouldHide = !triggerElement.checked;
         } else if (type === 'radio') {
             const selectedValue = document.querySelector(`input[name="${triggerElement.name}"]:checked`)?.value;
             shouldHide = selectedValue !== showValue;
-        } else { // Para Select
+        } else {
             shouldHide = triggerElement.value !== showValue;
         }
         if (targetElement) {
@@ -355,80 +361,68 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Gatilhos e alvos
     const triggers = {
-        '#{{ form.estado_civil.id_for_label }}': { target: '#campos-casado', value: 'casado' },
-        // --- CORREÇÃO APLICADA AQUI: O valor a ser verificado agora é 'True' (texto), não 'Sim' ---
-        'input[name="{{ form.tem_alergia_medicacao.name }}"]': { target: '#campo-alergias', value: 'True' },
-        'input[name="{{ form.tem_filhos.name }}"]': { target: '#secao-filhos', value: 'True' },
-        // --- Fim da correção ---
-        '#{{ form.batizado_aguas.id_for_label }}': { target: '#campos-batismo' },
-        '#{{ form.local_batismo.id_for_label }}': { target: '#campos-outra-igreja', value: 'outra' },
-        '#{{ form.membro_congregacao.id_for_label }}': { target: '#campo-congregacao' },
-        '#{{ form.frequenta_escola_biblica.id_for_label }}': { target: '#campo-escola-biblica' },
-        '#{{ form.deseja_exercer_funcao.id_for_label }}': { target: '#campo-funcao-desejada' },
+        '#id_estado_civil': { target: '#campos-casado', value: 'casado' },
+        'input[name$="tem_alergia_medicacao"]': { target: '#campo-alergias', value: 'True' },
+        'input[name$="tem_filhos"]': { target: '#secao-filhos', value: 'True' },
+        '#id_batizado_aguas': { target: '#campos-batismo' },
+        '#id_local_batismo': { target: '#campos-outra-igreja', value: 'outra' },
+        '#id_membro_congregacao': { target: '#campo-congregacao' },
+        '#id_frequenta_escola_biblica': { target: '#campo-escola-biblica' },
+        '#id_deseja_exercer_funcao': { target: '#campo-funcao-desejada' },
     };
 
-    // Aplica os listeners
     for (const selector in triggers) {
         document.querySelectorAll(selector).forEach(el => {
             const config = triggers[selector];
             const target = document.querySelector(config.target);
             el.addEventListener('change', () => toggleVisibility(el, target, config.value));
-            toggleVisibility(el, target, config.value); // Executa na inicialização
+            toggleVisibility(el, target, config.value);
         });
     }
 
-    // Lógica para adicionar formulários de filhos
     const addFilhoBtn = document.getElementById('add-filho-btn');
     const container = document.getElementById('filhos-forms-container');
     const template = document.getElementById('filho-form-template');
-    const totalFormsInput = document.querySelector('[name="filhos-TOTAL_FORMS"]');
-
+    const totalFormsInput = document.querySelector('[name$="TOTAL_FORMS"]');
+    
     addFilhoBtn.addEventListener('click', function() {
         let formIdx = parseInt(totalFormsInput.value);
         const newFormHtml = template.innerHTML.replace(/__prefix__/g, formIdx);
         container.insertAdjacentHTML('beforeend', newFormHtml);
         totalFormsInput.value = formIdx + 1;
     });
-
-    // Lógica para Data de Conversão
-    const dataConversaoInput = document.getElementById('{{ form.data_conversao.id_for_label }}');
-    const naoLembroCheckbox = document.getElementById('{{ form.data_conversao_nao_lembro.id_for_label }}');
+    
+    const dataConversaoInput = document.querySelector('[id$="data_conversao"]');
+    const naoLembroCheckbox = document.querySelector('[id$="data_conversao_nao_lembro"]');
     if(dataConversaoInput && naoLembroCheckbox) {
         naoLembroCheckbox.addEventListener('change', function() {
             dataConversaoInput.disabled = this.checked;
-            if(this.checked) {
-                dataConversaoInput.value = '';
-            }
+            if(this.checked) { dataConversaoInput.value = ''; }
         });
         if(naoLembroCheckbox.checked) dataConversaoInput.disabled = true;
     }
 
-    // Função genérica para aplicar máscara
     function applyMask(input, maskFunction) {
-        if(input) {
-            input.addEventListener('input', (e) => {
-                e.target.value = maskFunction(e.target.value);
-            });
-        }
+        if(input) { input.addEventListener('input', (e) => { e.target.value = maskFunction(e.target.value); }); }
     }
-
-    // Funções de máscara
-    const maskCPF = (value) => value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    
+    const maskCPF = (value) => {
+      return value
+        .replace(/\D/g, '')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+        .replace(/(\d{3})\.(\d{3})\.(\d{3})(\d{1,2})/, '$1.$2.$3-$4')
+        .slice(0, 14);
+    };
+    
     const maskCEP = (value) => value.replace(/\D/g, '').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{3})\d+?$/, '$1');
     const maskPhone = (value) => value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1');
-    const maskRG = (value) => {
-        return value
-            .replace(/\D/g, '') // Remove tudo que não é dígito
-            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'); // Adiciona ponto como separador de milhar
-    };
-
-    // Aplica as máscaras
+    
+    // --- CORREÇÃO DO SELETOR ---
     applyMask(document.getElementById('{{ form.cpf.id_for_label }}'), maskCPF);
     applyMask(document.getElementById('{{ form.cep.id_for_label }}'), maskCEP);
     applyMask(document.getElementById('{{ form.telefone.id_for_label }}'), maskPhone);
-    applyMask(document.getElementById('{{ form.rg.id_for_label }}'), maskRG);
 });
 </script>
 {% endblock %}

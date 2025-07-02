@@ -3,9 +3,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.forms import formset_factory
+from django.forms import formset_factory, inlineformset_factory
 from django.db import transaction
-from .forms import CadastroUsuarioForm, FilhoForm
+from .forms import CadastroUsuarioForm, FilhoForm, PerfilUsuarioForm
 from .models import User, Filho
 import json
 
@@ -22,40 +22,34 @@ def cadastro_usuario(request):
 
         if form.is_valid() and filhos_formset.is_valid():
             try:
-                # Salva o usuário principal primeiro
                 user = form.save()
-
-                # Processa e salva os filhos
                 for filho_form in filhos_formset:
                     if filho_form.has_changed():
                         filho = filho_form.save(commit=False)
                         filho.user = user
                         filho.save()
-
                 messages.success(
                     request, 
                     'Cadastro realizado com sucesso! Seu cadastro está aguardando aprovação de um secretário.'
                 )
                 return redirect('usuarios:cadastro_sucesso')
             except Exception as e:
-                messages.error(
-                    request, 
-                    f'Erro ao realizar cadastro: {str(e)}'
-                )
+                messages.error(request, f'Erro ao realizar cadastro: {str(e)}')
         else:
-            # --- LÓGICA DE DEPURAÇÃO DE ERRO ADICIONADA AQUI ---
+            # LÓGICA DE DEPURAÇÃO DE ERROS RESTAURADA
             error_list = []
             if form.errors:
-                # Adiciona erros do formulário principal
                 for field, errors in form.errors.items():
-                    error_list.append(f'Campo "{field}": {", ".join(errors)}')
+                    # Usamos form.fields[field].label para pegar o rótulo do campo, que é mais amigável
+                    field_label = form.fields[field].label if field in form.fields else field
+                    error_list.append(f'Campo "{field_label}": {", ".join(errors)}')
             
             if filhos_formset.errors:
-                # Adiciona erros dos formulários de filhos
                 for i, form_errors in enumerate(filhos_formset.errors):
                     if form_errors:
                         for field, errors in form_errors.items():
-                            error_list.append(f'Filho #{i+1}, campo "{field}": {", ".join(errors)}')
+                            field_label = FilhoForm.base_fields[field].label if field in FilhoForm.base_fields else field
+                            error_list.append(f'Filho #{i+1}, campo "{field_label}": {", ".join(errors)}')
 
             error_message = (
                 "Por favor, corrija os erros abaixo. Detalhes: " + 
@@ -63,7 +57,7 @@ def cadastro_usuario(request):
                 else "Ocorreu um erro de validação não identificado."
             )
             messages.error(request, error_message)
-            # --- FIM DA LÓGICA DE DEPURAÇÃO ---
+            # FIM DA LÓGICA DE DEPURAÇÃO RESTAURADA
 
     else:
         form = CadastroUsuarioForm()
@@ -71,7 +65,45 @@ def cadastro_usuario(request):
     
     context = {
         'form': form,
-        'filhos_formset': filhos_formset
+        'filhos_formset': filhos_formset,
+        'page_title': 'Ficha Cadastral de Novo Membro',
+        'button_text': 'Cadastrar'
+    }
+    return render(request, 'usuarios/cadastro.html', context)
+
+# NOVA VIEW PARA EDIÇÃO DE PERFIL
+@login_required
+@transaction.atomic
+def editar_perfil(request):
+    """
+    View para o usuário editar o próprio perfil.
+    """
+    FilhoFormSet = inlineformset_factory(
+        User, Filho, form=FilhoForm, 
+        extra=1, can_delete=True,
+    )
+
+    if request.method == 'POST':
+        form = PerfilUsuarioForm(request.POST, request.FILES, instance=request.user)
+        formset = FilhoFormSet(request.POST, instance=request.user, prefix='filhos')
+        
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
+            messages.success(request, 'Perfil atualizado com sucesso!')
+            return redirect('usuarios:perfil')
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+
+    else:
+        form = PerfilUsuarioForm(instance=request.user)
+        formset = FilhoFormSet(instance=request.user, prefix='filhos')
+
+    context = {
+        'form': form,
+        'filhos_formset': formset,
+        'page_title': 'Editar Meu Perfil',
+        'button_text': 'Salvar Alterações'
     }
     return render(request, 'usuarios/cadastro.html', context)
 
@@ -105,6 +137,7 @@ def dashboard(request):
         'is_congregado': user.is_congregado,
     }
     
+    # Se for secretário, adicionar estatísticas
     if user.is_secretario:
         context.update({
             'total_usuarios': User.objects.count(),
@@ -121,6 +154,7 @@ def listar_usuarios_pendentes(request):
     """
     View para secretários visualizarem usuários pendentes de aprovação.
     """
+    # Verificar se o usuário é secretário
     if not request.user.is_secretario:
         messages.error(request, 'Acesso negado. Apenas secretários podem acessar esta página.')
         return redirect('usuarios:dashboard')
@@ -144,6 +178,7 @@ def aprovar_usuario(request, user_id):
     try:
         usuario = User.objects.get(id=user_id)
         
+        # Se há um papel especificado no POST, usar esse papel
         if request.method == 'POST':
             novo_papel = request.POST.get('papel')
             if novo_papel in ['congregado', 'membro', 'secretario']:

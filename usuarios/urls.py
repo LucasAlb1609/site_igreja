@@ -16,6 +16,7 @@ urlpatterns = [
     # Dashboard e perfil
     path('dashboard/', views.dashboard, name='dashboard'),
     path('perfil/', views.perfil_usuario, name='perfil'),
+    path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
     
     # Gestão de usuários (para secretários)
     path('pendentes/', views.listar_usuarios_pendentes, name='usuarios_pendentes'),

@@ -4,70 +4,106 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-lg-8 mx-auto">
+    <div class="col-lg-10 mx-auto">
         <div class="card">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <h3 class="card-title mb-0">
-                    <i class="fas fa-user me-2"></i>
+                    <i class="fas fa-user-circle me-2"></i>
                     Meu Perfil
                 </h3>
+                <a href="{% url 'usuarios:editar_perfil' %}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit me-2"></i>Editar Perfil
+                </a>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <!-- Informações Básicas -->
-                    <div class="col-md-6">
-                        <h5 class="text-primary border-bottom pb-2">
-                            <i class="fas fa-id-card me-2"></i>Informações Básicas
-                        </h5>
-                        <table class="table table-borderless">
-                            <tr>
-                                <td><strong>Nome Completo:</strong></td>
-                                <td>{{ user.nome_completo|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Nome de Usuário:</strong></td>
-                                <td>{{ user.username }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>E-mail:</strong></td>
-                                <td>{{ user.email|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Data de Nascimento:</strong></td>
-                                <td>{{ user.data_nascimento|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Estado Civil:</strong></td>
-                                <td>{{ user.get_estado_civil_display|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Telefone:</strong></td>
-                                <td>{{ user.telefone|default:"-" }}</td>
-                            </tr>
-                        </table>
+                    <div class="col-md-4 text-center">
+                        {% if user.foto_perfil %}
+                            <img src="{{ user.foto_perfil.url }}" alt="Foto de {{ user.nome_completo }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% else %}
+                            <i class="fas fa-user-circle fa-8x text-muted mb-3"></i>
+                        {% endif %}
+                        <h4 class="text-primary">{{ user.nome_completo|default:"-" }}</h4>
+                        <p class="text-muted">{{ user.username }}</p>
                     </div>
 
-                    <!-- Endereço -->
+                    <div class="col-md-8">
+                        <h5 class="text-primary border-bottom pb-2 mb-3">
+                            <i class="fas fa-id-card me-2"></i>Informações Pessoais
+                        </h5>
+                        <table class="table table-sm table-borderless">
+                            <tr><td style="width: 35%;"><strong>E-mail:</strong></td><td>{{ user.email|default:"-" }}</td></tr>
+                            <tr><td><strong>CPF:</strong></td><td>{{ user.cpf|default:"-" }}</td></tr>
+                            <tr><td><strong>RG:</strong></td><td>{{ user.rg|default:"-" }}</td></tr>
+                            <tr><td><strong>Data de Nascimento:</strong></td><td>{{ user.data_nascimento|date:"d/m/Y"|default:"-" }}</td></tr>
+                            <tr><td><strong>Naturalidade:</strong></td><td>{{ user.naturalidade|default:"-" }}</td></tr>
+                            <tr><td><strong>Nome da Mãe:</strong></td><td>{{ user.nome_mae|default:"-" }}</td></tr>
+                            <tr><td><strong>Nome do Pai:</strong></td><td>{{ user.nome_pai|default:"-" }}</td></tr>
+                            <tr><td><strong>Telefone:</strong></td><td>{{ user.telefone|default:"-" }}</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
                     <div class="col-md-6">
-                        <h5 class="text-primary border-bottom pb-2">
+                        <h5 class="text-primary border-bottom pb-2 mb-3">
+                            <i class="fas fa-heart me-2"></i>Família
+                        </h5>
+                        <table class="table table-sm table-borderless">
+                            <tr><td style="width: 35%;"><strong>Estado Civil:</strong></td><td>{{ user.get_estado_civil_display|default:"-" }}</td></tr>
+                            {% if user.estado_civil == 'casado' %}
+                            <tr><td><strong>Nome do Cônjuge:</strong></td><td>{{ user.nome_conjuge|default:"-" }}</td></tr>
+                            <tr><td><strong>Data de Casamento:</strong></td><td>{{ user.data_casamento|date:"d/m/Y"|default:"-" }}</td></tr>
+                            {% endif %}
+                        </table>
+
+                        {% if user.filhos.all %}
+                            <h6 class="mt-4"><strong>Filhos:</strong></h6>
+                            <ul class="list-group">
+                                {% for filho in user.filhos.all %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{ filho.nome_completo }}
+                                        <span class="badge bg-secondary">{{ filho.data_nascimento|date:"d/m/Y" }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5 class="text-primary border-bottom pb-2 mb-3">
                             <i class="fas fa-map-marker-alt me-2"></i>Endereço
                         </h5>
-                        <table class="table table-borderless">
+                        <address class="mb-0">
+                            {{ user.endereco|default:"-" }}<br>
+                            {{ user.bairro|default:"Bairro não informado" }}<br>
+                            {{ user.cidade|default:"Cidade não informada" }} - {{ user.cep|default:"CEP não informado" }}
+                        </address>
+
+                        <h5 class="text-primary border-bottom pb-2 mt-4 mb-3">
+                            <i class="fas fa-briefcase me-2"></i>Profissão e Educação
+                        </h5>
+                        <table class="table table-sm table-borderless">
+                            <tr><td style="width: 35%;"><strong>Profissão:</strong></td><td>{{ user.profissao|default:"-" }}</td></tr>
+                            <tr><td><strong>Nível Escolar:</strong></td><td>{{ user.get_nivel_escolar_display|default:"-" }}</td></tr>
+                        </table>
+
+                        <h5 class="text-primary border-bottom pb-2 mt-4 mb-3">
+                            <i class="fas fa-notes-medical me-2"></i>Saúde
+                        </h5>
+                        <table class="table table-sm table-borderless">
                             <tr>
-                                <td><strong>Endereço:</strong></td>
-                                <td>{{ user.endereco|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Bairro:</strong></td>
-                                <td>{{ user.bairro|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Cidade:</strong></td>
-                                <td>{{ user.cidade|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>CEP:</strong></td>
-                                <td>{{ user.cep|default:"-" }}</td>
+                                <td style="width: 35%;"><strong>Alergia a medicação:</strong></td>
+                                <td>
+                                    {% if user.tem_alergia_medicacao %}
+                                        <span class="badge bg-danger">Sim</span>
+                                        <p class="small mt-1 mb-0 fst-italic">"{{ user.alergias_texto }}"</p>
+                                    {% else %}
+                                        <span class="badge bg-success">Não</span>
+                                    {% endif %}
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -76,112 +112,91 @@
                 <hr>
 
                 <div class="row">
-                    <!-- Profissão e Educação -->
-                    <div class="col-md-6">
-                        <h5 class="text-primary border-bottom pb-2">
-                            <i class="fas fa-briefcase me-2"></i>Profissão e Educação
+                    <div class="col-12">
+                         <h5 class="text-primary border-bottom pb-2 mb-3">
+                            <i class="fas fa-church me-2"></i>Informações Eclesiásticas
                         </h5>
-                        <table class="table table-borderless">
-                            <tr>
-                                <td><strong>Profissão:</strong></td>
-                                <td>{{ user.profissao|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Nível Escolar:</strong></td>
-                                <td>{{ user.get_nivel_escolar_display|default:"-" }}</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <!-- Informações da Igreja -->
-                    <div class="col-md-6">
-                        <h5 class="text-primary border-bottom pb-2">
-                            <i class="fas fa-church me-2"></i>Informações da Igreja
-                        </h5>
-                        <table class="table table-borderless">
-                            <tr>
-                                <td><strong>Data de Conversão:</strong></td>
-                                <td>{{ user.data_conversao|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Aceito por:</strong></td>
-                                <td>{{ user.get_aceito_por_display|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Membro de Congregação:</strong></td>
-                                <td>
-                                    {% if user.membro_congregacao %}
-                                        <span class="badge bg-success">Sim</span>
-                                        {% if user.qual_congregacao %}
-                                            <br><small>{{ user.qual_congregacao }}</small>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr><td style="width: 40%;"><strong>Data de Conversão:</strong></td><td>{{ user.data_conversao|date:"d/m/Y"|default:"Não informada" }}</td></tr>
+                                    <tr>
+                                        <td><strong>Batizado nas águas:</strong></td>
+                                        <td>
+                                            {% if user.batizado_aguas %}
+                                                <span class="badge bg-info">Sim</span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">Não</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% if user.batizado_aguas %}
+                                        <tr><td><strong>Data do Batismo:</strong></td><td>{{ user.data_batismo|date:"d/m/Y"|default:"-" }}</td></tr>
+                                        <tr><td><strong>Local do Batismo:</strong></td><td>{{ user.get_local_batismo_display|default:"-" }}</td></tr>
+                                        {% if user.local_batismo == 'outra' %}
+                                            <tr><td><strong>Igreja (Batismo):</strong></td><td>{{ user.outra_igreja_batismo|default:"-" }}</td></tr>
+                                            <tr><td><strong>Recebido por Aclamação:</strong></td>
+                                                <td>
+                                                    {% if user.recebido_por_aclamacao %}
+                                                        <span class="badge bg-success">Sim</span>
+                                                    {% else %}
+                                                        <span class="badge bg-secondary">Não</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
                                         {% endif %}
-                                    {% else %}
-                                        <span class="badge bg-secondary">Não</span>
                                     {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><strong>Escola Bíblica:</strong></td>
-                                <td>
-                                    {% if user.frequenta_escola_biblica %}
-                                        <span class="badge bg-success">Frequenta</span>
-                                        {% if user.qual_classe_escola_biblica %}
-                                            <br><small>{{ user.qual_classe_escola_biblica }}</small>
-                                        {% endif %}
-                                    {% else %}
-                                        <span class="badge bg-secondary">Não frequenta</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        </table>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td style="width: 40%;"><strong>Membro de Congregação:</strong></td>
+                                        <td>
+                                            {% if user.membro_congregacao %}
+                                                <span class="badge bg-success">Sim</span> ({{ user.qual_congregacao|default:"-" }})
+                                            {% else %}<span class="badge bg-secondary">Não</span>{% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Frequenta Escola Bíblica:</strong></td>
+                                        <td>
+                                            {% if user.frequenta_escola_biblica %}
+                                                <span class="badge bg-success">Sim</span> ({{ user.qual_classe_escola_biblica|default:"-" }})
+                                            {% else %}<span class="badge bg-secondary">Não</span>{% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Deseja exercer função:</strong></td>
+                                        <td>
+                                            {% if user.deseja_exercer_funcao %}
+                                                <span class="badge bg-success">Sim</span>
+                                                <p class="small mt-1 mb-0 fst-italic">"{{ user.qual_funcao_deseja }}"</p>
+                                            {% else %}<span class="badge bg-secondary">Não</span>{% endif %}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <hr>
 
-                <!-- Status do Sistema -->
                 <div class="row">
                     <div class="col-12">
                         <h5 class="text-primary border-bottom pb-2">
                             <i class="fas fa-cog me-2"></i>Status no Sistema
                         </h5>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    <div class="badge bg-info fs-6 mb-2">{{ user.get_papel_display }}</div>
-                                    <div><small>Papel</small></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    {% if user.aprovado %}
-                                        <div class="badge bg-success fs-6 mb-2">Aprovado</div>
-                                    {% else %}
-                                        <div class="badge bg-warning fs-6 mb-2">Pendente</div>
-                                    {% endif %}
-                                    <div><small>Status</small></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    {% if user.ativo %}
-                                        <div class="badge bg-success fs-6 mb-2">Ativo</div>
-                                    {% else %}
-                                        <div class="badge bg-danger fs-6 mb-2">Inativo</div>
-                                    {% endif %}
-                                    <div><small>Conta</small></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="text-center">
-                                    <div class="badge bg-secondary fs-6 mb-2">{{ user.data_cadastro|date:"d/m/Y" }}</div>
-                                    <div><small>Cadastro</small></div>
-                                </div>
-                            </div>
+                        <div class="row text-center">
+                            <div class="col"><strong>Papel:</strong><br><span class="badge bg-info fs-6">{{ user.get_papel_display }}</span></div>
+                            <div class="col"><strong>Status:</strong><br>{% if user.aprovado %}<span class="badge bg-success fs-6">Aprovado</span>{% else %}<span class="badge bg-warning fs-6">Pendente</span>{% endif %}</div>
+                            <div class="col"><strong>Conta:</strong><br>{% if user.ativo %}<span class="badge bg-success fs-6">Ativa</span>{% else %}<span class="badge bg-danger fs-6">Inativa</span>{% endif %}</div>
+                            <div class="col"><strong>Cadastro:</strong><br><span class="badge bg-secondary fs-6">{{ user.data_cadastro|date:"d/m/Y" }}</span></div>
                         </div>
 
                         {% if user.aprovado and user.aprovado_por %}
-                            <div class="mt-3">
+                            <div class="mt-3 text-center">
                                 <small class="text-muted">
                                     <i class="fas fa-check-circle text-success me-1"></i>
                                     Aprovado por {{ user.aprovado_por.nome_completo|default:user.aprovado_por.username }} 
@@ -192,21 +207,13 @@
                     </div>
                 </div>
 
-                <!-- Botões de Ação -->
-                <div class="d-flex justify-content-between mt-4">
+                <div class="mt-4">
                     <a href="{% url 'usuarios:dashboard' %}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left me-2"></i>Voltar ao Dashboard
                     </a>
-                    <div>
-                        <button class="btn btn-warning" disabled>
-                            <i class="fas fa-edit me-2"></i>Editar Perfil
-                            <small class="d-block">(Em desenvolvimento)</small>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
-
