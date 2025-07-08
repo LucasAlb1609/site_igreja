@@ -1,0 +1,85 @@
+{% extends 'usuarios/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }} - Sistema da Igreja{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>
+                <i class="fas fa-users me-2"></i>
+                {{ page_title }}
+            </h1>
+            <a href="#" class="btn btn-primary disabled">
+                <i class="fas fa-user-plus me-2"></i>Criar Novo Membro
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <table id="tabela-membros" class="table table-striped table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Nome Completo</th>
+                            <th>Status</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for membro in membros %}
+                        <tr>
+                            <td>
+                                {% if membro.foto_perfil %}
+                                    <img src="{{ membro.foto_perfil.url }}" class="rounded-circle me-2" width="30" height="30" alt="Foto">
+                                {% else %}
+                                    <i class="fas fa-user-circle text-muted me-2"></i>
+                                {% endif %}
+                                {{ membro.nome_completo }}
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ membro.get_status_eclesiastico_display }}</span>
+                                {% for group in membro.groups.all %}
+                                    <span class="badge bg-secondary">{{ group.name }}</span>
+                                {% endfor %}
+                            </td>
+                            <td>{{ membro.email|default:"-" }}</td>
+                            <td>{{ membro.telefone|default:"-" }}</td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-warning disabled" title="Editar Membro">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="btn btn-sm btn-danger disabled" title="Excluir Membro">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#tabela-membros').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json"
+        }
+    });
+});
+</script>
+{% endblock %}yy
