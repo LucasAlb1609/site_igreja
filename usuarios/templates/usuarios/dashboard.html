@@ -62,12 +62,16 @@
                         <li><i class="fas fa-user-tag text-info me-2"></i>Alterar papéis de usuários</li>
                         <li><i class="fas fa-list text-primary me-2"></i>Visualizar todos os usuários</li>
                     </ul>
-                    <a href="{% url 'usuarios:usuarios_pendentes' %}" class="btn btn-warning">
+                    <a href="{% url 'usuarios:usuarios_pendentes' %}" class="btn btn-warning me-2">
                         <i class="fas fa-clock me-2"></i>
                         Usuários Pendentes
                         {% if usuarios_pendentes > 0 %}
                             <span class="badge bg-danger">{{ usuarios_pendentes }}</span>
                         {% endif %}
+                    </a>
+                    <a href="{% url 'usuarios:listar_todos_usuarios' %}" class="btn btn-primary">
+                        <i class="fas fa-list me-2"></i>
+                        Todos os Usuários
                     </a>
                 </div>
             </div>

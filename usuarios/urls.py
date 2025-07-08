@@ -23,5 +23,12 @@ urlpatterns = [
     path('aprovar/<int:user_id>/', views.aprovar_usuario, name='aprovar_usuario'),
     path('rejeitar/<int:user_id>/', views.rejeitar_usuario, name='rejeitar_usuario'),
     path('alterar-papel/<int:user_id>/', views.alterar_papel_usuario, name='alterar_papel_usuario'),
+    
+    # Gestão completa de usuários (para secretários)
+    path("todos/", views.listar_todos_usuarios, name="listar_todos_usuarios"),
+    path("criar/", views.criar_usuario, name="criar_usuario"),
+    path("editar/<int:user_id>/", views.editar_usuario, name="editar_usuario"),
+    path("excluir/<int:user_id>/", views.excluir_usuario, name="excluir_usuario"),
+    path("ver/<int:user_id>/", views.ver_usuario, name="ver_usuario"),
 ]
 

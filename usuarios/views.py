@@ -242,3 +242,194 @@ def alterar_papel_usuario(request, user_id):
             messages.error(request, 'Papel inválido.')
     
     return redirect('usuarios:usuarios_pendentes')
+
+@login_required
+def listar_todos_usuarios(request):
+    """
+    View para secretários visualizarem todos os usuários (aprovados e pendentes).
+    """
+    if not request.user.is_secretario:
+        messages.error(request, 'Acesso negado. Apenas secretários podem acessar esta página.')
+        return redirect('usuarios:dashboard')
+    
+    usuarios = User.objects.all().order_by('nome_completo')
+    
+    context = {
+        'usuarios': usuarios,
+        'page_title': 'Lista de Usuários'
+    }
+    return render(request, 'usuarios/listar_usuarios.html', context)
+
+
+
+
+@login_required
+@transaction.atomic
+def criar_usuario(request):
+    """
+    View para secretários criarem novos usuários diretamente.
+    """
+    if not request.user.is_secretario:
+        messages.error(request, 'Acesso negado. Apenas secretários podem acessar esta página.')
+        return redirect('usuarios:dashboard')
+    
+    FilhoFormSet = formset_factory(FilhoForm, extra=1, can_delete=False)
+
+    if request.method == 'POST':
+        form = CadastroUsuarioForm(request.POST, request.FILES)
+        filhos_formset = FilhoFormSet(request.POST, prefix='filhos')
+
+        if form.is_valid() and filhos_formset.is_valid():
+            try:
+                user = form.save(commit=False)
+                user.aprovado = True  # Usuários criados por secretários são automaticamente aprovados
+                user.aprovado_por = request.user
+                user.data_aprovacao = timezone.now()
+                user.save()
+                
+                for filho_form in filhos_formset:
+                    if filho_form.has_changed():
+                        filho = filho_form.save(commit=False)
+                        filho.user = user
+                        filho.save()
+                        
+                messages.success(request, f'Usuário {user.nome_completo} criado com sucesso!')
+                return redirect('usuarios:listar_todos_usuarios')
+            except Exception as e:
+                messages.error(request, f'Erro ao criar usuário: {str(e)}')
+        else:
+            # Lógica de depuração de erros
+            error_list = []
+            if form.errors:
+                for field, errors in form.errors.items():
+                    field_label = form.fields[field].label if field in form.fields else field
+                    error_list.append(f'Campo "{field_label}": {", ".join(errors)}')
+            
+            if filhos_formset.errors:
+                for i, form_errors in enumerate(filhos_formset.errors):
+                    if form_errors:
+                        for field, errors in form_errors.items():
+                            field_label = FilhoForm.base_fields[field].label if field in FilhoForm.base_fields else field
+                            error_list.append(f'Filho #{i+1}, campo "{field_label}": {", ".join(errors)}')
+
+            error_message = (
+                "Por favor, corrija os erros abaixo. Detalhes: " + 
+                "; ".join(error_list) if error_list 
+                else "Ocorreu um erro de validação não identificado."
+            )
+            messages.error(request, error_message)
+
+    else:
+        form = CadastroUsuarioForm()
+        filhos_formset = FilhoFormSet(prefix='filhos')
+    
+    context = {
+        'form': form,
+        'filhos_formset': filhos_formset,
+        'page_title': 'Criar Novo Usuário',
+        'button_text': 'Criar Usuário'
+    }
+    return render(request, 'usuarios/cadastro.html', context)
+
+
+@login_required
+@transaction.atomic
+def editar_usuario(request, user_id):
+    """
+    View para secretários editarem usuários existentes.
+    """
+    if not request.user.is_secretario:
+        messages.error(request, 'Acesso negado. Apenas secretários podem acessar esta página.')
+        return redirect('usuarios:dashboard')
+    
+    try:
+        usuario = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        messages.error(request, 'Usuário não encontrado.')
+        return redirect('usuarios:listar_todos_usuarios')
+    
+    FilhoFormSet = inlineformset_factory(
+        User, Filho, form=FilhoForm, 
+        extra=1, can_delete=True,
+    )
+
+    if request.method == 'POST':
+        form = PerfilUsuarioForm(request.POST, request.FILES, instance=usuario)
+        formset = FilhoFormSet(request.POST, instance=usuario, prefix='filhos')
+        
+        if form.is_valid() and formset.is_valid():
+            form.save()
+            formset.save()
+            messages.success(request, f'Usuário {usuario.nome_completo} atualizado com sucesso!')
+            return redirect('usuarios:listar_todos_usuarios')
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+
+    else:
+        form = PerfilUsuarioForm(instance=usuario)
+        formset = FilhoFormSet(instance=usuario, prefix='filhos')
+
+    context = {
+        'form': form,
+        'filhos_formset': formset,
+        'page_title': f'Editar Usuário: {usuario.nome_completo}',
+        'button_text': 'Salvar Alterações',
+        'usuario': usuario
+    }
+    return render(request, 'usuarios/cadastro.html', context)
+
+
+@login_required
+def excluir_usuario(request, user_id):
+    """
+    View para secretários excluírem usuários.
+    """
+    if not request.user.is_secretario:
+        messages.error(request, 'Acesso negado. Apenas secretários podem acessar esta página.')
+        return redirect('usuarios:dashboard')
+    
+    try:
+        usuario = User.objects.get(id=user_id)
+        
+        # Não permitir que o secretário exclua a si mesmo
+        if usuario == request.user:
+            messages.error(request, 'Você não pode excluir sua própria conta.')
+            return redirect('usuarios:listar_todos_usuarios')
+        
+        # Não permitir exclusão de superusuários
+        if usuario.is_superuser:
+            messages.error(request, 'Não é possível excluir superusuários.')
+            return redirect('usuarios:listar_todos_usuarios')
+        
+        nome_usuario = usuario.nome_completo
+        usuario.delete()
+        messages.success(request, f'Usuário {nome_usuario} foi excluído com sucesso.')
+        
+    except User.DoesNotExist:
+        messages.error(request, 'Usuário não encontrado.')
+    
+    return redirect('usuarios:listar_todos_usuarios')
+
+
+@login_required
+def ver_usuario(request, user_id):
+    """
+    View para secretários visualizarem detalhes de um usuário específico.
+    """
+    if not request.user.is_secretario:
+        messages.error(request, 'Acesso negado. Apenas secretários podem acessar esta página.')
+        return redirect('usuarios:dashboard')
+    
+    try:
+        usuario = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        messages.error(request, 'Usuário não encontrado.')
+        return redirect('usuarios:listar_todos_usuarios')
+    
+    context = {
+        'user': usuario,
+        'page_title': f'Perfil de {usuario.nome_completo}',
+        'is_viewing_other': True
+    }
+    return render(request, 'usuarios/perfil.html', context)
+
