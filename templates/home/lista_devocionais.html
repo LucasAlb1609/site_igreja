@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/modular/devocionais.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5">Nossas Devocionais</h1>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="devocional-indice">
+                <h4>Índice</h4>
+                <ul>
+                    {% for dev in devocionais %}
+                    <li><a href="#devocional-{{ dev.id }}">{{ dev.titulo }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            {% if devocionais %}
+                {% for dev in devocionais %}
+                <div id="devocional-{{ dev.id }}" class="devocional-item">
+                    <h2 class="mb-3">{{ dev.titulo }}</h2>
+                    {% if dev.subtitulo %}
+                        <h5 class="text-muted">{{ dev.subtitulo }}</h5>
+                    {% endif %}
+                    <p class="font-italic">Por: {{ dev.autor }} - <small>{{ dev.data_publicacao|date:"d/m/Y" }}</small></p>
+                    <img src="{{ dev.imagem.url }}" class="img-fluid rounded shadow mb-4" alt="{{ dev.titulo }}">
+                    <div class="conteudo">
+                        {{ dev.conteudo|linebreaks }}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">Nenhuma devocional encontrada.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/devocionais-scroll.js' %}"></script>
+{% endblock %}

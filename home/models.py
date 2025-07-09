@@ -2,6 +2,7 @@
 from django.db import models
 from django.conf import settings
 import os
+from django.utils import timezone
 
 # Opções de imagens padrão
 OPCOES_IMAGEM_PADRAO = [
@@ -77,6 +78,23 @@ class ConfiguracaoSite(models.Model):
         else:
             # Retorna o caminho para a imagem padrão
             return f"{settings.STATIC_URL}fotos/{self.tipo_imagem}.jpeg"
+
+# --- NOVO MODELO PARA DEVOCIONAIS ---
+class Devocional(models.Model):
+    titulo = models.CharField(max_length=200, verbose_name="Título")
+    subtitulo = models.CharField(max_length=255, blank=True, null=True, verbose_name="Subtítulo")
+    autor = models.CharField(max_length=100, verbose_name="Autor (Assinatura)")
+    imagem = models.ImageField(upload_to='devocionais/', verbose_name="Imagem Ilustrativa")
+    conteudo = models.TextField(verbose_name="Conteúdo")
+    data_publicacao = models.DateTimeField(default=timezone.now, verbose_name="Data de Publicação")
+
+    def __str__(self):
+        return self.titulo
+
+    class Meta:
+        verbose_name = "Devocional"
+        verbose_name_plural = "Devocionais"
+        ordering = ['-data_publicacao']
 
 
 # --- NOVO MODELO APENAS PARA DEPARTAMENTOS --- 
@@ -181,6 +199,3 @@ class EventoEspecial(models.Model):
         verbose_name = "Evento Especial"
         verbose_name_plural = "Eventos Especiais"
         ordering = ['ordem']
-
-
-

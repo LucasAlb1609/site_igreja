@@ -1,0 +1,28 @@
+.devocional-item {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.devocional-indice {
+    position: sticky;
+    top: 100px; /* Ajuste conforme a altura do seu cabeçalho */
+}
+
+.devocional-indice ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.devocional-indice li a {
+    display: block;
+    padding: 8px 0;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    transition: color 0.2s;
+}
+
+.devocional-indice li a:hover {
+    color: #007bff;
+}

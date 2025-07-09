@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import ConfiguracaoSite, Departamento, SecaoLideranca, DiaSemana, EventoEspecial, Evento
+from .models import ConfiguracaoSite, Departamento, SecaoLideranca, DiaSemana, EventoEspecial, Evento, Devocional
 from django.conf import settings
 
 def index(request):
@@ -17,10 +17,14 @@ def index(request):
                 return f"{settings.STATIC_URL}fotos/{self.tipo_imagem}.jpeg"
         
         configuracao = DefaultConfig()
+
+    # Busca a devocional mais recente
+    devocional_recente = Devocional.objects.order_by('-data_publicacao').first()
     
-    # Passa a configuração para o template
+    # Passa a configuração e a devocional para o template
     context = {
-        'configuracao': configuracao
+        'configuracao': configuracao,
+        'devocional': devocional_recente,
     }
     
     return render(request, 'home/index.html', context)
@@ -82,3 +86,11 @@ def agenda(request):
         'eventos_especiais': eventos_especiais,
     }
     return render(request, 'agenda.html', context)
+
+# --- NOVA VIEW PARA LISTA DE DEVOCIONAIS ---
+def lista_devocionais(request):
+    devocionais = Devocional.objects.all()
+    context = {
+        'devocionais': devocionais
+    }
+    return render(request, 'home/lista_devocionais.html', context)

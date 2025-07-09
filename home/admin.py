@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import ConfiguracaoSite, Departamento, SecaoLideranca, Pessoa, DiaSemana, Evento, EventoEspecial
+from .models import ConfiguracaoSite, Departamento, SecaoLideranca, Pessoa, DiaSemana, Evento, EventoEspecial, Devocional
 
 class ConfiguracaoSiteAdmin(admin.ModelAdmin):
     list_display = ('titulo_video', 'link_youtube', 'tipo_imagem', 'preview_imagem', 'data_atualizacao')
@@ -35,6 +35,21 @@ class ConfiguracaoSiteAdmin(admin.ModelAdmin):
     preview_imagem.short_description = "Prévia da Imagem"
 
 admin.site.register(ConfiguracaoSite, ConfiguracaoSiteAdmin)
+
+# --- ADMIN PARA DEVOCIONAIS ---
+@admin.register(Devocional)
+class DevocionalAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'autor', 'data_publicacao')
+    list_filter = ('autor', 'data_publicacao')
+    search_fields = ('titulo', 'conteudo')
+    fieldsets = (
+        (None, {
+            'fields': ('titulo', 'subtitulo', 'autor', 'data_publicacao')
+        }),
+        ('Mídia e Conteúdo', {
+            'fields': ('imagem', 'conteudo')
+        }),
+    )
 
 # --- NOVO ADMIN APENAS PARA DEPARTAMENTOS --- 
 @admin.register(Departamento)

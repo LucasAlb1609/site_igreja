@@ -45,8 +45,33 @@
       </div>      
     </div>
 
-    <div class="container2">
-      <h1>DEVOCIONAL DA SEMANA</h1>
+    <div class="container2 py-5">
+      <div class="container">
+        <h1 class="text-center mb-4">DEVOCIONAL DA SEMANA</h1>
+        {% if devocional %}
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ devocional.imagem.url }}" class="img-fluid rounded shadow" alt="{{ devocional.titulo }}">
+            </div>
+            <div class="col-md-8">
+                <h2>{{ devocional.titulo }}</h2>
+                {% if devocional.subtitulo %}
+                <h5 class="text-muted">{{ devocional.subtitulo }}</h5>
+                {% endif %}
+                <p class="font-italic">Por: {{ devocional.autor }}</p>
+                <hr>
+                <div class="devocional-conteudo">
+                    {{ devocional.conteudo|linebreaks|truncatewords_html:100 }}
+                </div>
+                <div class="text-center mt-4">
+                  <a href="{% url 'lista_devocionais' %}#devocional-{{ devocional.id }}" class="btn btn-primary mr-2">Ler Completo</a>
+                  <a href="{% url 'lista_devocionais' %}" class="btn btn-secondary">Devocionais Anteriores</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center">Nenhuma devocional publicada ainda.</p>
+        {% endif %}
+      </div>
     </div>
-
-    {% endblock %}
+{% endblock %}
