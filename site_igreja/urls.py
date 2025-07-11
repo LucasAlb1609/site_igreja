@@ -18,8 +18,19 @@ from django.contrib import admin
 from django.urls import path, include
 from home import views
 
+# --- Adicionado para servir arquivos de mídia em desenvolvimento ---
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("usuarios/", include("usuarios.urls")),
     path("", include("home.urls")),
 ]
+
+# --- Bloco adicionado para servir arquivos de mídia ---
+# Isto permite que o servidor de desenvolvimento encontre e exiba
+# os arquivos que os usuários enviam (como a imagem da devocional).
+# Esta configuração só é ativada em modo DEBUG e não afeta a produção.
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
