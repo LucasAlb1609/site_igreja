@@ -160,7 +160,10 @@ class DiaSemana(models.Model):
     
     nome = models.IntegerField(choices=DIAS, unique=True, verbose_name="Dia da Semana")
     resumo = models.CharField(max_length=100, verbose_name="Resumo (ex: Dia de celebração)")
-    icone = models.CharField(max_length=50, help_text="Nome do ícone (ex: 'celebracao', 'oracao'). Use o nome do arquivo sem a extensão.", verbose_name="Ícone")
+    icone = models.CharField(
+        max_length=50, 
+        verbose_name="Ícone"
+    )
 
     def __str__(self):
         return self.get_nome_display()

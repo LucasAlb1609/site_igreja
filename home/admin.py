@@ -1,6 +1,10 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import ConfiguracaoSite, Departamento, SecaoLideranca, Pessoa, DiaSemana, Evento, EventoEspecial, Devocional
+from .widgets import IconSelectorWidget, get_icon_choices
+import os
+from django import forms
+from django.conf import settings
 
 class ConfiguracaoSiteAdmin(admin.ModelAdmin):
     list_display = ('titulo_video', 'link_youtube', 'tipo_imagem', 'preview_imagem', 'data_atualizacao')
@@ -98,9 +102,27 @@ class EventoInline(admin.TabularInline):
     model = Evento
     extra = 1
 
+class DiaSemanaAdminForm(forms.ModelForm):
+    icone = forms.ChoiceField(
+        choices=get_icon_choices, 
+        widget=IconSelectorWidget,
+        label="Escolha um Ícone"
+    )
+
+    class Meta:
+        model = DiaSemana
+        fields = '__all__'
+
+# 2. Integração do formulário no seu ModelAdmin
 @admin.register(DiaSemana)
 class DiaSemanaAdmin(admin.ModelAdmin):
-    list_display = ('get_nome_display', 'resumo')
+    # Associamos o formulário customizado aqui
+    form = DiaSemanaAdminForm
+    
+    # Adicionei 'exibir_icone' para vermos o ícone na lista
+    list_display = ('get_nome_display', 'resumo', 'exibir_icone')
+    
+    # Suas configurações originais mantidas
     inlines = [EventoInline]
 
     def get_nome_display(self, obj):
@@ -108,6 +130,24 @@ class DiaSemanaAdmin(admin.ModelAdmin):
     get_nome_display.short_description = 'Dia da Semana'
     get_nome_display.admin_order_field = 'nome'
 
+    # (Recomendado) Método para exibir a imagem do ícone na lista do admin
+    def exibir_icone(self, obj):
+        if obj.icone:
+            # Tenta encontrar o arquivo do ícone (com qualquer extensão comum)
+            icon_path_rel = os.path.join('fotos', 'ícones', 'agenda')
+            icon_dir_abs = os.path.join(settings.BASE_DIR, 'static', icon_path_rel)
+            
+            icon_url = None
+            if os.path.exists(icon_dir_abs):
+                for filename in os.listdir(icon_dir_abs):
+                    if os.path.splitext(filename)[0] == obj.icone:
+                        icon_url = os.path.join(settings.STATIC_URL, icon_path_rel, filename)
+                        break
+            
+            if icon_url:
+                return format_html('<img src="{}" alt="{}" style="width: 32px; height: 32px;" />', icon_url, obj.icone)
+        return "Nenhum"
+    exibir_icone.short_description = 'Ícone'
 
 @admin.register(EventoEspecial)
 class EventoEspecialAdmin(admin.ModelAdmin):
